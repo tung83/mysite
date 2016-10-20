@@ -7,7 +7,8 @@
     "require": {
         "php": ">=5.6.4",
         "laravel/framework": "5.3.*",
-        "laravelcollective/html": "^5.3.0"
+        "laravelcollective/html": "^5.3.0",
+        "almasaeed2010/adminlte": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -45,7 +46,8 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php artisan optimize"
+            "php artisan optimize",           
+            "php artisan asset:publish vendor/almasaeed2010/adminlte"
         ]
     },
     "config": {
