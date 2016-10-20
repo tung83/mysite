@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+// Home
+Route::get('/', 'Front\HomeController')->name('home');
+
+// Language
+Route::get('language/{lang}', 'Front\LanguageController')
+    ->where('lang', implode('|', config('app.languages')));
