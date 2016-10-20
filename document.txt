@@ -1,0 +1,3 @@
+access:
+
+suPHP_ConfigPath /home/pspmedia/public_html/
