@@ -13,6 +13,6 @@
         </a>
     </div>
     <div id='news-rightside' class="col-md-8">
-        @include('front.partials.news-items',['news' => $news])
+        @include('front.home.partials.news-items',['news' => $news])
     </div>
 </div>

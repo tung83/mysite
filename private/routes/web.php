@@ -15,9 +15,51 @@
 //    return view('welcome');
 //});
 
-// Home
-Route::get('/', 'Front\HomeController')->name('home');
 
-// Language
-Route::get('language/{lang}', 'Front\LanguageController')
-    ->where('lang', implode('|', config('app.languages')));
+Route::group(['namespace' => 'Front'], function() {
+
+    // Home
+    Route::get('/', 'HomeController')->name('home');
+
+    // Language
+    Route::get('language/{lang}', 'LanguageController')
+        ->where('lang', implode('|', config('app.languages')));
+
+    // Service
+    Route::get('service', 'ServiceController');
+    Route::get('service/{serviceCategory}', 'ServiceController');
+    Route::get('dich-vu', 'ServiceController');
+    Route::get('dich-vu/{serviceCategory}', 'ServiceController');
+
+    // Project
+    Route::get('project', 'ProjectController@index');
+    Route::get('du-an', 'ProjectController@index');
+    Route::get('project/{projectItem}', 'ProjectController@getItem');
+    Route::get('du-an/{projectItem}', 'ProjectController@getItem');
+    Route::get('/ajax/project','ProjectAjaxController@partialProjectData');
+
+    // News
+    Route::get('news', 'NewsController@index');
+    Route::get('tin-tuc', 'NewsController@index');
+    Route::get('news/{projectItem}', 'NewsController@getItem');
+    Route::get('tin-tuc/{projectItem}', 'NewsController@getItem');
+    Route::get('/ajax/news','NewsAjaxController@partialNewsData');
+
+    //Contact
+    Route::get('contact', 'ContactFormController@index');
+    Route::get('lien-he', 'ContactFormController@index');
+
+
+    Route::get('/ajax/homeProject','ProjectAjaxController@partialHomeData');
+    Route::get('/ajax/homeNews','NewsAjaxController@partialHomeData');
+
+});
+
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin@@'], function() {
+
+    Route::get('/', 'AdminController')->name('Admin');  
+    //Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('adminLogin');  
+    //Route::get('/', 'AdminController'->name('admin'))
+    // the rest of your dashboard routes.
+
+});
