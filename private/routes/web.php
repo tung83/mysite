@@ -52,12 +52,18 @@ Route::group(['namespace' => 'Front'], function() {
 
     Route::get('/ajax/homeProject','ProjectAjaxController@partialHomeData');
     Route::get('/ajax/homeNews','NewsAjaxController@partialHomeData');
+    
 
 });
+
+// Authentication 
+Auth::routes();
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin@@'], function() {
 
     Route::get('/', 'AdminController')->name('Admin');  
+    // Medias
+    Route::get('medias', 'FilemanagerController')->name('medias');
     //Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('adminLogin');  
     //Route::get('/', 'AdminController'->name('admin'))
     // the rest of your dashboard routes.
