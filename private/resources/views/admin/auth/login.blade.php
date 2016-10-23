@@ -13,11 +13,14 @@
                 <p>{{ trans('front/login.text') }}</p>				
 
                 {!! Form::open(['url' => 'admin@@/login']) !!}	
-
                     <div class="row">
 
-                        {!! Form::check('memory', trans('front/login.remind')) !!}
+                        {!! Form::controlBootstrap('text', 6, 'log', $errors, trans('front/login.log')) !!}
+                        {!! Form::controlBootstrap('password', 6, 'password', $errors, trans('front/login.password')) !!}
+                        {!! Form::submitBootstrap(trans('front/form.send'), 'col-lg-12') !!}
+                        {!! Form::checkboxBootstrap('memory', trans('front/login.remind')) !!}
                         {!! Form::text('address', '', ['class' => 'hpet']) !!}		  
+                        		  
                         <div class="col-lg-12">					
                             {!! link_to('password/reset', trans('front/login.forget')) !!}
                         </div>

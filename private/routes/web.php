@@ -58,8 +58,7 @@ Route::group(['namespace' => 'Front'], function() {
 
 // Authentication 
 Auth::routes();
-
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin@@'], function() {
+Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'prefix' => 'admin@@'], function() {
 
     Route::get('/', 'AdminController')->name('Admin');  
     // Medias

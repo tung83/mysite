@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Requests\Admin\Auth\LoginRequest;
 
 class LoginController extends Controller
 {
@@ -42,7 +43,7 @@ class LoginController extends Controller
         if ($lockedOut = $this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
 
-            return redirect('login')
+            return redirect('admin@@/login')
                 ->with('error', trans('front/login.maxattempt'))
                 ->withInput($request->only('log'));
         }
@@ -61,7 +62,7 @@ class LoginController extends Controller
                 $this->incrementLoginAttempts($request);
             }
 
-            return redirect('login')
+            return redirect('admin@@/login')
                 ->with('error', trans('front/login.credentials'))
                 ->withInput($request->only('log'));
         }
@@ -79,11 +80,11 @@ class LoginController extends Controller
                 $request->session()->forget('user_id');
             }
 
-            return redirect('/');
+            return redirect('/admin@@');
         }
         
         $request->session()->put('user_id', $user->id);
 
-        return redirect('login')->with('error', trans('front/verify.again'));
+        return redirect('admin@@/login')->with('error', trans('front/verify.again'));
     }
 }
