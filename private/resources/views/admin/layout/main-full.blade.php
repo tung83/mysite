@@ -19,6 +19,20 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins
            folder instead of downloading all of them to reduce the load. -->
         {!! HTML::style('admin/dist/css/skins/_all-skins.min.css') !!}
+        <!-- iCheck -->
+        {!! HTML::style('admin/plugins/iCheck/flat/blue.css') !!}
+        <!-- Morris chart -->
+        <link rel="stylesheet" href="">
+        {!! HTML::style('admin/plugins/morris/morris.css') !!}
+        <!-- jvectormap -->
+        {!! HTML::style('admin/plugins/jvectormap/jquery-jvectormap-1.2.2.css') !!}
+        <!-- Date Picker -->
+        {!! HTML::style('admin/plugins/datepicker/datepicker3.css') !!}
+        <!-- Daterange picker -->
+        {!! HTML::style('admin/plugins/daterangepicker/daterangepicker.css') !!}
+        <!-- bootstrap wysihtml5 - text editor -->
+        {!! HTML::style('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') !!}
+
 
         @yield('head')
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -523,14 +537,37 @@
 {!! HTML::script('admin/plugins/jQuery/jquery-2.2.3.min.js') !!}
 <!-- jQuery UI 1.11.4 -->
 {!! HTML::script('https://code.jquery.com/ui/1.11.4/jquery-ui.min.js') !!}
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
 <!-- Bootstrap 3.3.6 -->
 {!! HTML::script('admin/bootstrap/js/bootstrap.min.js') !!}
+<!-- Morris.js charts -->
+{!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js') !!}
+{!! HTML::script('admin/plugins/morris/morris.min.js') !!}
+<!-- Sparkline -->
+{!! HTML::script('admin/plugins/sparkline/jquery.sparkline.min.js') !!}
+<!-- jvectormap -->
+{!! HTML::script('admin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') !!}
+{!! HTML::script('admin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') !!}
+<!-- jQuery Knob Chart -->
+{!! HTML::script('admin/plugins/knob/jquery.knob.js') !!}
+<!-- daterangepicker -->
+{!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js') !!}
+{!! HTML::script('admin/plugins/daterangepicker/daterangepicker.js') !!}
+<!-- datepicker -->
+{!! HTML::script('admin/plugins/datepicker/bootstrap-datepicker.js') !!}
+<!-- Bootstrap WYSIHTML5 -->
+{!! HTML::script('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') !!}
 <!-- Slimscroll -->
 {!! HTML::script('admin/plugins/slimScroll/jquery.slimscroll.min.js') !!}
 <!-- FastClick -->
 {!! HTML::script('admin/plugins/fastclick/fastclick.js') !!}
 <!-- AdminLTE App -->
 {!! HTML::script('admin/dist/js/app.min.js') !!}
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+{!! HTML::script('admin/dist/js/pages/dashboard.js') !!}
 <!-- AdminLTE for demo purposes -->
 {!! HTML::script('admin/dist/js/demo.js') !!}
 @yield('scripts')

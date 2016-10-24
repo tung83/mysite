@@ -62,6 +62,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'prefix' => 'admin
 
     Route::get('/', 'AdminController')->name('Admin');  
     // Medias
+    Route::get('/pages', 'PageController')->name('admin_pages');
+    // Medias
     Route::get('medias', 'FilemanagerController')->name('medias');
     //Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('adminLogin');  
     //Route::get('/', 'AdminController'->name('admin'))

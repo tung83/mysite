@@ -31,7 +31,7 @@ class AdminController extends Controller
             array_push($pannels, new PannelAdmin($pannel));
         }
 
-        return view('back.index', compact('pannels'));
+        return view('admin.index', compact('pannels'));
         
     }
 }

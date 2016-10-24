@@ -282,8 +282,7 @@
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVWAnZRS56JnP5Nr5otnuzg47TsmJoKBM&callback=initMap">
     </script>
-
+    {!! HTML::script(asset('js/scroll-nav-fixed.js')) !!}
         @yield('scripts')
-    <script type="text/javascript" src="{!! asset('js/scroll-nav-fixed.js') !!}"></script>
   </body>
 </html>
