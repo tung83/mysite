@@ -533,6 +533,6 @@
 {!! HTML::script('admin/dist/js/app.min.js') !!}
 <!-- AdminLTE for demo purposes -->
 {!! HTML::script('admin/dist/js/demo.js') !!}
-@yield('scripts')
+@stack('scripts')
 </body>
 </html>

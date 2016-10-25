@@ -63,6 +63,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'prefix' => 'admin
     Route::get('/', 'AdminController')->name('Admin');  
     // Medias
     Route::get('/pages', 'PageController')->name('admin_pages');
+    Route::get('admin_menuTable', 'PageController@menuTable')->name('admin_menuTable');
+    
     // Medias
     Route::get('medias', 'FilemanagerController')->name('medias');
     //Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('adminLogin');  
@@ -70,7 +72,3 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'prefix' => 'admin
     // the rest of your dashboard routes.
 
 });
-Route::controller('datatables', 'DatatablesController', [
-    'anyData'  => 'datatables.data',
-    'getIndex' => 'datatables',
-]);

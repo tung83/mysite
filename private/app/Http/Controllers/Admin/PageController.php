@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\PannelPage;
+use App\Models\Menu;
+use Yajra\Datatables\Datatables;
 
 class PageController extends Controller
 {
@@ -25,5 +26,14 @@ class PageController extends Controller
     public function __invoke()
     {
         return view('admin.page.pages');        
+    }
+    public function menuTable()
+    {
+        //return Datatables::of(Menu::query())->make(true);
+         return Datatables::of(Menu::query())
+            ->addColumn('action', function ($menu) {
+                return '<a href="#edit-'.$menu->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+            })
+            ->make(true);
     }
 }
