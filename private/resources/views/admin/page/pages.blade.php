@@ -12,7 +12,10 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="menus-table" class="table table-bordered table-striped">
+                <p>
+                    <a href="http://almsaeedstudio.com/download/AdminLTE-dist" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a>
+              </p>
+                <table id="menus-table" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>ID</th>

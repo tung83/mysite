@@ -32,7 +32,8 @@ class PageController extends Controller
         //return Datatables::of(Menu::query())->make(true);
          return Datatables::of(Menu::query())
             ->addColumn('action', function ($menu) {
-                return '<a href="#edit-'.$menu->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                return '<a href="#edit-'.$menu->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>'
+                        .'<a href="#delete-'.$menu->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-trash"></i> </a>';
             })
             ->make(true);
     }
