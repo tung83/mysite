@@ -31,6 +31,7 @@ class FormBuilder
             'value' => null,
             'pop' => null,
             'placeholder' => '',
+            'icon' =>null,
         ]);
         Form::component('checkboxBootstrap', 'components.checkbox', [
             'name',

@@ -14,7 +14,7 @@
     </ul>
   </li>
    <li>
-    <a href="{{ route('admin_pages') }}">
+    <a href="{{ route('admin_menu') }}">
       <i class="fa fa-th"></i> <span>Pages SEO</span>
     </a>
   </li>

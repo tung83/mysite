@@ -1,4 +1,4 @@
-<div class="form-group {{ $columns == 0 ? '': 'col-lg-' . $columns }} {{ $errors->has($name) ? 'has-error' : '' }}">
+<div class="form-group has-feedback {{ $columns == 0 ? '': 'col-lg-' . $columns }} {{ $errors->has($name) ? 'has-error' : '' }}">
     @if($label)
         {!! Form::label($name, $label, ['class' => 'control-label']) !!}
     @endif
@@ -10,5 +10,9 @@
     @else
         {!! Form::input($type, $name, $value, ['class' => 'form-control', 'placeholder' => $placeholder]) !!} 
     @endif
+    @if($icon)
+        <span class="{{$icon}} form-control-feedback"></span>
+    @endif
     {!! $errors->first($name, '<small class="help-block">:message</small>') !!}           
 </div>
+

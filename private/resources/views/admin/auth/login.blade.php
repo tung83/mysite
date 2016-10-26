@@ -1,44 +1,58 @@
 @extends('admin.auth.template')
 
 @section('main')
-    <div class="row">
-        <div class="box">
-            <div class="col-lg-12">
-                @if(session()->has('error'))
-                    @include('partials/error', ['type' => 'danger', 'message' => session('error')])
-                @endif	
-                <hr>	
-                <h2 class="intro-text text-center">{{ trans('front/login.connection') }}</h2>
-                <hr>
-                <p>{{ trans('front/login.text') }}</p>				
+<div class="login-box">
+  <div class="login-logo">
+    <b>{{ trans('front/site.title')}}</b>Admin
+  </div>
+    @if(session()->has('error'))
+        @include('partials/error', ['type' => 'danger', 'message' => session('error')])
+    @endif	
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <h2 class="intro-text text-center">{{ trans('front/login.connection') }}</h2>
+    
+    {!! Form::open(['url' => 'admin@@/login']) !!}	
+            {!! Form::controlBootstrap('email', 0, 'log', $errors, null, null, null, 'Email', 'glyphicon glyphicon-envelope') !!}
+            {!! Form::controlBootstrap('password', 0, 'password', $errors, null, null, null, 'Password', 'glyphicon glyphicon-lock') !!}
+            {!! Form::submitBootstrap(trans('front/form.send'), 'col-lg-12') !!}
+            {!! Form::checkboxBootstrap('memory', trans('front/login.remind')) !!}
+            {!! Form::text('address', '', ['class' => 'hpet']) !!}		  
+					
+            {!! link_to('password/reset', trans('front/login.forget')) !!}
+          
 
-                {!! Form::open(['url' => 'admin@@/login']) !!}	
-                    <div class="row">
-
-                        {!! Form::controlBootstrap('text', 6, 'log', $errors, trans('front/login.log')) !!}
-                        {!! Form::controlBootstrap('password', 6, 'password', $errors, trans('front/login.password')) !!}
-                        {!! Form::submitBootstrap(trans('front/form.send'), 'col-lg-12') !!}
-                        {!! Form::checkboxBootstrap('memory', trans('front/login.remind')) !!}
-                        {!! Form::text('address', '', ['class' => 'hpet']) !!}		  
-                        		  
-                        <div class="col-lg-12">					
-                            {!! link_to('password/reset', trans('front/login.forget')) !!}
-                        </div>
-
-                    </div>
-
-                {!! Form::close() !!}
-
-                <div class="text-center">
-                    <hr>
-                    <h2 class="intro-text text-center">{{ trans('front/login.register') }}</h2>
-                    <hr>	
-                    <p>{{ trans('front/login.register-info') }}</p>
-                    {!! link_to('register', trans('front/login.registering'), ['class' => 'btn btn-default']) !!}
-                </div>
-
-            </div>
+    {!! Form::close() !!}
+    
+<!--    <form action="../../index2.html" method="post">
+      <div class="form-group has-feedback">
+        <input type="email" class="form-control" placeholder="Email">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="Password">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <label>
+              <input type="checkbox"> Remember Me
+            </label>
+          </div>
         </div>
-    </div>
+         /.col 
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        </div>
+         /.col 
+      </div>
+    </form>-->
+
+
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
 @endsection
 
