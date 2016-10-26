@@ -28,7 +28,7 @@ class MenuController extends Controller
     */
     public function __invoke()
     {
-        return view('admin.page.menu');        
+        return view('admin.menu.list');        
     }
     public function menuTable()
     {
