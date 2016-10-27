@@ -62,9 +62,9 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'prefix' => 'admin
 
     Route::get('/', 'AdminController')->name('Admin');  
     // page
-    Route::get('/menu', 'MenuController')->name('admin_menu');
-    Route::get('admin_menuTable', 'MenuController@menuTable')->name('admin_menuTable');
-    Route::resource('menu', 'MenuController', ['except' => ['show','index']]);
+    Route::get('/page', 'MenuController')->name('admin.page');
+    Route::get('admin.pageTable', 'MenuController@menuTable')->name('admin.pageTable');
+    Route::resource('page', 'MenuController', ['except' => ['show','index'], 'as' => 'admin']);
     
     // Medias
     Route::get('medias', 'FilemanagerController')->name('medias');

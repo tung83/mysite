@@ -13,7 +13,7 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <p>
-                    <a href="http://almsaeedstudio.com/download/AdminLTE-dist" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a>
+                    <a href="{{url('admin@@/page/create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a>
               </p>
                 <table id="menus-table" class="table table-bordered table-striped">
                 <thead>
@@ -47,7 +47,7 @@
         $('#menus-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{!! route('admin_menuTable') !!}',
+            ajax: '{!! route('admin.pageTable') !!}',
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'title', name: 'title' },

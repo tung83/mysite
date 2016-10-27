@@ -17,6 +17,12 @@ class FormBuilder
             'value',
             'class' => '',
         ]);
+        Form::component('submitCancelBootstrap', 'components.submitCancel', [
+            'value',
+            'class' => '',
+            'cancelLink',
+            'cancelText'
+        ]);
         Form::component('destroyBootstrap', 'components.destroy', [
             'value',
             'message',

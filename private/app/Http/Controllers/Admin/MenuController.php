@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use App\Repositories\MenuRepository;
 use Yajra\Datatables\Datatables;
+use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
@@ -35,33 +36,22 @@ class MenuController extends Controller
         //return Datatables::of(Menu::query())->make(true);
          return Datatables::of(Menu::query())
             ->addColumn('action', function ($menu) {
-                return '<a href="#edit-'.$menu->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>'
+                return '<a href="'.route('admin.page.edit',['page' => $menu->id]).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>'
                         .'<a href="#delete-'.$menu->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-trash"></i> </a>';
             })
             ->make(true);
     }
-
-    /**
-     * Show the form for creating a new post.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         return view('admin.menu.create');
     }
-
-    /**
-     * Store a newly created post in storage.
-     *
-     * @param  \App\Http\Requests\PostRequest $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(PostRequest $request)
+    
+    public function store(Request $request)
     {
-        $this->menuRepository->store($request->all(), $request->user()->id);
+        $this->menuRepository->store($request->all());
 
-        return redirect('menu')->with('ok', trans('admin/menu.stored'));
+        return redirect()->route('admin_page', ['ok'=>trans('admin/menu.stored')]);
     }
 
     /**
@@ -72,37 +62,18 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-        $post = $this->menuRepository->getByIdWithTags($id);
+        $menu = $this->menuRepository->getById($id);
 
-        $this->authorize('change', $post);
-
-        return view('admin.menu.edit', $this->menuRepository->getPostWithTags($post));
+        return view('admin.menu.edit', compact('menu'));
     }
-
-    /**
-     * Update the specified post in storage.
-     *
-     * @param  \App\Http\Requests\PostUpdateRequest $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(PostRequest $request, $id)
+    
+    public function update(Request $request, $id)
     {
-        $post = $this->menuRepository->getById($id);
+        $this->menuRepository->update($request->all(), $id);
 
-        $this->authorize('change', $post);
-
-        $this->menuRepository->update($request->all(), $post);
-
-        return redirect('menu')->with('ok', trans('admin/menu.updated'));
+        return redirect()->route('admin_page', ['ok'=>trans('admin/menu.updated')]);
     }
-
-    /**
-     * Remove the specified post from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         $post = $this->menuRepository->getById($id);

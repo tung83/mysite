@@ -1,5 +1,5 @@
-@extends('back.blog.template')
+@extends('admin.menu.template')
 
 @section('form')
-    {!! Form::model($post, ['route' => ['blog.update', $post->id], 'method' => 'put', 'class' => 'form-horizontal panel']) !!}
+    {!! Form::model($menu, ['route' => ['admin.page.update', $menu->id], 'method' => 'put']) !!}
 @endsection
