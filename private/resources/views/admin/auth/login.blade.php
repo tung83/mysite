@@ -19,7 +19,8 @@
               <div class="col-xs-8">
                 <div class="checkbox icheck">
                   <label>
-                      <input type="checkbox"> Remember Me</input>
+                      {{Form::checkbox('memory', true)}}
+                      Remember Me
                   </label>
                 </div>
               </div>

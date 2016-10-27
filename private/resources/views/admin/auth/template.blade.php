@@ -54,6 +54,7 @@
                     radioClass: 'iradio_square-blue',
                     increaseArea: '20%' // optional
                   });
+                   $('input').iCheck('check');
             });
            
         </script>  

@@ -74,7 +74,7 @@ class LoginController extends Controller
                 $this->incrementLoginAttempts($request);
             }
 
-            auth()->login($user, $request->has('memory'));
+            auth()->login($user, $request->input('memory', false));
 
             if ($request->session()->has('user_id')) {
                 $request->session()->forget('user_id');
