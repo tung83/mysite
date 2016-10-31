@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Session;
 
 class AdminControllerBase extends Controller
 {
     public function __construct()
     {
-        Session::put('admin-locale', 'vi');
-        Session::save();
-        App::setLocale(Session::get('admin-locale'));
+        session()->put('admin-locale', 'en');
+        session()->save();
+        app()->setLocale(Session::get('admin-locale'));
     }    
 }
