@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Services\PannelAdmin;
 
-class AdminController extends Controller
+class AdminController extends AdminControllerBase
 {
     /**
      * Create a new AdminController instance.

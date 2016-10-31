@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use App\Repositories\MenuRepository;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 
-class MenuController extends Controller
+class MenuController extends AdminControllerBase
 {
     protected $menuRepository;
     /**
@@ -37,8 +36,10 @@ class MenuController extends Controller
          return Datatables::of(Menu::query())
             ->addColumn('action', function ($menu) {
                 return '<a href="'.route('admin.page.edit',['page' => $menu->id]).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>'
-                        .'<a href="#delete-'.$menu->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-trash"></i> </a>';
+                        .'&nbsp;<a href="#delete-'.$menu->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-trash"></i> </a>';
             })
+            ->editColumn('id', 'ID: {{$id}}')
+            ->editColumn('title', '<p>{{$title}}</p><p class="sub-content">{{$e_title}}</p>')
             ->make(true);
     }
     

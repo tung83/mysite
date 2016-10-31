@@ -19,6 +19,7 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins
            folder instead of downloading all of them to reduce the load. -->
         {!! HTML::style('admin/dist/css/skins/_all-skins.min.css') !!}
+        {!! HTML::style('admin/dist/css/admin.css') !!}
 
         @yield('head')
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

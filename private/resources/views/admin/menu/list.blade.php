@@ -6,36 +6,33 @@
 @section('main')
     <div class="row">
         <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">List of Menus</h3>
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">List of Menus</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <p>
+                        <a href="{{url('admin@@/page/create')}}" class="btn btn-primary"><i class="fa fa-plus"></i>Add New</a>
+                    </p>
+                    <table id="menus-table" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên Trang</th>
+                                <th>Meta keyword</th>
+                                <th>Meta Description</th>
+                                <th class="col-action">Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!-- /.box-body -->
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <p>
-                    <a href="{{url('admin@@/page/create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a>
-              </p>
-                <table id="menus-table" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Tên Trang</th>
-                  <th>Meta keyword</th>
-                  <th>Meta Description</th>
-                  <th>Actions</th>
-                </tr>
-                </thead>
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-
-          <d
-          <!-- /.box -->
+            <!-- /.box -->
         </div>
         <!-- /.col -->
-      </div>
+    </div>
 @endsection
 
 @push('scripts')
@@ -54,6 +51,9 @@
                 { data: 'meta_keyword', name: 'meta_keyword' },
                 { data: 'meta_description', name: 'meta_description' },
                 {data: 'action', name: 'action', orderable: false, searchable: false}
+            ],
+            "columnDefs": [
+                {"className": "text-center", "targets": 4}
             ]
         });
     });
