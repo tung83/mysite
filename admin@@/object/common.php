@@ -3,26 +3,10 @@ class common{
     static function __contstruct(){
         
     }
-    static function basic_css(){
-        global $css;
-        foreach($css as $val){
-            $str.='
-    <link rel="stylesheet" type="text/css" href="'.myWeb.'css/'.$val.'.css" />';
-        }
-        return $str;
-    }
-    static function basic_js(){
-        global $js;
-        foreach($js as $val){
-            $str.='
-    <script type="text/javascript" src="'.myWeb.'js/'.$val.'.js"></script>';
-        }
-        return $str;
-    }
-    static function file_check($file,$type='image'){
-        if($file['error']>0) return false;
-		else if(strstr($file['type'],$type)!=NULL) return true;
-		else return false;
+    static function language_change($url,$lang='vi',$pos=1){
+        $url=explode('/',$url);
+        $url[$pos]=$lang;
+        return implode('/',$url);
     }
     static function slug($str, $options = array()){
         // Make sure string is in UTF-8 and strip invalid UTF-8 characters    	
@@ -178,50 +162,10 @@ class common{
         $arr=array('lat'=>$latitude,'long'=>$longitude);
         return $arr;
     }
-    static function load($class_name,$type='object'){
-        switch($type){
-            case 'page':
-                include_once pageLib.$class_name.'.php';
-                break;
-            case 'widget':
-                include_once widgetLib.$class_name.'.php';
-                break;
-            case 'object': 
-            default:
-                include_once phpLib.$class_name.'.php';
-                break;                
-        }        
-    }
-    static function object($class_name){
-        self::load($class_name,'object');
-    }
-    static function page($class_name){
-        self::load($class_name,'page');
-    }
-    static function widget($class_name){
-        self::load($class_name,'widget');
-    }
     static function qtext($db,$id,$table='qtext'){
         $db->where('id',$id);
         $item=$db->getOne($table,'content');
         return $item['content'];
-    }
-    function ads_banner($db){
-        $db->reset();
-        $db->where('active',1)->orderBy('ind','ASC')->orderBy('id');
-        $list=$db->get('ads_banner');
-        $str='
-        <p class="ads-banner">';
-        if($db->count>0){
-            foreach($list as $item){
-                $lnk=$item['lnk']!=''?'http://'.$item['lnk']:'javascript:void(0)';
-                $str.='
-                <a href="'.$lnk.'"><img src="'.webPath.$item['img'].'" alt="" title=""/></a>';
-            }   
-        }
-        $str.='
-        </p>';
-        return $str;
     }
 }
 ?>

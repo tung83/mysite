@@ -3,7 +3,7 @@ include '../config.php';
 $act=$_POST['act'];
 $str='';
 switch($act){
-    case 'cate':
+    case 'category':
         $lev=$_POST['lev'];
         $pId=intval($_POST['pId']);
         $table=htmlspecialchars($_POST['table']);

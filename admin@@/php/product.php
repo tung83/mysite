@@ -1,268 +1,17 @@
 <?php
 function mainProcess($db)
 {
-    switch($_GET['type']){
-        case 'product_cate':
-            return product_cate($db);
-            break;
-        case 'product_cate_2':
-            return product_cate_2($db);
-            break;
-        default:
-            if(isset($_GET['id'])) return product_image($db);
-            else return product($db);
-            break;
-    }
-}
-function product_cate($db)
-{
-	$msg='';
-    $act='product';
-    $type='product_cate';
-    $table='product_cate';
-    $lev=1;
-    if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
-		$db->where('id',$_POST['idLoad']);
-        $list = $db->getOne($table);
-        $btn=array('name'=>'update','value'=>'Update');
-        $form = new form($list);
-	} else {
-        $btn=array('name'=>'addNew','value'=>'Submit');	
-        $form = new form();
-	}
-	if(isset($_POST["addNew"])||isset($_POST["update"])) {
-        $title=htmlspecialchars($_POST['title']);	   
-        $meta_kw=htmlspecialchars($_POST['meta_keyword']);
-        $meta_desc=htmlspecialchars($_POST['meta_description']);
-        $active=$_POST['active']=="on"?1:0;
-        $ind=intval($_POST['ind']);
-	}
-    if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
-        $list = explode(',',$_POST['listDel']);
-        foreach($list as $item){           
-            $db->where('id',intval($item));
-            try{
-               $db->delete($table); 
-            } catch(Exception $e) {
-                $msg=$e->getMessage();
-            }   
-        }
-        header("location:".$_SERVER['REQUEST_URI'],true);
-    }
-	if(isset($_POST["addNew"])) {
-        $insert = array(
-                    'title'=>$title,'lev'=>$lev,
-                    'active'=>$active,'meta_keyword'=>$meta_kw,
-                    'meta_description'=>$meta_desc,'ind'=>$ind
-                );
-		try{
-            $recent = $db->insert($table,$insert);
-            header("location:".$_SERVER['REQUEST_URI'],true); 
-        } catch(Exception $e) {
-            $msg=$e->getMessage();
-        }			
-	}
-	if(isset($_POST["update"]))	{
-	   $update=array(
-                    'title'=>$title,'lev'=>$lev,
-                    'active'=>$active,'meta_keyword'=>$meta_kw,
-                    'meta_description'=>$meta_desc,'ind'=>$ind
-                );
-        try{
-            $db->where('id',$_POST['idLoad']);
-            $db->update($table,$update);  
-            header("location:".$_SERVER['REQUEST_URI'],true);   
-        } catch (Exception $e){
-            $msg=$e->getMessage();
-        }
-	}
-	
-	if(isset($_POST["Del"])&&$_POST["Del"]==1) {
-        $db->where('id',$_POST['idLoad']);
-        try{
-            if($_POST['idLoad']!=8&&$_POST['idLoad']!=9&&$_POST['idLoad']!=10){
-                $db->delete($table); 
-                header("location:".$_SERVER['REQUEST_URI'],true);
-            }
-        } catch(Exception $e) {
-            $msg=$e->getMessage();
-        }
-	}
-    $page_head= array(
-                    array('#','Danh mục sản phẩm cấp 1')
-                );
-	$str=$form->breadcumb($page_head);
-	$str.=$form->message($msg);
-    
-    $str.=$form->search_area($db,$act,'',$_GET['hint'],0);
-    
-    $head_title=array('Tiêu đề','Thứ tự','Hiển thị');
-	$str.=$form->table_start($head_title);
-	
-    $page=isset($_GET["page"])?intval($_GET["page"]):1;
-    if(isset($_GET['hint'])) $db->where('title','%'.$_GET['hint'].'%','LIKE');  
-    $db->where('lev',1)->orderBy('id');
-    $db->pageLimit=ad_lim;
-    $list=$db->paginate($table,$page);
-
-    if($db->count!=0){
-        foreach($list as $item){
-            $item_content = array(
-                array($item['title'],'text'),
-                array($item['ind'],'text'),
-                array($item['active'],'bool')
-            );
-            $str.=$form->table_body($item['id'],$item_content);      
-        }
-    }                               
-	$str.=$form->table_end();                            
-    $str.=$form->pagination($page,ad_lim,$count);
-	$str.='			
-	<form role="form" id="actionForm" name="actionForm" enctype="multipart/form-data" action="" method="post" data-toggle="validator">
-	<div class="row">
-    	<div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
-        <div class="col-lg-12">
-            '.$form->text('title',array('label'=>'Tiêu đề','required'=>true)).'
-            '.$form->text('meta_keyword',array('label'=>'Keyword <code>SEO</code>')).'
-            '.$form->textarea('meta_description',array('label'=>'Description <code>SEO</code>')).'
-            '.$form->number('ind',array('label'=>'Thứ tự','required'=>true)).'
-            '.$form->checkbox('active',array('label'=>'Hiển Thị','checked'=>true)).'
-        </div>
-    	'.$form->hidden($btn['name'],$btn['value']).'
-	</div>
-	</form>
-	';	
-	return $str;
-}
-function product_cate_2($db){
-    $msg='';
-    $act='product';
-    $type='product_cate_2';
-    $table='product_cate';
-    $lev=2;
-    if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
-		$db->where('id',$_POST['idLoad']);
-        $list = $db->getOne($table);
-        $btn=array('name'=>'update','value'=>'Update');
-        $form = new form($list);
-	} else {
-        $btn=array('name'=>'addNew','value'=>'Submit');	
-        $form = new form();
-	}
-	if(isset($_POST["addNew"])||isset($_POST["update"])) {
-        $title=htmlspecialchars($_POST['title']);	   
-        $meta_kw=htmlspecialchars($_POST['meta_keyword']);
-        $meta_desc=htmlspecialchars($_POST['meta_description']);
-        $active=$_POST['active']=="on"?1:0;
-        $ind=intval($_POST['ind']);
-        $pId=intval($_POST['frm_cate_1']);
-	}
-    if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
-        $list = explode(',',$_POST['listDel']);
-        foreach($list as $item){
-            $db->where('id',intval($item));
-            try{
-               $db->delete($table); 
-            } catch(Exception $e) {
-                $msg=$e->getMessage();
-            }
-        }
-        header("location:".$_SERVER['REQUEST_URI'],true);
-    }
-	if(isset($_POST["addNew"])) {
-        $insert = array(
-                    'title'=>$title,'lev'=>$lev,'pId'=>$pId,
-                    'active'=>$active,'meta_keyword'=>$meta_kw,
-                    'meta_description'=>$meta_desc,'ind'=>$ind
-                );
-		try{
-            $recent = $db->insert($table,$insert);
-            header("location:".$_SERVER['REQUEST_URI'],true); 
-        } catch(Exception $e) {
-            $msg=$e->getMessage();
-        }			
-	}
-	if(isset($_POST["update"]))	{
-	   $update=array(
-                    'title'=>$title,'lev'=>$lev,'pId'=>$pId,
-                    'active'=>$active,'meta_keyword'=>$meta_kw,
-                    'meta_description'=>$meta_desc,'ind'=>$ind
-                );
-        try{
-            $db->where('id',$_POST['idLoad']);
-            $db->update($table,$update);  
-            header("location:".$_SERVER['REQUEST_URI'],true);   
-        } catch (Exception $e){
-            $msg=$e->getMessage();
-        }
-	}
-	
-	if(isset($_POST["Del"])&&$_POST["Del"]==1) {
-        $db->where('id',$_POST['idLoad']);
-        try{
-           $db->delete($table); 
-           header("location:".$_SERVER['REQUEST_URI'],true);
-        } catch(Exception $e) {
-            $msg=$e->getMessage();
-        }
-	}
-    $page_head= array(
-                    array('#','Danh mục sản phẩm cấp 2')
-                );
-	$str=$form->breadcumb($page_head);
-	$str.=$form->message($msg);
-    
-    $str.=$form->search_area($db,$act,'product_cate',$_GET['hint'],1);
-    
-    $head_title=array('Tiêu đề','Thuộc danh mục','Thứ tự','Hiển thị');
-	$str.=$form->table_start($head_title);
-	
-    $page=isset($_GET["page"])?intval($_GET["page"]):1;
-    if(isset($_GET['cate_lev_1'])&&intval($_GET['cate_lev_1'])!=0) $db->where('pId',intval($_GET['cate_lev_1']));
-    if(isset($_GET['hint'])) $db->where('title','%'.$_GET['hint'].'%','LIKE');
-    $db->where('lev',2)->orderBy('id');
-    $db->pageLimit=ad_lim;
-    $list=$db->paginate($table,$page);
-
-    if($db->count!=0){
-        foreach($list as $item){
-            $cate=$db->where('id',$item['pId'])->getOne('product_cate','id,title');
-            $item_content = array(
-                array($item['title'],'text'),
-                array(array($cate),'cate'),
-                array($item['ind'],'text'),
-                array($item['active'],'bool')
-            );
-            $str.=$form->table_body($item['id'],$item_content);      
-        }
-    }                               
-	$str.=$form->table_end();                            
-    $str.=$form->pagination($page,ad_lim,$count);
-	$str.='			
-	<form role="form" id="actionForm" name="actionForm" enctype="multipart/form-data" action="" method="post" data-toggle="validator">
-	<div class="row">
-    	<div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
-        <div class="col-lg-12">
-            '.$form->text('title',array('label'=>'Tiêu đề','required'=>true)).'
-            '.$form->cate_group($db,$table='product_cate',1).'
-            '.$form->text('meta_keyword',array('label'=>'Keyword <code>SEO</code>')).'
-            '.$form->textarea('meta_description',array('label'=>'Description <code>SEO</code>')).'
-            '.$form->number('ind',array('label'=>'Thứ tự','required'=>true)).'
-            '.$form->checkbox('active',array('label'=>'Hiển Thị','checked'=>true)).'
-        </div>
-    	'.$form->hidden($btn['name'],$btn['value']).'
-	</div>
-	</form>';	
-	return $str;
+    if(isset($_GET['pdId'])) return product_image($db);
+    else return product($db);
 }
 function product($db){
     $msg='';
     $act='product';
-    $type='product';
     $table='product';
+    $hint=htmlspecialchars($_GET['hint']);
     if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
 		$db->where('id',$_POST['idLoad']);
-        $list = $db->getOne($table);
+        $list = $db->get($table);
         $btn=array('name'=>'update','value'=>'Update');
         $form = new form($list);
 	} else {
@@ -270,21 +19,35 @@ function product($db){
         $form = new form();
 	}
 	if(isset($_POST["addNew"])||isset($_POST["update"])) {
+        $pId=intval($_POST['frm_cate_2']);
         $title=htmlspecialchars($_POST['title']);
-        //$code=htmlspecialchars($_POST['code']);
-        $price=intval($_POST['price']);
-        $price_reduce=intval($_POST['price_reduce']);
+        $video=htmlspecialchars($_POST['video']);
         $meta_kw=htmlspecialchars($_POST['meta_keyword']);
         $meta_desc=htmlspecialchars($_POST['meta_description']);
-        $content=str_replace("'","",$_POST['content']);     
         $feature=str_replace("'","",$_POST['feature']);
-        //$manual=str_replace("'","",$_POST['manual']);
-        //$promotion=str_replace("'","",$_POST['promotion']);
-        //$video=htmlspecialchars($_POST['video']);
+        $content=str_replace("'","",$_POST['content']);
+        $detail=str_replace("'","",$_POST['detail']);
+        $teach=str_replace("'","",$_POST['teach']);
+        $lnk=htmlspecialchars($_POST['lnk']);
+        $e_lnk=htmlspecialchars($_POST['e_lnk']);
+        $e_title=htmlspecialchars($_POST['e_title']);
+        $e_meta_kw=htmlspecialchars($_POST['e_meta_keyword']);
+        $e_meta_desc=htmlspecialchars($_POST['e_meta_description']);
+        $e_feature=str_replace("'","",$_POST['e_feature']);
+        $e_content=str_replace("'","",$_POST['e_content']);
+        $e_detail=str_replace("'","",$_POST['e_detail']);
+        $e_teach=str_replace("'","",$_POST['e_teach']);
+        $price=intval($_POST['price']);
+        $ind=intval($_POST['ind']);
+        $price_reduce=intval($_POST['price_reduce']);
+        $in_stock=$_POST['in_stock']=="on"?1:0;
         $active=$_POST['active']=="on"?1:0;
         $home=$_POST['home']=='on'?1:0;
-        $ind=intval($_POST['ind']);
-        $pId=intval($_POST['frm_cate_1']);
+        if(count($_POST['product_option'])>0){
+            $product_option=array_unique($_POST['product_option']);
+            $product_option=implode(',',$product_option);    
+        }else $product_option='';
+        
 	}
     if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
         $list = explode(',',$_POST['listDel']);
@@ -300,10 +63,17 @@ function product($db){
     }
 	if(isset($_POST["addNew"])) {
         $insert = array(
-                    'title'=>$title,'content'=>$content,
-                    'feature'=>$feature,'price'=>$price,'price_reduce'=>$price_reduce,
+                    'title'=>$title,'feature'=>$feature,'detail'=>$detail,
+                    'content'=>$content,'teach'=>$teach,
                     'meta_keyword'=>$meta_kw,'meta_description'=>$meta_desc,
-                    'home'=>$home,'active'=>$active,'pId'=>$pId,'ind'=>$ind
+                    'lnk'=>$lnk,'e_lnk'=>$e_lnk,
+                    'e_title'=>$e_title,'e_feature'=>$e_feature,'e_detail'=>$e_detail,
+                    'e_content'=>$e_content,'e_teach'=>$e_teach,
+                    'e_meta_keyword'=>$e_meta_kw,'e_meta_description'=>$e_meta_desc,
+                    'pd_option'=>$product_option,'ind'=>$ind,
+                    'pId'=>$pId,'video'=>$video,
+                    'price_reduce'=>$price_reduce,'home'=>$home,
+                    'active'=>$active,'price'=>$price,'in_stock'=>$in_stock
                 );
 		try{
             $db->insert($table,$insert);
@@ -314,161 +84,18 @@ function product($db){
 	}
 	if(isset($_POST["update"]))	{
 	   $update=array(
-                    'title'=>$title,'content'=>$content,
-                    'feature'=>$feature,'price'=>$price,'price_reduce'=>$price_reduce,
+                    'title'=>$title,'feature'=>$feature,'detail'=>$detail,
+                    'content'=>$content,'teach'=>$teach,
                     'meta_keyword'=>$meta_kw,'meta_description'=>$meta_desc,
-                    'home'=>$home,'active'=>$active,'pId'=>$pId,'ind'=>$ind
+                    'lnk'=>$lnk,'e_lnk'=>$e_lnk,
+                    'e_title'=>$e_title,'e_feature'=>$e_feature,'e_detail'=>$e_detail,
+                    'e_content'=>$e_content,'e_teach'=>$e_teach,
+                    'e_meta_keyword'=>$e_meta_kw,'e_meta_description'=>$e_meta_desc,
+                    'pd_option'=>$product_option,'ind'=>$ind,
+                    'pId'=>$pId,'video'=>$video,
+                    'price_reduce'=>$price_reduce,'home'=>$home,
+                    'active'=>$active,'price'=>$price,'in_stock'=>$in_stock
                 );
-        try{
-            $db->where('id',$_POST['idLoad']);
-            $db->update($table,$update);
-            header("location:".$_SERVER['REQUEST_URI'],true);
-        } catch (Exception $e){
-            $msg=$e->getMessage();
-        }
-	}
-
-	if(isset($_POST["Del"])&&$_POST["Del"]==1) {
-        $db->where('id',$_POST['idLoad']);
-        try{
-           $db->delete($table);
-           header("location:".$_SERVER['REQUEST_URI'],true);
-        } catch(Exception $e) {
-            $msg=$e->getMessage();
-        }
-	}
-    
-    $page_head= array(
-                    array('#','Danh sách sản phẩm')
-                );
-
-	$str=$form->breadcumb($page_head);
-	$str.=$form->message($msg);
-    
-    $str.=$form->search_area($db,$act,'product_cate',$_GET['hint'],1);
-
-    $head_title=array('Tên SP','Danh mục','Hình ảnh','Trang chủ','Hiển thị','Thứ tự');
-	$str.=$form->table_start($head_title);
-    
-    $page=isset($_GET["page"])?intval($_GET["page"]):1;
-    if(isset($_GET['hint'])) $db->where('title','%'.$_GET['hint'].'%','LIKE'); 
-    if(isset($_GET['cate_lev_1'])&&intval($_GET['cate_lev_1'])>0){
-        $db->where('pId',intval($_GET['cate_lev_1']));
-    }
-    $db->orderBy('id');
-    $db->pageLimit=ad_lim;
-    $list=$db->paginate($table,$page);
-    $count=$db->totalCount;
-    if($db->count!=0){
-        $db_sub=$db;
-        foreach($list as $item){
-            $cate_1=$db->where('id',$item['pId'])->where('lev',1)->getOne('product_cate','id,title,pId');
-            //$cate_1=$db->where('id',$cate_2['pId'])->where('lev',1)->getOne('product_cate','id,title');
-            $img=$db->where('pId',$item['id'])->orderBy('ind','asc')->getOne('product_image','img');
-            if(trim($img['img'])==='') $img='holder.js/130x100';else $img=myPath.$img['img'];   
-            $item_content = array(
-                array($item['title'],'text'),
-                //array($item['code'],'text'),
-                //array($item['price'],'number'),
-                //array($item['price_reduce'],'number'),  
-                array(array($cate_1),'cate'),                              
-                array($img,'image'),
-                
-                array($item['home'],'bool'),
-                array($item['active'],'bool'),
-                array($item['ind'],'text')
-            );
-            $addition=array(
-                array('variable'=>array('act'=>$act,'type'=>$type,'id'=>$item['id']),'icon'=>'upload')
-            );
-            $str.=$form->table_body($item['id'],$item_content,$addition);
-        }
-    }
-	$str.=$form->table_end();                            
-    $str.=$form->pagination($page,ad_lim,$count);
-	$str.='
-	<form role="form" class="form" id="actionForm" name="actionForm" enctype="multipart/form-data" action="" method="post" data-toggle="validator">
-	<div class="row">
-    	<div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
-        
-        <div class="col-lg-12">
-            '.$form->text('title',array('label'=>'Tên SP','required'=>true)).'
-            '.$form->cate_group($db,'product_cate',1).'
-                   
-            '.$form->text('meta_keyword',array('label'=>'Keyword <code>SEO</code>')).'
-            '.$form->textarea('meta_description',array('label'=>'Description <code>SEO</code>')).'
-            '.$form->ckeditor('feature',array('label'=>'Điểm nổi bật')).'            
-            '.$form->ckeditor('content',array('label'=>'Mô tả chi tiết')).'
-            '.$form->checkbox('active',array('label'=>'Hiển Thị','checked'=>true)).'
-            '.$form->checkbox('home',array('label'=>'Trang chủ')).'
-            
-            '.$form->number('ind',array('label'=>'Thứ tự')).'
-    	</div>
-        
-    	'.$form->hidden($btn['name'],$btn['value']).'
-	</div>
-	</form>
-	';
-	return $str;
-}
-function product_image($db){
-    $msg='';
-    $act='product';
-    $type='product';
-    $table='product_image';
-    $pId=intval($_GET['id']);
-    
-    if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
-		$db->where('id',$_POST['idLoad']);
-        $list = $db->getOne($table);
-        $btn=array('name'=>'update','value'=>'Update');
-        $form = new form($list);
-	} else {
-        $btn=array('name'=>'addNew','value'=>'Submit');
-        $form = new form();
-	}
-	if(isset($_POST["addNew"])||isset($_POST["update"])) {
-        $ind=intval($_POST['ind']);
-        $active=$_POST['active']=="on"?1:0;
-        $file=time().$_FILES['file']['name'];
-	}
-    if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
-        $list = explode(',',$_POST['listDel']);
-        foreach($list as $item){
-            $db->where('id',intval($item));
-            try{
-               $db->delete($table);
-            } catch(Exception $e) {
-                $msg=$e->getMessage();
-            }
-        }
-        header("location:".$_SERVER['REQUEST_URI'],true);
-    }
-	if(isset($_POST["addNew"])) {
-        $insert = array('ind'=>$ind,'active'=>$active,'pId'=>$pId);
-		try{
-            $recent = $db->insert($table,$insert);
-            if(common::file_check($_FILES['file'])){
-                WideImage::load('file')->resize(458,600, 'fill')->saveToFile(myPath.$file);
-                WideImage::load(myPath.$file)->resize(168,220, 'fill')->saveToFile(myPath.'thumb_'.$file);
-                $db->where('id',$recent);
-                $db->update($table,array('img'=>$file));
-            }
-            header("location:".$_SERVER['REQUEST_URI'],true);
-        } catch(Exception $e) {
-            $msg=$e->getMessage();
-        }
-	}
-	if(isset($_POST["update"]))	{
-	   $update=array('ind'=>$ind,'active'=>$active);
-       if(common::file_check($_FILES['file'])){
-            WideImage::load('file')->resize(458,600, 'fill')->saveToFile(myPath.$file);
-            WideImage::load(myPath.$file)->resize(168,220, 'fill')->saveToFile(myPath.'thumb_'.$file);
-            $update = array_merge($update,array('img'=>$file));
-            $db->where('id',$_POST['idLoad']);
-            $last_img = $db->getOne($table,'img');
-            if($last_img['img']!='') unlink(myPath.$last_img['img']);
-        }
         try{
             $db->where('id',$_POST['idLoad']);
             $db->update($table,$update);
@@ -487,49 +114,284 @@ function product_image($db){
             $msg=mysql_error();
         }
 	}
+
+    $page_head= array(
+                    array('#','Danh sách SP')
+                );
+
+	$str=$form->breadcumb($page_head);
+	$str.=$form->message($msg);
+
+    $str.=$form->search_area($db,$act,$hint);
+
+    $head_title=array('Tiêu đề','Đơn giá / KM(VNĐ)','Danh mục','Tính năng','Thứ tự','Hiển thị');
+	$str.=$form->table_head($head_title);
+
+    if(intval($_GET['cate_lev_2'])!=0) $db->where('pId',intval($_GET['cate_lev_2']));
+    else if(intval($_GET['cate_lev_1'])!=0) {
+        $db_tmp=$db;
+        $db_tmp->where('lev',2)->where('pId',intval($_GET['cate_lev_1']));
+        $list=$db_tmp->get('category',null,'id');
+        foreach($list as $item){
+            $list_tmp[]=$item['id'];
+        }
+        $db->where('pId',$list_tmp,'in');
+    }
+    if(trim($hint)!='') $db->where('title','%'.$hint.'%','like');
+	  $page=isset($_GET["page"])?intval($_GET["page"]):1;
+    $db->orderBy('id');
+    $db->pageLimit=ad_lim;
+    $list=$db->paginate($table,$page);
+    $count=$db->totalCount;
+    if($db->count!=0){
+        $db_sub=$db;
+        foreach($list as $item){
+            $item_id=$item['id'];
+            if($item['active']==1){
+                $active = '<span class="glyphicon glyphicon-ok"></span>';
+            } else {
+                $active='<span class="glyphicon glyphicon-remove"></span>';
+            }
+            $db_sub->where('id',$item['pId']);
+            $cate_sub=$db_sub->getOne('category','pId,title');
+            $db_sub->where('id',$cate_sub['pId']);
+            $cate=$db_sub->getOne('category',null,'title');
+            if($item['pd_option']!=''){
+                $option=explode(',',$item['pd_option']);
+            }else{
+                $option=array();   
+            }            
+            $opt_list='';
+            if(count($option)>0){
+                foreach((array)$option as $opt){
+                    $opt_item=$db->where('id',$opt)->getOne('product_option','icon');
+                    $opt_list.='<img src="'.myPath.$opt_item['icon'].'" class=""/> ';
+                }   
+            }           
+            $item_content = array(
+                $item['title'],
+                number_format($item['price'],0,'.',',').' / '.number_format($item['price_reduce'],0,'.',','),
+                '<dl><dt><a>'.$cate['title'].'</a></dt><dd><a><i class="glyphicon glyphicon-forward"></i>'.$cate_sub['title'].'</a></dd></dl>',
+                $opt_list,
+                $item['ind'],
+                $active
+            );
+            if(isset($_POST['Edit'])==1&&$_POST['idLoad']==$item_id) $change=true;
+            else $change=false;
+            $addition=array(
+                array('direction'=>'main.php?act='.$act.'&pdId='.$item_id,'icon'=>'upload')
+            );
+            $str.=$form->table_body($item_id,$item_content,$change,$_SERVER['REQUEST_URI'],$addition);
+        }
+    }
+	$str.='
+					</tbody>
+				</table>
+				</div>';
+
+    $str.=$form->del_list();
+    $pg = new Pagination();
+    $pg->pagenumber = $page;
+    $pg->pagesize = ad_lim;
+    $pg->totalrecords = $count;
+    $pg->paginationstyle = 1; // 1: advance, 0: normal
+    $pg->defaultUrl = "main.php?act=$act";
+    $pg->paginationUrl = "main.php?act=$act&page=[p]";
+    $str.= $pg->process();
+	$str.='
+			</div>
+		</div>
+		<!-- Row -->
+		<form role="form" class="form" id="actionForm" name="actionForm" enctype="multipart/form-data" action="" method="post" data-toggle="validator">
+		<div class="row">
+		<div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
+        <div class="col-lg-12 admin-tabs">
+            <ul class="nav nav-tabs">
+    			<li class="active"><a href="#vietnamese" data-toggle="tab">Việt Nam</a></li>
+    			<li><a href="#english" data-toggle="tab">English</a></li>
+    		</ul>
+    		<div class="tab-content">
+    			<div class="tab-pane bg-vi active" id="vietnamese">
+                    '.$form->text('title','Tên SP').'
+                    '.$form->text('lnk','Liên Kết').'
+                    '.$form->text('meta_keyword','Keyword <code>SEO</code>').'
+                    '.$form->textarea('meta_description','Description <code>SEO</code>').'
+                    '.$form->ckeditor('feature','Nổi bật').'
+                    '.$form->ckeditor('content','Mô tả').'
+                    '.$form->ckeditor('detail','Thông số kỹ thuật').'
+                    '.$form->ckeditor('teach','Hướng dẫn sử dụng').'
+    			</div>
+    			<div class="tab-pane bg-en" id="english">
+                    '.$form->text('e_title','Tên SP').'
+                     '.$form->text('e_lnk','Liên Kết').'
+                    '.$form->text('e_meta_keyword','Keyword <code>SEO</code>').'
+                    '.$form->textarea('e_meta_description','Description <code>SEO</code>').'
+                    '.$form->ckeditor('e_feature','Nổi bật').'
+                    '.$form->ckeditor('e_content','Mô tả').'
+                    '.$form->ckeditor('e_detail','Thông số kỹ thuật').'
+                    '.$form->ckeditor('e_teach','Hướng dẫn sử dụng').'
+    			</div>
+    		</div>
+        </div>
+        <div class="col-lg-6">
+            '.$form->text('video','Youtube Video<code>https://www.youtube.com/embed/<i style="color:#000">60g__iiYDPo</i></code>').'
+            '.$form->number('price','Đơn giá<code> VNĐ </code>','',true).'
+            '.$form->number('price_reduce','Giá khuyến mãi<code> VNĐ </code>').'
+            '.$form->number('ind','Thứ tự').'
+            '.$form->checkbox('active','Hiển Thị','',true).'
+            '.$form->checkbox('home','Trang chủ','',true).'
+            '.$form->checkbox('in_stock','Còn Hàng',true).'
+		</div>
+        <div class="col-lg-6">
+            '.$form->category_group($db).'
+            '.$form->product_option($db).'
+        </div>
+		'.$form->hidden($_POST['idLoad'],$btn['name'],$btn['value']).'
+	</div>
+	</form>
+	';
+	return $str;
+}
+function product_image($db){
+    $msg='';
+    $act='product';
+    $table='product_image';
+    $pId=intval($_GET['pdId']);
+    if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
+		$db->where('id',$_POST['idLoad']);
+        $list = $db->get($table);
+        $btn=array('name'=>'update','value'=>'Update');
+        $form = new form($list);
+	} else {
+        $btn=array('name'=>'addNew','value'=>'Submit');
+        $form = new form();
+	}
+	if(isset($_POST["addNew"])||isset($_POST["update"])) {
+        $ind=intval($_POST['ind']);
+        $active=$_POST['active']=="on"?1:0;
+        $file=time().$_FILES['file']['name'];
+	}
+    if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
+        $list = explode(',',$_POST['listDel']);
+        foreach($list as $item){
+            $db->where('id',intval($item));
+            try{
+               $db->delete($table);
+            } catch(Exception $e) {
+                $msg=mysql_error();
+            }
+        }
+        header("location:".$_SERVER['REQUEST_URI'],true);
+    }
+	if(isset($_POST["addNew"])) {
+        $insert = array('ind'=>$ind,'active'=>$active,'pId'=>$pId);
+		try{
+            $recent = $db->insert($table,$insert);
+            if($form->file_chk($_FILES['file'])){
+                WideImage::load('file')->resize(800, 600, 'fill')->saveToFile(myPath.$file);
+                $db->where('id',$recent);
+                $db->update($table,array('img'=>$file));
+            }
+            header("location:".$_SERVER['REQUEST_URI'],true);
+        } catch(Exception $e) {
+            $msg=mysql_error();
+        }
+	}
+	if(isset($_POST["update"]))	{
+	   $update=array('ind'=>$ind,'active'=>$active);
+       if($form->file_chk($_FILES['file'])){
+            WideImage::load('file')->resize(800, 600, 'fill')->saveToFile(myPath.$file);
+            $update = array_merge($update,array('img'=>$file));
+            $db->where('id',$_POST['idLoad']);
+            $last_img = $db->getOne($table,'img');
+            if($last_img['img']!='') unlink(myPath.$last_img['img']);
+        }
+        try{
+            $db->where('id',$_POST['idLoad']);
+            $db->update($table,$update);
+            header("location:".$_SERVER['REQUEST_URI'],true);
+        } catch (Exception $e){
+            $msg = $e->getErrorMessage();
+        }
+	}
+
+	if(isset($_POST["Del"])&&$_POST["Del"]==1) {
+        $db->where('id',$_POST['idLoad']);
+        try{
+           $db->delete($table);
+           header("location:".$_SERVER['REQUEST_URI'],true);
+        } catch(Exception $e) {
+            $msg=mysql_error();
+        }
+	}
     $db->where('id',$pId);
     $pd=$db->getOne('product','id,title,pId');
     $db->where('id',$pd['pId']);
-    $cate=$db->getOne('product_cate','id,title');
-
+    $cate_sub=$db->getOne('category','id,title,pId');
+    $db->where('id',$cate_sub['pId']);
+    $cate=$db->getOne('category','id,title');
     $page_head= array(
-                    array('#','Hình ảnh sản phẩm'),
-                    array('main.php?act='.$act.'&type='.$type,$pd['title'].' <code><i class="fa fa-backward"></i></code>')
+                    array('main.php?act='.$act,'Danh mục SP'),
+                    array('main.php?act='.$act,$cate['title']),
+                    array('main.php?act='.$act,$cate_sub['title']),
+                    array('#',$pd['title'])
                 );
 	$str=$form->breadcumb($page_head);
 	$str.=$form->message($msg);
     $head_title=array('Hình ảnh','Thứ tự','Hiển thị');
-	$str.=$form->table_start($head_title);
-    
-    $page=isset($_GET["page"])?intval($_GET["page"]):1;
-	$db->where('pId',$pId);
-    $db->pageLimit=ad_lim;
-	$list=$db->paginate($table,$page);
-	$count= $db->totalCount;
-	
-	
-    if($count>0){
+	$str.=$form->table_head($head_title);
+	$s="select * from $table where pId=$pId";
+	$list = $db->rawQuery($s);
+	$count= $db->count;
+	$page=isset($_GET["page"])?intval($_GET["page"]):1;
+	$lim=10;
+	$start=($page-1)*$lim;
+	$s.=" limit $start,$lim";
+	$list = $db->rawQuery($s);
+    if($db->count!=0){
         foreach($list as $item){
+            $item_id=$item['id'];
+            if($item['active']==1){
+                $active = '<span class="glyphicon glyphicon-ok"></span>';
+            } else {
+                $active='<span class="glyphicon glyphicon-remove"></span>';
+            }
             $item_content = array(
-                array(myPath.$item['img'],'image'),
-                array($item['ind'],'text'),
-                array($item['active'],'bool')
+                '<img src="'.myPath.$item['img'].'" class="img-thumbnail" style="max-height:100px"/>',
+                $item['ind'],
+                $active
             );
-            $str.=$form->table_body($item['id'],$item_content);
+            if(isset($_POST['Edit'])==1&&$_POST['idLoad']==$item_id) $change=true;
+            else $change=false;
+            $str.=$form->table_body($item_id,$item_content,$change,$_SERVER['REQUEST_URI']);
         }
     }
-    $str.=$form->table_end();                            
-    $str.=$form->pagination($page,ad_lim,$count);
 	$str.='
-	<form role="form" id="actionForm" name="actionForm" enctype="multipart/form-data" action="" method="post" data-toggle="validator">
-	<div class="row">
-    	<div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
+					</tbody>
+				</table>
+				</div>';
+    $str.=$form->del_list();
+    $pg = new Pagination();
+    $pg->pagenumber = $page;
+    $pg->pagesize = $lim;
+    $pg->totalrecords = $count;
+    $pg->paginationstyle = 1; // 1: advance, 0: normal
+    $pg->defaultUrl = "main.php?act=$act&pdId=$pId";
+    $pg->paginationUrl = "main.php?act=$act&pdId=$pId&page=[p]";
+    $str.= $pg->process();
+	$str.='
+			</div>
+		</div>
+		<!-- Row -->
+		<form role="form" id="actionForm" name="actionForm" enctype="multipart/form-data" action="" method="post" data-toggle="validator">
+		<div class="row">
+		<div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
         <div class="col-lg-12">
-            '.$form->file('file',array('label'=>'Hình ảnh <code>( 458,600 )</code>')).'
-            '.$form->number('ind',array('label'=>'Thứ tự','required'=>true)).'
-            '.$form->checkbox('active',array('label'=>'Hiển Thị','checked'=>true)).'
+            '.$form->file('file','Hình ảnh <code>( 800 x 600 )</code>').'
+            '.$form->number('ind','Thứ tự','',true).'
+            '.$form->checkbox('active','Hiển Thị','',true).'
         </div>
-    	'.$form->hidden($btn['name'],$btn['value']).'
+		'.$form->hidden($_POST['idLoad'],$btn['name'],$btn['value']).'
 	</div>
 	</form>
 	';

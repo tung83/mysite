@@ -3,7 +3,7 @@
  * CKFinder
  * ========
  * http://ckfinder.com
- * Copyright (C) 2007-2012, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (C) 2007-2011, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -18,20 +18,12 @@
 	<link href="../sample.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<h1 class="samples">
+	<h1>
 		CKFinder - Sample - Popups<br />
 	</h1>
-	<div class="description">
+	<hr />
+	<p>
 	The example of opening multiple CKFinder instances in popup windows is available in the &quot;_samples&quot; directory. Click <a href="../popups.html">here</a> to open it.
-	</div>
-	<div id="footer">
-		<hr />
-		<p>
-			CKFinder - Ajax File Manager - <a class="samples" href="http://ckfinder.com/">http://ckfinder.com</a>
-		</p>
-		<p id="copy">
-			Copyright &copy; 2003-2012, <a class="samples" href="http://cksource.com/">CKSource</a> - Frederico Knabben. All rights reserved.
-		</p>
-	</div>
-	</body>
+	</p>
+</body>
 </html>

@@ -11,9 +11,10 @@ function qtext($db)
     $id=intval($_GET['id']);
 
 	$db->where('id',$id);
-    $item = $db->getOne($table);
+    $list = $db->get($table);
+    $item=$list[0];
     $btn=array('name'=>'update','value'=>'Update');
-    $form = new form($item);
+    $form = new form($list);
 
 	if(isset($_POST["addNew"])||isset($_POST["update"])) {
         $content=str_replace("'","",$_POST['content']);
@@ -42,10 +43,21 @@ function qtext($db)
 		<form role="form" id="actionForm" name="actionForm" enctype="multipart/form-data" action="" method="post" data-toggle="validator">
 		<div class="row">
 		<div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
-        <div class="col-lg-12">
-            '.$form->ckeditor('content',array('label'=>'Nội dung')).'
+        <div class="col-lg-12 admin-tabs">
+            <ul class="nav nav-tabs">
+    			<li class="active"><a href="#vietnamese" data-toggle="tab">Việt Nam</a></li>
+    			<li><a href="#english" data-toggle="tab">English</a></li>
+    		</ul>
+    		<div class="tab-content">
+    			<div class="tab-pane bg-vi active" id="vietnamese">
+                    '.$form->ckeditor('content','Nội dung :').'
+    			</div>
+    			<div class="tab-pane bg-en" id="english">
+                    '.$form->ckeditor('e_content','Nội dung :').'
+    			</div>
+    		</div>
         </div>
-		'.$form->hidden($btn['name'],$btn['value']).'
+		'.$form->hidden($_POST['idLoad'],$btn['name'],$btn['value']).'
 	</div>
 	</form>
 	';	

@@ -1,27 +1,30 @@
 <?php
-function mainProcess($db){
+function mainProcess($db)
+{
 	return slider($db);	
 }
-function slider($db){
+function slider($db)
+{
 	$msg='';
     $act='slider';
     $table='slider';
     if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
 		$db->where('id',$_POST['idLoad']);
-        $item = $db->getOne($table);
+        $list = $db->get($table);
         $btn=array('name'=>'update','value'=>'Update');
-        $form = new form($item);
+        $form = new form($list);
 	} else {
         $btn=array('name'=>'addNew','value'=>'Submit');	
         $form = new form();
 	}
 	if(isset($_POST["addNew"])||isset($_POST["update"])) {
-        $title=htmlspecialchars($_POST['title']);
-        $sum=htmlspecialchars($_POST['sum']);
+        $title=htmlspecialchars($_POST['title']);	   
+        $e_title=htmlspecialchars($_POST['e_title']);
         $lnk=htmlspecialchars($_POST['lnk']);
-        $ind=intval($_POST['ind']);	   
+        $e_lnk=htmlspecialchars($_POST['e_lnk']);
+        $ind=intval($_POST['ind']);
+        $active=$_POST['active']=="on"?1:0;
         $file=time().$_FILES['file']['name'];
-        $active=$_POST['active']=='on'?1:0;        
 	}
     if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
         $list = explode(',',$_POST['listDel']);
@@ -37,11 +40,11 @@ function slider($db){
         header("location:".$_SERVER['REQUEST_URI'],true);
     }
 	if(isset($_POST["addNew"])) {
-        $insert = array('title'=>$title,'ind'=>$ind,'active'=>$active,'lnk'=>$lnk,'sum'=>$sum);
+        $insert = array('title'=>$title,'e_title'=>$e_title,'ind'=>$ind,'active'=>$active,'lnk'=>$lnk,'e_lnk'=>$e_lnk);
 		try{
             $recent = $db->insert($table,$insert);
-            if(common::file_check($_FILES['file'])){
-                WideImage::load('file')->resize(1004,500,'fill')->saveToFile(myPath.$file);
+            if($form->file_chk($_FILES['file'])){
+                WideImage::load('file')->resize(1390,500, 'fill')->saveToFile(myPath.$file);
                 $db->where('id',$recent);
                 $db->update($table,array('img'=>$file));
             }
@@ -51,20 +54,21 @@ function slider($db){
         }			
 	}
 	if(isset($_POST["update"]))	{
-        $update=array('title'=>$title,'ind'=>$ind,'active'=>$active,'lnk'=>$lnk,'sum'=>$sum);
-        if(common::file_check($_FILES['file'])){
-            WideImage::load('file')->resize(1004,500, 'fill')->saveToFile(myPath.$file);
-            $update = array_merge($update,array('img'=>$file)); 
+	   $update=array('title'=>$title,'e_title'=>$e_title,'ind'=>$ind,'active'=>$active,'lnk'=>$lnk,'e_lnk'=>$e_lnk);
+       if($form->file_chk($_FILES['file'])){
+            WideImage::load('file')->resize(1390,500, 'fill')->saveToFile(myPath.$file);
+            $update = array_merge($update,array('img'=>$file));
             $form->img_remove($_POST['idLoad'],$db,$table);
-        }        
+        }
         try{
             $db->where('id',$_POST['idLoad']);
-            $db->update($table,$update);
+            $db->update($table,$update);  
             header("location:".$_SERVER['REQUEST_URI'],true);   
         } catch (Exception $e){
             $msg = $e->getErrorMessage();
         }
 	}
+	
 	if(isset($_POST["Del"])&&$_POST["Del"]==1) {
         try{
             $form->img_remove($_POST['idLoad'],$db,$table);
@@ -80,48 +84,80 @@ function slider($db){
                 );
 	$str=$form->breadcumb($page_head);
 	$str.=$form->message($msg);
-    
-    $str.=$form->search_area($db,$act,'category',$_GET['hint'],0);
-    
-    $head_title=array('Hình ảnh','Tiêu đề','Liên kết','STT','Hiển thị');    
-	$str.=$form->table_start($head_title);
+    $head_title=array('Hình ảnh','Tiêu đề( Vi / <b>En</b> )','Liên kết( Vi / <b>En</b> )','Thứ tự','Hiển thị');
+	$str.=$form->table_head($head_title);
     
     $page=isset($_GET["page"])?intval($_GET["page"]):1;
-    if(isset($_GET['hint'])) $db->where('title','%'.$_GET['hint'].'%','LIKE');  
+    $db->pageLimit=$lim=ad_lim;
     $db->orderBy('id');
-    $db->pageLimit=ad_lim;
 	$list=$db->paginate($table,$page);    
 	$count= $db->totalCount;
 	
     if($count!=0){
         foreach($list as $item){
+            $item_id=$item['id'];
+            if($item['active']==1){
+                $active = '<span class="glyphicon glyphicon-ok"></span>';
+            } else {
+                $active='<span class="glyphicon glyphicon-remove"></span>';
+            }
             $item_content = array(
-                array(myPath.$item['img'],'image'),                
-                array($item['title'],'text'),
-                array($item['lnk'],'link'),
-                array($item['ind'],'text'),
-                array($item['active'],'bool')
+                '<img src="'.myPath.$item['img'].'" class="img-thumbnail img-admin"/>',
+                $item['title'].'<br/><b>'.$item['e_title'].'</b>',
+                $item['lnk'].'<br/><b>'.$item['e_lnk'].'</b>',
+                $item['ind'],
+                $active
             );
-            $str.=$form->table_body($item['id'],$item_content);      
+            if(isset($_POST['Edit'])==1&&$_POST['idLoad']==$item_id) $change=true;
+            else $change=false;
+            $str.=$form->table_body($item_id,$item_content,$change,$_SERVER['REQUEST_URI']);      
         }
-    }   
-    $str.=$form->table_end();                            
-    $str.=$form->pagination($page,ad_lim,$count);
-	$str.='
-	<form role="form" id="actionForm" name="actionForm" enctype="multipart/form-data" action="" method="post" data-toggle="validator">
-	<div class="row">
-        <div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
-        <div class="col-lg-12">
-            '.$form->text('title',array('label'=>'Tiêu Đề')).'
-            '.$form->textarea('sum',array('label'=>'Tóm tắt','rows'=>5)).'
-            '.$form->text('lnk',array('label'=>'Liên kết<code>http://</code>')).'
-            '.$form->file('file',array('label'=>'Hình ảnh <code>( đề nghị: 1004,500 )</code>')).'
-            '.$form->number('ind',array('label'=>'Thứ tự')).'
-            '.$form->checkbox('active',array('label'=>'Hiển thị','checked'=>true)).'
+    }                               
+	$str.='					
+					</tbody>
+				</table>
+				</div>';
+    $str.=$form->del_list();
+    $pg = new Pagination();
+    $pg->pagenumber = $page;
+    $pg->pagesize = $lim;
+    $pg->totalrecords = $count;
+    $pg->paginationstyle = 1; // 1: advance, 0: normal
+    $pg->defaultUrl = "main.php?act=$act";
+    $pg->paginationUrl = "main.php?act=$act&page=[p]";
+    $str.= $pg->process();
+	$str.='			
+			</div>
+		</div>
+		<!-- Row -->
+		<form role="form" id="actionForm" name="actionForm" enctype="multipart/form-data" action="" method="post" data-toggle="validator">
+		<div class="row">
+		<div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
+        <div class="col-lg-12 admin-tabs">
+            <ul class="nav nav-tabs">
+    			<li class="active"><a href="#vietnamese" data-toggle="tab">Việt Nam</a></li>
+    			<li><a href="#english" data-toggle="tab">English</a></li>
+    		</ul>
+    		<div class="tab-content">
+    			<div class="tab-pane bg-vi active" id="vietnamese">
+                    '.$form->text('title','Tiêu đề').'
+                    '.$form->text('lnk','Liên kết <code>( http:// )</code>').' 	
+    			</div>
+    			<div class="tab-pane bg-en" id="english">
+                    '.$form->text('e_title','Tiêu đề').'
+                    '.$form->text('e_lnk','Liên kết <code>( http:// )</code>').' 	
+    			</div>
+    		</div>
         </div>
-		'.$form->hidden($btn['name'],$btn['value']).'
+        <div class="col-lg-12">
+            '.$form->file('file','Hình ảnh <code>( 1390 x 500 )</code>').'
+            '.$form->number('ind','Thứ tự','',true).'
+            '.$form->checkbox('active','Hiển Thị','',true).'
+        </div>
+		'.$form->hidden($_POST['idLoad'],$btn['name'],$btn['value']).'
 	</div>
-	</form>';	
+	</form>
+	';	
 	return $str;	
 }
 ?>

@@ -24,10 +24,12 @@ unset($process);
 //define area
 define('_hostName'  , 'localhost');	
 
-define('_userName'  , 'acura_db');	
-define('_dbName'    , 'acura_db');	
-define('_pass'      , 'Ems123@');
-
+define('_userName'  , 'pspmedia');	
+define('_dbName'    , 'pspmedia');	
+define('_pass'      , 't80vyBMVTe54bkhR');
+//define('_userName'  , 'pspmedia_mekogas');	
+//define('_dbName'    , 'pspmedia_mekogas');	
+//define('_pass'      , 'PS123@');
 
 //define('_userName'  , 'root');	
 //define('_dbName'    , 'acura');	
@@ -40,8 +42,8 @@ define('myPath'     ,'../file/upload/');
 define('webPath'    ,'/file/upload/');
 define('selfPath'   ,'/file/self/');
 
-define('phpLib'     ,'/object/');
-define('widgetLib'  ,'/widget/');
+define('phpLib'     ,dirname(__FILE__).'/object/');
+define('widgetLib'  ,dirname(__FILE__).'/widget/');
 
 
 //define area end

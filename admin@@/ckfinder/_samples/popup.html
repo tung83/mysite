@@ -3,7 +3,7 @@
  * CKFinder
  * ========
  * http://ckfinder.com
- * Copyright (C) 2007-2012, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (C) 2007-2011, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -23,16 +23,16 @@ function BrowseServer()
 {
 	// You can use the "CKFinder" class to render CKFinder in a page:
 	var finder = new CKFinder();
-	finder.basePath = '../';	// The path for the installation of CKFinder (default = "/ckfinder/").
+	finder.basePath = '../../';	// The path for the installation of CKFinder (default = "/ckfinder/").
 	finder.selectActionFunction = SetFileField;
 	finder.popup();
 
 	// It can also be done in a single line, calling the "static"
-	// popup( basePath, width, height, selectFunction ) function:
-	// CKFinder.popup( '../', null, null, SetFileField ) ;
+	// Popup( basePath, width, height, selectFunction ) function:
+	// CKFinder.Popup( '../../', null, null, SetFileField ) ;
 	//
-	// The "popup" function can also accept an object as the only argument.
-	// CKFinder.popup( { basePath : '../', selectActionFunction : SetFileField } ) ;
+	// The "Popup" function can also accept an object as the only argument.
+	// CKFinder.Popup( { BasePath : '../../', selectActionFunction : SetFileField } ) ;
 }
 
 // This is a sample function which is called when a file is selected in CKFinder.
@@ -44,25 +44,17 @@ function SetFileField( fileUrl )
 	</script>
 </head>
 <body>
-	<h1 class="samples">
+	<h1>
 		CKFinder - Sample - Popup<br />
 	</h1>
-	<div class="description">
+	<hr />
+	<p>
 		CKFinder may be used in a popup. You may define a custom JavaScript function to be called when
-		an image is selected (double-clicked).</div>
+		an image is selected (double-clicked).</p>
 	<p>
 		Selected File URL<br />
 		<input id="xFilePath" name="FilePath" type="text" size="60" />
 		<input type="button" value="Browse Server" onclick="BrowseServer();" />
 	</p>
-	<div id="footer">
-		<hr />
-		<p>
-			CKFinder - Ajax File Manager - <a class="samples" href="http://ckfinder.com/">http://ckfinder.com</a>
-		</p>
-		<p id="copy">
-			Copyright &copy; 2003-2012, <a class="samples" href="http://cksource.com/">CKSource</a> - Frederico Knabben. All rights reserved.
-		</p>
-	</div>
 </body>
 </html>

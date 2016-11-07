@@ -18,16 +18,10 @@
  */
 class ClientInfo
 {
-    private $user_agent      = '';
-    private $user_ip         = '';
-    private $user_country    = 'unknow';
-    private $user_city       = 'unknow'; 
-
+    private $user_agent = '';
     public function __construct()
     {
         $this->user_agent = $_SERVER['HTTP_USER_AGENT'];
-        $this->user_ip    = $_REQUEST['REMOTE_ADDR'];
-        $this->getLocation();
     }
     public function getCurrentMacAddress()
     {
@@ -40,15 +34,7 @@ class ClientInfo
         $mac=substr($mycom,($pmac+36),17); // Get Physical Address
         return $mac;
     }
-    public function getUserCountry(){
-        return $this->user_country;
-    }
-    public function getUserCity(){
-        return $this->user_city;
-    }
-    public function getUserIp(){
-        return $this->user_ip;
-    }
+
     private function getMacLinux() {
         exec('netstat -ie', $result);
         if(is_array($result)) {
@@ -104,7 +90,7 @@ class ClientInfo
         return $os_platform;
     }
 
-    public function getBrowser() {
+    function getBrowser() {
         $browser        =   "Unknown Browser";
         $browser_array  =   array(
                                 '/msie/i'       =>  'Internet Explorer',
@@ -124,33 +110,6 @@ class ClientInfo
             }
         }
         return $browser;
-    }
-    /**
-     *array (
-     *    'status' => 'success',
-     *    'country' => 'COUNTRY',
-     *    'countryCode' => 'COUNTRY CODE',
-     *    'region' => 'REGION CODE',
-     *    'regionName' => 'REGION NAME',
-     *    'city' => 'CITY',
-     *    'zip' => ZIP CODE,
-     *    'lat' => LATITUDE,
-     *    'lon' => LONGITUDE,
-     *    'timezone' => 'TIME ZONE',
-     *    'isp' => 'ISP NAME',
-     *    'org' => 'ORGANIZATION NAME',
-     *    'as' => 'AS NUMBER / NAME',
-     *    'query' => 'IP ADDRESS USED FOR QUERY',
-     *  )
-     */
-    public function getLocation(){
-        $query = @unserialize(file_get_contents('http://ip-api.com/php/'.$this->user_ip));
-        if($query && $query['status'] == 'success') {
-            $this->user_country = $query['country'];
-            $this->user_city = $query['city'];
-            $this->user_ip = $query['query'];
-        }
-        return true;
     }
 
 }

@@ -37,7 +37,7 @@ function cate($db)
     if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
         $list = explode(',',$_POST['listDel']);
         foreach($list as $item){
-            $db->where('id',intval($item))->where('pId',intval($item),'OR');
+            $db->where('id',intval($item))->where('pId',intval($item),'=','OR');
             try{
                $db->delete($table); 
             } catch(Exception $e) {

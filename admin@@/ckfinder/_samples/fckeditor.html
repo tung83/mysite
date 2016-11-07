@@ -3,7 +3,7 @@
  * CKFinder
  * ========
  * http://ckfinder.com
- * Copyright (C) 2007-2012, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (C) 2007-2011, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -20,12 +20,13 @@
 	<script type="text/javascript" src="../ckfinder.js"></script>
 </head>
 <body>
-	<h1 class="samples">
+	<h1>
 		CKFinder - Sample - FCKeditor Integration
 	</h1>
-	<div class="description">
+	<hr />
+	<p>
 		CKFinder can be easily integrated with FCKeditor. Try it now, by clicking
-		the "Image" or "Link" icons and then the "<strong>Browse Server</strong>" button.</div>
+		the "Image" or "Link" icons and then the "<strong>Browse Server</strong>" button.</p>
 	<p>
 		<script type="text/javascript">
 
@@ -45,26 +46,17 @@ else
 	oFCKeditor.BasePath	= '/fckeditor/' ;
 	oFCKeditor.Value	= '<p>Just click the <b>Image</b> or <b>Link</b> button, and then <b>&quot;Browse Server&quot;</b>.</p>' ;
 
-	// Just call CKFinder.setupFCKeditor before calling Create(), CreateHtml()
+	// Just call CKFinder.SetupFCKeditor before calling Create(), CreateHtml()
 	// or ReplaceTextarea() in FCKeditor. The second parameter (optional), is
 	// the path for the CKFinder installation (default = "/ckfinder/").
 	CKFinder.setupFCKeditor( oFCKeditor, '../' ) ;
 	// It is also possible to pass an object with selected CKFinder properties as a second argument.
-	// CKFinder.setupFCKeditor( oFCKeditor, { basePath : '../', skin : 'v1' } ) ;
+	// CKFinder.SetupFCKeditor( oFCKeditor, { BasePath : '../../', RememberLastFolder : false } ) ;
 
 	oFCKeditor.Create() ;
 }
 
 		</script>
 	</p>
-	<div id="footer">
-		<hr />
-		<p>
-			CKFinder - Ajax File Manager - <a class="samples" href="http://ckfinder.com/">http://ckfinder.com</a>
-		</p>
-		<p id="copy">
-			Copyright &copy; 2003-2012, <a class="samples" href="http://cksource.com/">CKSource</a> - Frederico Knabben. All rights reserved.
-		</p>
-	</div>
 </body>
 </html>

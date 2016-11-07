@@ -1,25 +1,21 @@
 <?php
 function mainProcess($db)
 {
-    switch($_GET['type']){
-        case 'news_cate':
-            return news_cate($db);
-            break;
-        default:
-            return news($db);
-            break;
+    $type=$_GET['type'];
+    switch($type){
+        case 'news_cate': return news_cate($db,$type);break;
+        case 'news': return news($db,$type);break;
+        default:return news_cate($db,$type);break;
     }
 }
-function news_cate($db)
+function news_cate($db,$type)
 {
 	$msg='';
     $act='news';
-    $type='news_cate';
     $table='news_cate';
-    $lev=1;
     if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
 		$db->where('id',$_POST['idLoad']);
-        $list = $db->getOne($table);
+        $list = $db->get($table);
         $btn=array('name'=>'update','value'=>'Update');
         $form = new form($list);
 	} else {
@@ -28,8 +24,11 @@ function news_cate($db)
 	}
 	if(isset($_POST["addNew"])||isset($_POST["update"])) {
         $title=htmlspecialchars($_POST['title']);	   
+        $e_title=htmlspecialchars($_POST['e_title']);
         $meta_kw=htmlspecialchars($_POST['meta_keyword']);
         $meta_desc=htmlspecialchars($_POST['meta_description']);
+        $e_meta_kw=htmlspecialchars($_POST['e_meta_keyword']);
+        $e_meta_desc=htmlspecialchars($_POST['e_meta_description']);
         $active=$_POST['active']=="on"?1:0;
         $ind=intval($_POST['ind']);
 	}
@@ -40,16 +39,17 @@ function news_cate($db)
             try{
                $db->delete($table); 
             } catch(Exception $e) {
-                $msg=$e->getMessage();
+                $msg=mysql_error();
             }
         }
         header("location:".$_SERVER['REQUEST_URI'],true);
     }
 	if(isset($_POST["addNew"])) {
         $insert = array(
-                    'title'=>$title,'lev'=>$lev,
+                    'title'=>$title,'e_title'=>$e_title,
                     'active'=>$active,'meta_keyword'=>$meta_kw,
-                    'meta_description'=>$meta_desc,'ind'=>$ind
+                    'meta_description'=>$meta_desc,'ind'=>$ind,
+                    'e_meta_keyword'=>$e_meta_kw,'e_meta_description'=>$e_meta_desc
                 );
 		try{
             $recent = $db->insert($table,$insert);
@@ -60,9 +60,10 @@ function news_cate($db)
 	}
 	if(isset($_POST["update"]))	{
 	   $update=array(
-                    'title'=>$title,'lev'=>$lev,
+                    'title'=>$title,'e_title'=>$e_title,'ind'=>$ind,
                     'active'=>$active,'meta_keyword'=>$meta_kw,
-                    'meta_description'=>$meta_desc,'ind'=>$ind
+                    'meta_description'=>$meta_desc,
+                    'e_meta_keyword'=>$e_meta_kw,'e_meta_description'=>$e_meta_desc
                 );
         try{
             $db->where('id',$_POST['idLoad']);
@@ -79,7 +80,7 @@ function news_cate($db)
            $db->delete($table); 
            header("location:".$_SERVER['REQUEST_URI'],true);
         } catch(Exception $e) {
-            $msg=$e->getMessage();
+            $msg=mysql_error();
         }
 	}
     $page_head= array(
@@ -87,56 +88,86 @@ function news_cate($db)
                 );
 	$str=$form->breadcumb($page_head);
 	$str.=$form->message($msg);
-    
-    $str.=$form->search_area($db,$act,'',$_GET['hint'],0);
-    
-    $head_title=array('Tiêu đề','Thứ tự','Hiển thị');
-	$str.=$form->table_start($head_title);
+    $head_title=array('Tiêu đề','Hiển thị');
+	$str.=$form->table_head($head_title);
 	
     $page=isset($_GET["page"])?intval($_GET["page"]):1;
-    if(isset($_GET['hint'])) $db->where('title','%'.$_GET['hint'].'%','LIKE');  
-    $db->orderBy('id');
     $db->pageLimit=ad_lim;
+    $db->orderBy('id');
     $list=$db->paginate($table,$page);
 
     if($db->count!=0){
         foreach($list as $item){
+            $item_id=$item['id'];
+            if($item['active']==1){
+                $active = '<span class="glyphicon glyphicon-ok"></span>';
+            } else {
+                $active='<span class="glyphicon glyphicon-remove"></span>';
+            }
             $item_content = array(
-                array($item['title'],'text'),
-                array($item['ind'],'text'),
-                array($item['active'],'bool')
+                $item['title'],
+                $active
             );
-            $str.=$form->table_body($item['id'],$item_content);      
+            if(isset($_POST['Edit'])==1&&$_POST['idLoad']==$item_id) $change=true;
+            else $change=false;
+            $str.=$form->table_body($item_id,$item_content,$change,$_SERVER['REQUEST_URI'],$addition);      
         }
     }                               
-	$str.=$form->table_end();                            
-    $str.=$form->pagination($page,ad_lim,$count);
+	$str.='					
+					</tbody>
+				</table>
+				</div>';
+    $str.=$form->del_list();
+    $pg = new Pagination();
+    $pg->pagenumber = $page;
+    $pg->pagesize = ad_lim;
+    $pg->totalrecords = $db->totalCount;
+    $pg->paginationstyle = 1; // 1: advance, 0: normal
+    $pg->defaultUrl = "main.php?act=$act&type=$type";
+    $pg->paginationUrl = "main.php?act=$act&type=$type&page=[p]";
+    $str.= $pg->process();
 	$str.='			
-	<form role="form" id="actionForm" name="actionForm" enctype="multipart/form-data" action="" method="post" data-toggle="validator">
-	<div class="row">
-    	<div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
-        <div class="col-lg-12">
-            '.$form->text('title',array('label'=>'Tiêu đề','required'=>true)).'
-            '.$form->text('meta_keyword',array('label'=>'Keyword <code>SEO</code>')).'
-            '.$form->textarea('meta_description',array('label'=>'Description <code>SEO</code>')).'
-            '.$form->number('ind',array('label'=>'Thứ tự','required'=>true)).'
-            '.$form->checkbox('active',array('label'=>'Hiển Thị','checked'=>true)).'
+			</div>
+		</div>
+		<!-- Row -->
+		<form role="form" id="actionForm" name="actionForm" enctype="multipart/form-data" action="" method="post" data-toggle="validator">
+		<div class="row">
+		<div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
+        <div class="col-lg-12 admin-tabs">
+            <ul class="nav nav-tabs">
+    			<li class="active"><a href="#vietnamese" data-toggle="tab">Việt Nam</a></li>
+    			<li><a href="#english" data-toggle="tab">English</a></li>
+    		</ul>
+    		<div class="tab-content">
+    			<div class="tab-pane bg-vi active" id="vietnamese">
+                    '.$form->text('title','Tiêu đề').'
+                    '.$form->text('meta_keyword','Keyword <code>SEO</code>').'
+                    '.$form->textarea('meta_description','Description <code>SEO</code>').'
+    			</div>
+    			<div class="tab-pane bg-en" id="english">
+                    '.$form->text('e_title','Tiêu đề').'
+                    '.$form->text('e_meta_keyword','Keyword <code>SEO</code>').'
+                    '.$form->textarea('e_meta_description','Description <code>SEO</code>').'
+    			</div>
+    		</div>
         </div>
-    	'.$form->hidden($btn['name'],$btn['value']).'
+        <div class="col-lg-12">
+            '.$form->checkbox('active','Hiển Thị','',true).'
+        </div>
+		'.$form->hidden($_POST['idLoad'],$btn['name'],$btn['value']).'
 	</div>
 	</form>
 	';	
 	return $str;	
 }
-function news($db)
+function news($db,$type)
 {
 	$msg='';
     $act='news';
-    $type='news';
     $table='news';
     if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
 		$db->where('id',$_POST['idLoad']);
-        $list = $db->getOne($table);
+        $list = $db->get($table);
         $btn=array('name'=>'update','value'=>'Update');
         $form = new form($list);
 	} else {
@@ -145,50 +176,62 @@ function news($db)
 	}
 	if(isset($_POST["addNew"])||isset($_POST["update"])) {
         $title=htmlspecialchars($_POST['title']);	   
+        $e_title=htmlspecialchars($_POST['e_title']);
         $sum=htmlspecialchars($_POST['sum']);
+        $e_sum=htmlspecialchars($_POST['e_sum']);
         $content=str_replace("'","",$_POST['content']);
+        $e_content=str_replace("'","",$_POST['e_content']);
+        $meta_kw=htmlspecialchars($_POST['meta_keyword']);
+        $meta_desc=htmlspecialchars($_POST['meta_description']);
+        $e_meta_kw=htmlspecialchars($_POST['e_meta_keyword']);
+        $e_meta_desc=htmlspecialchars($_POST['e_meta_description']);
+        $pId=intval($_POST['pId']);
         $active=$_POST['active']=="on"?1:0;
         $file=time().$_FILES['file']['name'];
         $ind=intval($_POST['ind']);
 	}
-    /*if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
+    if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
         $list = explode(',',$_POST['listDel']);
         foreach($list as $item){
             $db->where('id',intval($item));
             try{
                $db->delete($table); 
             } catch(Exception $e) {
-                $msg=$e->getMessage();
+                $msg=mysql_error();
             }
         }
         header("location:".$_SERVER['REQUEST_URI'],true);
     }
 	if(isset($_POST["addNew"])) {
         $insert = array(
-            'title'=>$title,'ind'=>$ind,
-            'sum'=>$sum,'content'=>$content,
-            'active'=>$active
+            'title'=>$title,'e_title'=>$e_title,'ind'=>$ind,
+            'sum'=>$sum,'e_sum'=>$e_sum,'content'=>$content,'e_content'=>$e_content,
+            'meta_keyword'=>$meta_kw,'meta_description'=>$meta_desc,
+            'e_meta_keyword'=>$e_meta_kw,'e_meta_description'=>$e_meta_desc,
+            'active'=>$active,'pId'=>$pId
         );
 		try{
             $recent = $db->insert($table,$insert);
-            if(common::file_check($_FILES['file'])){
-                WideImage::load('file')->resize(345,250, 'fill')->saveToFile(myPath.$file);
+            if($form->file_chk($_FILES['file'])){
+                WideImage::load('file')->resize(340,266, 'fill')->saveToFile(myPath.$file);
                 $db->where('id',$recent);
                 $db->update($table,array('img'=>$file));
             }
             header("location:".$_SERVER['REQUEST_URI'],true); 
         } catch(Exception $e) {
-            $msg=$e->getMessage();
+            $msg=mysql_error();
         }			
-	}*/
+	}
 	if(isset($_POST["update"]))	{
-        $update=array(
-            'title'=>$title,'ind'=>$ind,
-            'sum'=>$sum,'content'=>$content,
-            'active'=>$active
-        );
-        if(common::file_check($_FILES['file'])){
-            WideImage::load('file')->resize(345,250, 'fill')->saveToFile(myPath.$file);
+	   $update=array(
+            'title'=>$title,'e_title'=>$e_title,'ind'=>$ind,
+            'sum'=>$sum,'e_sum'=>$e_sum,'content'=>$content,'e_content'=>$e_content,
+            'meta_keyword'=>$meta_kw,'meta_description'=>$meta_desc,
+            'e_meta_keyword'=>$e_meta_kw,'e_meta_description'=>$e_meta_desc,
+            'active'=>$active,'pId'=>$pId
+       );
+       if($form->file_chk($_FILES['file'])){
+            WideImage::load('file')->resize(340,266, 'fill')->saveToFile(myPath.$file);
             $update = array_merge($update,array('img'=>$file));
             $form->img_remove($_POST['idLoad'],$db,$table);
         }
@@ -197,68 +240,103 @@ function news($db)
             $db->update($table,$update);  
             header("location:".$_SERVER['REQUEST_URI'],true);   
         } catch (Exception $e){
-            $msg = $e->getMessage();
+            $msg = $e->getErrorMessage();
         }
 	}
 	
-	/*if(isset($_POST["Del"])&&$_POST["Del"]==1) {
+	if(isset($_POST["Del"])&&$_POST["Del"]==1) {
         $db->where('id',$_POST['idLoad']);
         try{
            $db->delete($table); 
            header("location:".$_SERVER['REQUEST_URI'],true);
         } catch(Exception $e) {
-            $msg=$e->getMessage();
+            $msg=mysql_error();
         }
-	}*/
-    
+	}
     $page_head= array(
-                    array('#','Hướng dẫn mua hàng')
+                    array('#','Danh sách tin tức')
                 );
 	$str=$form->breadcumb($page_head);
 	$str.=$form->message($msg);
-    
-    $str.=$form->search_area($db,$act,'news_cate',$_GET['hint'],0);
-    
-    $head_title=array('Tiêu đề','Hiện/Ẩn','STT');
-	$str.=$form->table_start($head_title);
+    $head_title=array('Tiêu đề','Loại','Hình ảnh','Thứ tự','Hiển thị');
+	$str.=$form->table_head($head_title);
 	
     $page=isset($_GET["page"])?intval($_GET["page"]):1;
-    if(isset($_GET['hint'])) $db->where('title','%'.$_GET['hint'].'%','LIKE'); 
-    if(isset($_GET['cate_lev_1'])&&intval($_GET['cate_lev_1'])>0){
-        $db->where('pId',intval($_GET['cate_lev_1']));
-    }
-    $db->orderBy('id');
     $db->pageLimit=ad_lim;
+    $db->orderBy('id');
     $list=$db->paginate($table,$page);
-    $count=$db->totalCount;
 
     if($db->count!=0){
         foreach($list as $item){
-            //$cate=$db->where('id',$item['pId'])->getOne('news_cate','id,title');
+            $item_id=$item['id'];
+            if($item['active']==1){
+                $active = '<span class="glyphicon glyphicon-ok"></span>';
+            } else {
+                $active='<span class="glyphicon glyphicon-remove"></span>';
+            }
+            $cate=$db->where('id',$item['pId'])->getOne('news_cate','title');
             $item_content = array(
-                array($item['title'],'text'),
-                //array(myPath.$item['img'],'image'),
-                //array(array($cate),'cate'),
-                array($item['active'],'bool'),
-                array($item['ind'],'text')
+                $item['title'],
+                $cate['title'],
+                '<img src="'.myPath.$item['img'].'" class="img-thumbnail img-admin"/>',
+                $item['ind'],
+                $active
             );
-            $str.=$form->table_body($item['id'],$item_content);      
+            if(isset($_POST['Edit'])==1&&$_POST['idLoad']==$item_id) $change=true;
+            else $change=false;
+            $str.=$form->table_body($item_id,$item_content,$change,$_SERVER['REQUEST_URI'],$addition);      
         }
     }                               
-    $str.=$form->table_end();                            
-    $str.=$form->pagination($page,ad_lim,$count);
+	$str.='					
+					</tbody>
+				</table>
+				</div>';
+    $str.=$form->del_list();
+    $pg = new Pagination();
+    $pg->pagenumber = $page;
+    $pg->pagesize = ad_lim;
+    $pg->totalrecords = $db->totalCount;
+    $pg->paginationstyle = 1; // 1: advance, 0: normal
+    $pg->defaultUrl = "main.php?act=$act&type=$type";
+    $pg->paginationUrl = "main.php?act=$act&type=$type&page=[p]";
+    $str.= $pg->process();
 	$str.='			
-	<form role="form" id="actionForm" name="actionForm" enctype="multipart/form-data" action="" method="post" data-toggle="validator">
-	<div class="row">
-    	<div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
-        <div class="col-lg-12">
-            '.$form->text('title',array('label'=>'Tiêu đề','required'=>true)).'            
-            '.$form->ckeditor('content',array('label'=>'Nội dung')).'
-            '.$form->number('ind',array('label'=>'Thứ tự')).'
-            '.$form->checkbox('active',array('label'=>'Hiển Thị','checked'=>true)).'
+			</div>
+		</div>
+		<!-- Row -->
+		<form role="form" id="actionForm" name="actionForm" enctype="multipart/form-data" action="" method="post" data-toggle="validator">
+		<div class="row">
+		<div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
+        <div class="col-lg-12 admin-tabs">
+            <ul class="nav nav-tabs">
+    			<li class="active"><a href="#vietnamese" data-toggle="tab">Việt Nam</a></li>
+    			<li><a href="#english" data-toggle="tab">English</a></li>
+    		</ul>
+    		<div class="tab-content">
+    			<div class="tab-pane bg-vi active" id="vietnamese">
+                    '.$form->text('title','Tiêu đề').'
+                    '.$form->textarea('sum','Trích dẫn').'
+                    '.$form->text('meta_keyword','Keyword <code>SEO</code>').'
+                    '.$form->textarea('meta_description','Description <code>SEO</code>').'
+                    '.$form->ckeditor('content','Nội dung :').'
+    			</div>
+    			<div class="tab-pane bg-en" id="english">
+                    '.$form->text('e_title','Tiêu đề').'
+                    '.$form->textarea('e_sum','Trích dẫn').'
+                    '.$form->text('e_meta_keyword','Keyword <code>SEO</code>').'
+                    '.$form->textarea('e_meta_description','Description <code>SEO</code>').'
+                    '.$form->ckeditor('e_content','Nội dung :').'
+    			</div>
+    		</div>
         </div>
-    
-    	'.$form->hidden($btn['name'],$btn['value']).'
+        <div class="col-lg-12">
+            '.$form->select_table('pId','Loại tin tức:','news_cate',$db,true).'
+            '.$form->file('file','Hình ảnh <code>( 340 x 266 )</code>').'
+            '.$form->number('ind','Thứ tự').'
+            '.$form->checkbox('active','Hiển Thị','',true).'
+        </div>
+
+		'.$form->hidden($_POST['idLoad'],$btn['name'],$btn['value']).'
 	</div>
 	</form>
 	';	

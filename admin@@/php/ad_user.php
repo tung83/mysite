@@ -162,9 +162,9 @@ function ad_user($db)
  	    
 
         <div class="col-lg-12">		
-            '.$form->email('email',array('holder'=>'Email của bạn','error'=>'Định dạng email không đúng!','required'=>true)).'
-            '.$form->pwd('pwd',array('holder'=>'Password...','required'=>true,'get'=>false)).'
-            '.$form->pwd('cf_pwd',array('holder'=>'Confirm Password...','match'=>'pwd','required'=>true)).'			
+            '.$form->email('email','Email','',true).'
+            '.$form->password('pwd','Password','',(isset($_POST["Edit"])==1?false:true)).'
+            '.$form->select('power','Phân quyền truy cập',array(array('id'=>1,'title'=>'Administrator'),array('id'=>2,'title'=>'User')),true).'			
 		</div>    
 		<div class="col-lg-12" style="padding-bottom:10px">
 			<input type="hidden" name="idLoad" value="'.$_POST["idLoad"].'"/>

@@ -30,6 +30,7 @@ function sp_cate($db,$type)
         $e_meta_kw=htmlspecialchars($_POST['e_meta_keyword']);
         $e_meta_desc=htmlspecialchars($_POST['e_meta_description']);
         $active=$_POST['active']=="on"?1:0;
+        $ind=intval($_POST['ind']);
         $file=time().$_FILES['file']['name'];
         $icon=time().$_FILES['icon']['name'];
 	}
@@ -49,7 +50,7 @@ function sp_cate($db,$type)
         $insert = array(
                     'title'=>$title,'e_title'=>$e_title,
                     'active'=>$active,'meta_keyword'=>$meta_kw,
-                    'meta_description'=>$meta_desc,
+                    'meta_description'=>$meta_desc,'ind'=>$ind,
                     'e_meta_keyword'=>$e_meta_kw,'e_meta_description'=>$e_meta_desc
                 );
 		try{
@@ -175,6 +176,7 @@ function sp_cate($db,$type)
     		</div>
         </div>
         <div class="col-lg-12">
+            '.$form->number('ind','Thứ tự').'
             '.$form->file('icon','Icon <code>( 14 x 16 )</code>').'
             '.$form->file('file','Hình ảnh <code>( 243 x 170 )</code>').'
             '.$form->checkbox('active','Hiển Thị','',true).'
@@ -210,6 +212,7 @@ function sp($db,$type)
         $e_meta_desc=htmlspecialchars($_POST['e_meta_description']);
         $pId=intval($_POST['pId']);
         $active=$_POST['active']=="on"?1:0;
+        $ind=intval($_POST['ind']);
 	}
     if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
         $list = explode(',',$_POST['listDel']);
@@ -229,7 +232,7 @@ function sp($db,$type)
             'content'=>$content,'e_content'=>$e_content,
             'meta_keyword'=>$meta_kw,'meta_description'=>$meta_desc,
             'e_meta_keyword'=>$e_meta_kw,'e_meta_description'=>$e_meta_desc,
-            'active'=>$active,'pId'=>$pId
+            'active'=>$active,'pId'=>$pId,'ind'=>$ind
         );
 		try{
             $recent = $db->insert($table,$insert);
@@ -244,7 +247,7 @@ function sp($db,$type)
             'content'=>$content,'e_content'=>$e_content,
             'meta_keyword'=>$meta_kw,'meta_description'=>$meta_desc,
             'e_meta_keyword'=>$e_meta_kw,'e_meta_description'=>$e_meta_desc,
-            'active'=>$active,'pId'=>$pId
+            'active'=>$active,'pId'=>$pId,'ind'=>$ind
         );
         try{
             $db->where('id',$_POST['idLoad']);
@@ -269,7 +272,7 @@ function sp($db,$type)
                 );
 	$str=$form->breadcumb($page_head);
 	$str.=$form->message($msg);
-    $head_title=array('Tiêu đề','Loại','Hiển thị');
+    $head_title=array('Tiêu đề','Thứ tự','Loại','Hiển thị');
 	$str.=$form->table_head($head_title);
 	
     $page=isset($_GET["page"])?intval($_GET["page"]):1;
@@ -288,6 +291,7 @@ function sp($db,$type)
             $cate=$db->where('id',$item['pId'])->getOne('sp_cate','title');
             $item_content = array(
                 $item['title'],
+                $item['ind'],
                 $cate['title'],
                 $active
             );
@@ -336,8 +340,9 @@ function sp($db,$type)
     			</div>
     		</div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6">            
             '.$form->select_table('pId','Loại hỗ trợ:','sp_cate',$db,true).'
+            '.$form->number('ind','Thứ tự').'
             '.$form->checkbox('active','Hiển Thị','',true).'
         </div>
        
