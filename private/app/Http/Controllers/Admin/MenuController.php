@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class MenuController extends AdminControllerBase
 {
-    use AdminPageCommon;
     protected $menuRepository;
     /**
      * Create a new PageController instance.
