@@ -6,9 +6,9 @@
         <a href="#" tabindex="0" class="badge pull-right" data-toggle="popover" data-trigger="focus" title="' . $pop[0] .'" data-content="' . $pop[1] . '"><span>?</span></a>
     @endif
     @if($type == 'textarea')
-        {!! Form::textarea($name, $value, ['class' => 'form-control', 'placeholder' => $placeholder]) !!} 
+        {!! Form::textarea($name, $value, ['class' => 'form-control', 'placeholder' => $placeholder,'required' => 'required']) !!} 
     @else
-        {!! Form::input($type, $name, $value, ['class' => 'form-control', 'placeholder' => $placeholder]) !!} 
+        {!! Form::input($type, $name, $value, ['class' => 'form-control', 'placeholder' => $placeholder, 'required' => 'required']) !!} 
     @endif
     @if($icon)
         <span class="{{$icon}} form-control-feedback"></span>
