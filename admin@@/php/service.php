@@ -2,20 +2,20 @@
 function mainProcess($db)
 {
     switch($_GET['type']){
-        case 'project_cate':
-            return project_cate($db);
+        case 'service_cate':
+            return service_cate($db);
             break;
         default:
-            return project($db);
+            return service($db);
             break;
     }
 }
-function project_cate($db)
+function service_cate($db)
 {
 	$msg='';
-    $act='project';
-    $type='project_cate';
-    $table='project_cate';
+    $act='service';
+    $type='service_cate';
+    $table='service_cate';
     $lev=1;
     if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
 		$db->where('id',$_POST['idLoad']);
@@ -96,7 +96,7 @@ function project_cate($db)
         }
 	}
     $page_head= array(
-                    array('#','Danh mục dự án')
+                    array('#','Danh mục dịch vụ')
                 );
 	$str=$form->breadcumb($page_head);
 	$str.=$form->message($msg);
@@ -156,12 +156,12 @@ function project_cate($db)
 	';	
 	return $str;	
 }
-function project($db)
+function service($db)
 {
 	$msg='';
-    $act='project';
-    $type='project';
-    $table='project';
+    $act='service';
+    $type='service';
+    $table='service';
     if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
 		$db->where('id',$_POST['idLoad']);
         $list = $db->getOne($table);
@@ -254,12 +254,12 @@ function project($db)
 	}
     
     $page_head= array(
-                    array('#','Danh sách dự án')
+                    array('#','Danh sách dịch vụ')
                 );
 	$str=$form->breadcumb($page_head);
 	$str.=$form->message($msg);
     
-    $str.=$form->search_area($db,$act,'project_cate',$_GET['hint'],1);
+    $str.=$form->search_area($db,$act,'service_cate',$_GET['hint'],1);
     
     $head_title=array('Tiêu đề<code>Vi/En</code>','Hình ảnh','Danh mục','Hiện/Ẩn','STT');
 	$str.=$form->table_start($head_title);
@@ -276,7 +276,7 @@ function project($db)
 
     if($db->count!=0){
         foreach($list as $item){
-            $cate=$db->where('id',$item['pId'])->getOne('project_cate','id,title');
+            $cate=$db->where('id',$item['pId'])->getOne('service_cate','id,title');
             $item_content = array(
                 array($item['title'].'<br/><code>'.$item['e_title'].'</code>','text'),
                 array(myPath.$item['img'],'image'),
@@ -294,7 +294,7 @@ function project($db)
 	<div class="row">
     	<div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
         <div class="col-lg-12">
-            '.$form->cate_group($db,'project_cate',1).'
+            '.$form->cate_group($db,'service_cate',1).'
         </div>
         <div class="col-lg-12 admin-tabs">
             <ul class="nav nav-tabs">
