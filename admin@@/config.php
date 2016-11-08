@@ -24,6 +24,10 @@ unset($process);
 //define area
 define('_hostName'  , 'localhost');	
 
+define('_userName'  , 'tung');	
+define('_dbName'    , 'psmedia');	
+define('_pass'      , 'tung');
+
 define('_userName'  , 'pspmedia');	
 define('_dbName'    , 'pspmedia');	
 define('_pass'      , 't80vyBMVTe54bkhR');

@@ -10,7 +10,7 @@ function seo($db)
     $table='menu';
     if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
 		$db->where('id',$_POST['idLoad']);
-        $list = $db->get($table);
+        $list = $db->getOne($table);
         $btn=array('name'=>'update','value'=>'Update');
         $form = new form($list);
 	} else {
@@ -47,8 +47,8 @@ function seo($db)
                 );
 	$str=$form->breadcumb($page_head);
 	$str.=$form->message($msg);
-    $head_title=array('Tên Trang','Meta keyword <code>Vi/En</code>','Meta Description<code>Vi/En</code>');
-	$str.=$form->table_head($head_title);
+    $head_title=array('Tiêu Đề Trang<code>Vi/En</code>','Meta keyword<code>Vi/En</code>','Meta Description<code>Vi/En</code>');
+	$str.=$form->table_start($head_title);
 	
     $page=isset($_GET["page"])?intval($_GET["page"]):1;
     $db->pageLimit=ad_lim;
@@ -56,55 +56,44 @@ function seo($db)
 
     if($db->count!=0){
         foreach($list as $item){
-            $item_id=$item['id'];
-            $item_content = array(
-                $item['title'].'<br/><code>'.$item['e_title'].'</code>',
-                $item['meta_keyword'].'<br/><code>'.$item['e_meta_keyword'].'</code>',
-                nl2br($item['meta_description']).'<br/><code>'.nl2br($item['e_meta_description']).'</code>'
+            $item_content = array(        
+                array($item['title'].'<code>Vi</code><br/>'.$item['e_title'].'<code>En</code>','text'),
+                array($item['meta_keyword'].'<code>Vi</code><br/>'.$item['e_meta_keyword'].'<code>En</code>','text'),
+                array($item['meta_description'],'text')
             );
-            if(isset($_POST['Edit'])==1&&$_POST['idLoad']==$item_id) $change=true;
-            else $change=false;
-            $str.=$form->table_body($item_id,$item_content,$change,$_SERVER['REQUEST_URI'],$addition);      
+            $str.=$form->table_body($item['id'],$item_content);       
         }
     }                               
-	$str.='					
-					</tbody>
-				</table>
-				</div>';
-    $pg = new Pagination();
-    $pg->pagenumber = $page;
-    $pg->pagesize = ad_lim;
-    $pg->totalrecords = $db->totalCount;
-    $pg->paginationstyle = 1; // 1: advance, 0: normal
-    $pg->defaultUrl = "main.php?act=$act";
-    $pg->paginationUrl = "main.php?act=$act&page=[p]";
-    $str.= $pg->process();
+	$str.=$form->table_end();                            
+    $str.=$form->pagination($page,ad_lim,$count);
 	$str.='			
-			</div>
-		</div>
-		<!-- Row -->
-		<form role="form" id="actionForm" name="actionForm" enctype="multipart/form-data" action="" method="post" data-toggle="validator">
+	<form role="form" id="actionForm" name="actionForm" enctype="multipart/form-data" action="" method="post" data-toggle="validator">
 		<div class="row">
 		<div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
-        <div class="col-lg-12 admin-tabs">
-            <ul class="nav nav-tabs">
-    			<li class="active"><a href="#vietnamese" data-toggle="tab">Việt Nam</a></li>
-    			<li><a href="#english" data-toggle="tab">English</a></li>
-    		</ul>
-    		<div class="tab-content">
-    			<div class="tab-pane bg-vi active" id="vietnamese">
-                    '.$form->text('title','Tiêu đề',false,true).'
-                    '.$form->text('meta_keyword','Keyword <code>SEO</code>').'
-                    '.$form->textarea('meta_description','Description <code>SEO</code>').'
-    			</div>
-    			<div class="tab-pane bg-en" id="english">
-                    '.$form->text('e_title','Tiêu đề',false,true).'
-                    '.$form->text('e_meta_keyword','Keyword <code>SEO</code>').'
-                    '.$form->textarea('e_meta_description','Description <code>SEO</code>').'
-    			</div>
-    		</div>
+        <div class="col-lg-12">           
+            
+            <div class="col-lg-12 admin-tabs">
+                <ul class="nav nav-tabs">
+        			<li class="active"><a href="#vietnamese" data-toggle="tab">Tiếng Việt</a></li>
+        			<li><a href="#english" data-toggle="tab">Tiếng Anh</a></li>
+        		</ul>
+        		<div class="tab-content">
+        			<div class="tab-pane bg-vi active" id="vietnamese">
+                        '.$form->text('title',array('label'=>'Tiêu đề','disabled'=>true)).'
+                        '.$form->text('meta_keyword',array('label'=>'Keyword <code>SEO</code>')).'
+                        '.$form->textarea('meta_description',array('label'=>'Description <code>SEO</code>')).'
+        			</div>
+        			<div class="tab-pane bg-en" id="english">
+                        '.$form->text('e_title',array('label'=>'Tiêu đề','disabled'=>true)).'
+                        '.$form->text('e_meta_keyword',array('label'=>'Keyword <code>SEO</code>')).'
+                        '.$form->textarea('e_meta_description',array('label'=>'Description <code>SEO</code>')).'
+        			</div>
+        		</div>
+            </div>
+            
+            
         </div>
-		'.$form->hidden($_POST['idLoad'],$btn['name'],$btn['value']).'
+		'.$form->hidden($btn['name'],$btn['value']).'
 	</div>
 	</form>
 	';	

@@ -152,7 +152,7 @@ class  form{
     			<div class="table-responsive">
     				<table class="table table-bordered table-hover table-striped">
     					<thead>
-    						<tr>
+    						<tr style="">
     							<th class="text-center" style="width:7%">ID</th>';
         foreach($head_title as $item){
             $str.='

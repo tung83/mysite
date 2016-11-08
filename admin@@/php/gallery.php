@@ -1,212 +1,127 @@
 <?php
-function mainProcess()
-{
-	return gallery();	
+function mainProcess($db){
+	return gallery($db);	
 }
-function gallery()
-{
+function gallery($db){
 	$msg='';
-	if(isset($_POST["addNew"])||isset($_POST["update"]))
-	{
-		$file=time().$_FILES["file"]["name"];
-		$active=$_POST["active"]=="on"?1:0;	
-		$title=str_replace("'","&rsquo;",$_POST["title"]);
+    $act='gallery';
+    $table='gallery';
+    if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
+		$db->where('id',$_POST['idLoad']);
+        $item = $db->getOne($table);
+        $btn=array('name'=>'update','value'=>'Update');
+        $form = new form($item);
+	} else {
+        $btn=array('name'=>'addNew','value'=>'Submit');	
+        $form = new form();
 	}
-	if(isset($_POST["addNew"]))
-	{
-		$sInsert="insert into gallery(active,title";
-		$sInsert.=") values($active,'$title')";
-		$test=mysql_query($sInsert);
-		$recent=mysql_insert_id();
-		if(checkImg($file)==true)
-		{
-			move_uploaded_file($_FILES["file"]["tmp_name"],myPath.$file);
-			mysql_query("update gallery set img='$file' where id=$recent");	
-		}
-		if($test)
-		{
-			header("location:".$_SERVER['REQUEST_URI'],true);
-		}
-		else echo $sInsert;//$msg=mysql_error();			
+	if(isset($_POST["addNew"])||isset($_POST["update"])) {
+        $title=htmlspecialchars(($_POST['title'])==''?"L'avoine Việt Nam":$_POST['title']);
+        $sum=htmlspecialchars($_POST['sum']);
+        $lnk=htmlspecialchars($_POST['lnk']);
+        $ind=intval($_POST['ind']);	   
+        $file=time().$_FILES['file']['name'];
+        $active=$_POST['active']=='on'?1:0;        
 	}
-	if(isset($_POST["update"]))
-	{
-		$sUpdate="update gallery set active=$active,title='$title'";
-		if(checkImg($file)==true)
-		{
-			move_uploaded_file($_FILES["file"]["tmp_name"],myPath.$file);
-			$sUpdate.=",img='$file'";
-		}
-		$sUpdate.=" where id=".$_POST["idLoad"];
-		$test=mysql_query($sUpdate);
-		if($test) header("location:".$_SERVER['REQUEST_URI'],true);
-		else $msg=mysql_error();
+    if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
+        $list = explode(',',$_POST['listDel']);
+        foreach($list as $item){
+            $form->img_remove(intval($item),$db,$table);
+            $db->where('id',intval($item));
+            try{
+                $db->delete($table); 
+            } catch(Exception $e) {
+                $msg=mysql_error();
+            }
+        }
+        header("location:".$_SERVER['REQUEST_URI'],true);
+    }
+	if(isset($_POST["addNew"])) {
+        $insert = array('title'=>$title,'ind'=>$ind,'active'=>$active,'lnk'=>$lnk,'sum'=>$sum);
+		try{
+            $recent = $db->insert($table,$insert);
+            if(common::file_check($_FILES['file'])){
+                $db->where('id',$recent);
+                $db->update($table,array('img'=>$file));
+                WideImage::load('file')->saveToFile(myPath.$file);
+                WideImage::load('file')->resize(300,null,'fill')->saveToFile(myPath.'thumb_'.$file);                
+                header("location:".$_SERVER['REQUEST_URI'],true); 
+            }            
+            
+        } catch(Exception $e) {
+            $msg=mysql_error();
+        }		
 	}
-	if(isset($_POST["Edit"])&&$_POST["Edit"]==1)
-	{
-		$sql="select * from gallery where id=".$_POST["idLoad"];
-		$tabEdit=mysql_query($sql);
-		$rowEdit=mysql_fetch_object($tabEdit);
+	if(isset($_POST["update"]))	{
+        $update=array('title'=>$title,'ind'=>$ind,'active'=>$active,'lnk'=>$lnk,'sum'=>$sum);
+        if(common::file_check($_FILES['file'])){
+            WideImage::load('file')->saveToFile(myPath.$file);
+            WideImage::load('file')->resize(300,0,'fill')->saveToFile(myPath.'thumb_'.$file);
+            $update = array_merge($update,array('img'=>$file));        
+            $form->img_remove($_POST['idLoad'],$db,$table);
+        }        
+        try{
+            $db->where('id',$_POST['idLoad']);
+            $db->update($table,$update);
+            header("location:".$_SERVER['REQUEST_URI'],true);   
+        } catch (Exception $e){
+            $msg = $e->getErrorMessage();
+        }
 	}
-	if(isset($_POST["Del"])&&$_POST["Del"]==1)
-	{
-		$sDelete="delete from gallery where id=".$_POST["idLoad"];
-		$test=mysql_query($sDelete);
-		if($test)
-		{
-			header("location:".$_SERVER['REQUEST_URI'],true);
-		}
-		else $msg=mysql_error();
+	if(isset($_POST["Del"])&&$_POST["Del"]==1) {
+        try{
+            $form->img_remove($_POST['idLoad'],$db,$table);
+            $db->where('id',$_POST['idLoad']);
+            $db->delete($table);            
+            header("location:".$_SERVER['REQUEST_URI'],true);
+        } catch(Exception $e) {
+            $msg=$e->getErrorMessage();
+        }
 	}
-	$str='
-	<!-- Page Heading -->
-	<div class="row">
-		<div class="col-lg-12">
-			<ol class="breadcrumb">
-				<li class="active">
-					<i class="fa fa-dashboard"></i> Cập nhật album ảnh
-				</li>
-			</ol>
-		</div>
-	</div>';
-	if($msg!='')
-	{
-		$str.='<div class="alert alert-danger" role="alert" style="margin-top:10px">'.$msg.'</div>';	
-	}
-	$str.='
-	<!-- Row -->
-	<div class="row">
-		 <div class="col-lg-12">
-			<div class="table-responsive">
-				<table class="table table-bordered table-hover table-striped">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Hình ảnh</th>
-                            <th>Tiêu đề</th>
-													
-							<th>Hiển thị</th>
-							<th style="width:12% !important">Options</th>
-						</tr>
-					</thead>
-					<tbody>
-					';
-	$s="select * from gallery order by id desc";
-	$tab=mysql_query($s);
-	$count=mysql_num_rows($tab);
-	$page=isset($_GET["page"])?intval($_GET["page"]):1;
-	$lim=10;
-	$start=($page-1)*$lim;
-	$s.=" limit $start,$lim";
-	$tab=mysql_query($s);
-	while($row=mysql_fetch_object($tab))
-	{
-		$active=$row->active==1?'<span class="glyphicon glyphicon-ok"></span>':'<span class="glyphicon glyphicon-remove"></span>';
-		$str.='
-		<tr>
-			<td>'.$row->id.'</td>
-			<td>
-	'.($row->img!=''?'<img src="'.myPath.$row->img.'" class="img-responsive img-thumbnail" style="height:80px"/>':'&nbsp;').'
-			</td>
-            <td>'.($row->title!=''?''.$row->title.'':'&nbsp;').'</td>
-			
-			<td>'.$active.'</td>
-			<td align="center">
-		';
-	if(isset($_POST["Edit"])==1)
-	{
-		if($_POST["idLoad"]==$row->id)
-		{
-			$str.='
-			<a href="'.$_SERVER['REQUEST_URI'].'" class="glyphicon glyphicon-refresh" aria-hidden="true"></a>
-			';	
-		}
-		else
-		{
-			$str.='
-			<a href="javascript:operationFrm('.$row->id.",'E'".')" class="glyphicon glyphicon-pencil" aria-hidden="true"></a>
-			';	
-		}	
-	}
-	else
-	{
-		$str.='
-			<a href="javascript:operationFrm('.$row->id.",'E'".')" class="glyphicon glyphicon-pencil" aria-hidden="true"></a>
-			';		
-	}
+    $page_head= array(
+                    array('#','Thư viện ảnh')
+                );
+	$str=$form->breadcumb($page_head);
+	$str.=$form->message($msg);
+    
+    $str.=$form->search_area($db,$act,'category',$_GET['hint'],0);
+    
+    $head_title=array('Hình ảnh','Tiêu đề','STT','Hiển thị');    
+	$str.=$form->table_start($head_title);
+    
+    $page=isset($_GET["page"])?intval($_GET["page"]):1;
+    if(isset($_GET['hint'])) $db->where('title','%'.$_GET['hint'].'%','LIKE');  
+    $db->orderBy('id');
+    $db->pageLimit=ad_lim;
+	$list=$db->paginate($table,$page);    
+	$count= $db->totalCount;
 	
+    if($count!=0){
+        foreach($list as $item){
+            $item_content = array(
+                array(myPath.'thumb_'.$item['img'],'image'),                
+                array($item['title'],'text'),
+                array($item['ind'],'text'),
+                array($item['active'],'bool')
+            );
+            $str.=$form->table_body($item['id'],$item_content);      
+        }
+    }   
+    $str.=$form->table_end();                            
+    $str.=$form->pagination($page,ad_lim,$count);
 	$str.='
-	<a href="javascript:operationFrm('.$row->id.",'D'".')" class="glyphicon glyphicon-trash" aria-hidden="true"></a>			  
-			</td>
-		</tr>
-		';	
-	}                                 
-	$str.='					
-					</tbody>
-				</table>
-				</div>';
-	$str.=ad_paging($lim,$count,'main.php?act=home-slider&',$page);
-	$str.='
-			</div>
-		</div>
-		<!-- Row -->
-		<form role="form" name="actionForm" enctype="multipart/form-data" action="" method="post">
-		<div class="row">
-		<div class="col-lg-12">
-		<div class="panel panel-default">
-		<div class="panel-heading">
-			Cập nhật - Thêm mới thông tin
-		</div>
-		
-		<div class="panel-body">
-		<div class="row">
-		
-		<div class="col-lg-12">
-		
-				<div class="form-group">
-				<label>Tiêu đề </label>
-				<input class="form-control" name="title" type="text" value="'.$rowEdit->title.'">
-			</div>					
-			
-			<div class="form-group">
-				<label>Hình ảnh</label>
-				<input type="file" name="file" />
-			</div>					
-			
-			<div class="form-group">
-				<label class="checkbox-inline">
-					<input type="checkbox" name="active" '.($rowEdit->active==1?"checked='checked'":"").'>Hiển thị
-				</label>
-			</div>			
-		</div>
-		
-		<div class="col-lg-12">
-			<input type="hidden" name="idLoad" value="'.$_POST["idLoad"].'"/>
-			<input type="hidden" name="Edit"/>
-			<input type="hidden" name="Del"/>';
-	if(isset($_POST["Edit"])&&$_POST["Edit"]==1)
-	{
-		$str.='		
-				<button type="submit" name="update" class="btn btn-default">Update</button>';
-	}
-	else
-	{
-		$str.='		
-				<button type="submit" name="addNew" class="btn btn-default">Submit</button>';	
-	}
-	$str.='
-			<button type="reset" class="btn btn-default" id="reset">Reset</button>
-		</div>
-		
-	<div>
-	<!--div row-->
+	<form role="form" id="actionForm" name="actionForm" enctype="multipart/form-data" action="" method="post" data-toggle="validator">
+	<div class="row">
+        <div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
+        <div class="col-lg-12">
+            '.$form->text('title',array('label'=>'Tiêu Đề')).'
+            '.$form->file('file',array('label'=>'Hình ảnh')).'
+            '.$form->number('ind',array('label'=>'Thứ tự')).'
+            '.$form->checkbox('active',array('label'=>'Hiển thị','checked'=>true)).'
+        </div>
+		'.$form->hidden($btn['name'],$btn['value']).'
 	</div>
-	<!--panel body-->
-	</div>
-	</div>
-	</div>
-	</form>
-	';	
-	return $str;
+	</form>';	
+	return $str;	
 }
 ?>

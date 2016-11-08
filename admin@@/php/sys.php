@@ -185,14 +185,12 @@ function sys($db,$type)
         $e_meta_kw=htmlspecialchars($_POST['e_meta_keyword']);
         $e_meta_desc=htmlspecialchars($_POST['e_meta_description']);
         $adds=htmlspecialchars($_POST['adds']);
-        $adds_show=htmlspecialchars($_POST['adds_show']);
         $maps=($_POST['maps']);
         $district=intval($_POST['district']);
         $city=intval($_POST['city']);
         $pId=intval($_POST['pId']);
         $active=$_POST['active']=="on"?1:0;
         $file=time().$_FILES['file']['name'];
-        $ind=intval($_POST['ind']);
 	}
     if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
         $list = explode(',',$_POST['listDel']);
@@ -212,7 +210,7 @@ function sys($db,$type)
             'sum'=>$sum,'e_sum'=>$e_sum,'content'=>$content,'e_content'=>$e_content,
             'meta_keyword'=>$meta_kw,'meta_description'=>$meta_desc,
             'e_meta_keyword'=>$e_meta_kw,'e_meta_description'=>$e_meta_desc,
-            'active'=>$active,'adds'=>$adds,'ind'=>$ind,'adds_show'=>$adds_show,
+            'active'=>$active,'maps'=>$maps,'adds'=>$adds,
             'city'=>$city,'district'=>$district,'pId'=>$pId
         );
 		try{
@@ -233,7 +231,7 @@ function sys($db,$type)
             'sum'=>$sum,'e_sum'=>$e_sum,'content'=>$content,'e_content'=>$e_content,
             'meta_keyword'=>$meta_kw,'meta_description'=>$meta_desc,
             'e_meta_keyword'=>$e_meta_kw,'e_meta_description'=>$e_meta_desc,
-            'active'=>$active,'adds'=>$adds,'ind'=>$ind,'adds_show'=>$adds_show,
+            'active'=>$active,'maps'=>$maps,'adds'=>$adds,
             'city'=>$city,'district'=>$district,'pId'=>$pId
        );
        if($form->file_chk($_FILES['file'])){
@@ -285,8 +283,7 @@ function sys($db,$type)
             $cate=$db->where('id',$item['pId'])->getOne('sys_cate','title');
             $item_content = array(
                 $item['title'],
-                $dis['title'].' - '.$ci['title'].'<div class="alert alert-success" role="alert">'.$item['adds'].'</div>
-                <div class="alert alert-warning" role="alert">'.$item['adds_show'].'</div>',
+                $dis['title'].' - '.$ci['title'].'<div class="alert alert-success" role="alert">'.$item['adds'].'</div>',
                 $cate['title'],
                 '<img src="'.myPath.$item['img'].'" class="img-thumbnail img-admin"/>',
                 $active
@@ -341,14 +338,12 @@ function sys($db,$type)
         <div class="col-lg-6">
             '.$form->select_table('pId','Loại phân phối:','sys_cate',$db,true).'
             '.$form->file('file','Hình ảnh <code>( 125 x 90 )</code>').'
-            '.$form->number('ind','Thứ tự').'
             '.$form->checkbox('active','Hiển Thị','',true).'
         </div>
         <div class="col-lg-6">
             '.$form->location($db).'
             <!--'.$form->textarea('maps','Bản đồ:').'-->
             '.$form->text('adds','Địa chỉ','',true).'
-            '.$form->text('adds_show','Địa chỉ hiển thị','',true).'
         </div>
 		'.$form->hidden($_POST['idLoad'],$btn['name'],$btn['value']).'
 	</div>

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class NewsCategory extends Model
 {
-    protected $table = 'news_category';
+    protected $table = 'news_cate';
 
     public $timestamps = false;
 
@@ -24,8 +24,6 @@ class NewsCategory extends Model
         'e_meta_description',
         'img',
         'icon',
-        'pId',
-        'lev',
         'ind',
         'active'
     ];

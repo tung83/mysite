@@ -6,35 +6,36 @@ function operationFrm(id,type)
 		{			
 			case "E":
 				frm.Edit.value = 1;
+                frm.idLoad.value = id;
+        		frm.action="";
+        		frm.submit();
 				break;
 			case "D":
-				if(confirm("Bạn có muốn xóa không ?"))
-				{
-					frm.Del.value = 1;
-				}
-				else	return;
+                confirm( function(){
+                    frm.Del.value = 1;
+                    frm.idLoad.value = id;
+                    frm.action="";
+                    frm.submit();
+                },function(){
+                    return;
+                });
 				break;
 			default:
 				return;
-		}
-		frm.idLoad.value = id;
-		frm.action="";
-		frm.submit();	
+		}			
 }
 function del_all(){
     var frm=document.actionForm;
-    var a=confirm('Bạn có muốn xoá các record đã chọn không?');
-    if(a==true){
+    confirm(function(){
         var favorite = [];
         $.each($("input[name='checkbox_child']:checked"), function(){            
             favorite.push($(this).val());
         });
         var res = favorite.join(",");
         frm.listDel.value = res;
-        frm.submit();        
-    }else{
-        return;
-    }
+        frm.submit(); 
+    });
+    return false;
 }
 function frm_update(frm,e)
 {

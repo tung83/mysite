@@ -4,8 +4,15 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+.title{
+    font-size: 20px;
+    color: cyan;
+    background:#222;
+    padding:10px 10px
+}
+
 body {
-    background-color: #222
+    background:#2a424e url('../../login_background.jpg') no-repeat top center fixed
 }
 
 #wrapper {
@@ -28,7 +35,7 @@ body {
 }
 
 
-.navbar-default{background:#222}
+.navbar-default{background:#304A54}
 
 .navbar-brand{color:#fff !important}
 .navbar-brand:hover{text-decoration:underline}
@@ -116,7 +123,7 @@ body {
 }
 
 .sidebar .fa.arrow:before {
-    content: "\f104";
+    content: "\f105";
 }
 
 .sidebar .active>a>.fa.arrow:before {
@@ -412,3 +419,6 @@ table.dataTable thead .sorting:after {
     background-color:rgba(0,0,255,0.2)
 }
 .img-admin{max-height:100px}
+.cate-tree{list-style:none;color:#777777;margin:0;padding:0}
+.cate-tree li{display:block}
+.cate-tree li:nth-child(2){padding-left:10px}.cate-tree li:nth-child(3){padding-left:20px}

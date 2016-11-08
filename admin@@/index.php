@@ -80,18 +80,18 @@ if(isset($_POST["Sign"]))
                         <form role="form" method="post" action="">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                    <input class="form-control" placeholder="Tài khoản" name="email" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
 						<input class="form-control" placeholder="Password" name="password" type="password" value="">
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                        <input name="remember" type="checkbox" value="Remember Me">Ghi nhớ tài khoản
                                     </label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <input class="btn btn-lg btn-primary btn-block" type="submit" name="Sign" value="Sign in"/>
+                                <input class="btn btn-lg btn-primary btn-block" type="submit" name="Sign" value="Đăng Nhập"/>
                             </fieldset>
                         </form>
                     </div>

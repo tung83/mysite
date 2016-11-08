@@ -341,37 +341,37 @@ body {
     }
 }
 
-/*recruit home page*/
-.recruit{
+/*career home page*/
+.career{
     background: #fff url("../img/recruit-bg.png") no-repeat 0 100%;
     min-height: 560px;
     padding: 10px 0 10px 10px;
 }
-.recruit #recruit-sum{
+.career #career-sum{
     margin-top: 260px;
     margin-left: 100px;
     height: 200px;
     width: 400px;
 }
-.recruit #recruit-sum p{
+.career #career-sum p{
     text-align: right;
 }
-.recruit #recruit-sum .right, .recruit #recruit-sum .left {
+.career #career-sum .right, .career #career-sum .left {
   width: 90px;
   height: 100%;
 }
 
-.recruit #recruit-sum .right{
+.career #career-sum .right{
   -webkit-shape-outside: polygon(100% 0, 100% 100%, 0 100%);
   shape-outside: polygon(100% 0, 100% 100%, 0 100%);
   float: right;
 }
-.recruit #recruit-sum .left {
+.career #career-sum .left {
   -webkit-shape-outside: polygon(0 0, 100% 0, 0 100%);
   shape-outside: polygon( 0, 100% 0, 0 100%);
   float: left;
 }
-.recruit .recruit-item {
+.career .career-item {
     background-image: url("../img/recruit-item.png");
     background-repeat: no-repeat;
     color: #fff;
@@ -380,28 +380,28 @@ body {
     height: 80px;    
     position: relative;
 }
-.recruit .recruit-item:before{
+.career .career-item:before{
     position: absolute;
     top: 30px;
     left: 36px;
 }
-.recruit .recruit-item.item1:before{
+.career .career-item.item1:before{
     content: "1";
 }
-.recruit .recruit-item.item2:before{
+.career .career-item.item2:before{
     content: "2";
 }
-.recruit .recruit-item.item3:before{
+.career .career-item.item3:before{
     content: "3";
 }
 @media (min-width: 992px){   
-    .recruit .recruit-item.item2{
+    .career .career-item.item2{
         margin-left: 60px;
     }
-    .recruit .recruit-item.item3{
+    .career .career-item.item3{
         margin-left: 120px;
     } 
-    .recruit ol{
+    .career ol{
         float: right;
         width: 485px;
         margin-top: 160px;

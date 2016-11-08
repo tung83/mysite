@@ -25,9 +25,6 @@ class Project extends Model
         'e_meta_keyword',
         'e_meta_description',
         'pId',
-        'maps',
-        'city',
-        'district',
         'img',
         'active',
         'ind'

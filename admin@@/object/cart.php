@@ -1,19 +1,19 @@
 <?php
 class cart{
-    private $cookie;
-    public function __construct($db,$table){
+    private $cart;
+    public function __construct($db,$table='product'){
         $this->db=$db;
         $this->table=$table;
-        if(!isset($_COOKIE['cart'])) $_COOKIE['cart']=array();
-        $this->cookie=$_COOKIE['cart'];    
+        if(!isset($_SESSION['cart'])) $_SESSION['cart']=array();
+        $this->cart=$_SESSION['cart'];    
     }
-    private function set_cookie($res){
-        $_COOKIE['cart']=$this->cookie=$res;
+    private function set_cart($res){
+        $_SESSION['cart']=$this->cart=$res;
     }
     function cart_add($id,$qty){
         $k=0;
         $tmp=array();        
-        foreach($this->cookie as $item){
+        foreach($this->cart as $item){
             if($item['id']==$id){
                 $qty=$item['qty']+$qty;
                 array_push($tmp,array('id'=>$item['id'],'qty'=>$qty));        
@@ -25,31 +25,38 @@ class cart{
         if($k==0){            
             array_push($tmp,array('id'=>$id,'qty'=>$qty));
         }
-        $this->set_cookie($tmp);
+        $this->set_cart($tmp);
         return $this;
     }
     function cart_remove($id){
         $tmp=array();
-        foreach($this->cookie as $item){
+        foreach($this->cart as $item){
             if($item['id']==$id){
                 continue;
             }else{
                 array_push($tmp,array('id'=>$item['id'],'qty'=>$item['qty']));
             }
         }    
-        $this->set_cookie($tmp);
+        $this->set_cart($tmp);
         return $this;
+    }
+    function cart_empty(){
+        unset($_SESSION['cart']);
+        $this->cart=null;
     }
     function cart_update($id,$qty){
         $tmp=array();
-        foreach($this->cookie as $item){
-            if($item['id']==$id){
+        foreach($this->cart as $item){
+            if($item['id']==$id){                
+                if($qty==0){
+                    continue;
+                }
                 array_push($tmp,array('id'=>$item['id'],'qty'=>$qty));
             } else {
                 array_push($tmp,array('id'=>$item['id'],'qty'=>$item['qty']));
             }
         }
-        $this->set_cookie($tmp);
+        $this->set_cart($tmp);
         return $this;
     }
     function cart_update_multi($arr=array()){
@@ -58,8 +65,24 @@ class cart{
         }    
         return $this;
     }
+    function cart_count(){
+        $count=0;
+        if(count($this->cart)>0){
+            foreach($this->cart as $item){
+                $count+=$item['qty'];
+            }   
+        }
+        return $count;
+    }
     function cart_output(){
-        var_dump($this->cookie);
+        $str='';
+        return $str;
+    }
+    function cart_insert(){
+        
+    }
+    function cart_info(){
+        
     }
 }
 ?>

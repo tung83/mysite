@@ -6,6 +6,6 @@
     @include('front.home.partials.projects', ['projectCategories' => $projectCategories, 'projects'=> $projects])
     @include('front.home.partials.news', ['newsCategories' => $newsCategories, 'news'=> $news])
     @include('front.home.partials.faqs', ['faqs'=> $faqs])
-    @include('front.home.partials.recruits', ['recruits' => $recruits, 'qtextRecruit' => $qtextRecruit])
+    @include('front.home.partials.careers', ['careers' => $careers, 'qtextRecruit' => $qtextRecruit])
     @include('front.home.partials.customers',['customers' => $customers])
 @endsection

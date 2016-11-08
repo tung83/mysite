@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ServiceCategory extends Model
 {
-    protected $table = 'service_category';
+    protected $table = 'service_cate';
 
     public $timestamps = false;
 
@@ -24,8 +24,6 @@ class ServiceCategory extends Model
         'e_meta_description',
         'img',
         'icon',
-        'pId',
-        'lev',
         'ind',
         'active'
     ];

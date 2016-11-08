@@ -6,12 +6,6 @@ error_reporting(E_ALL ^ E_NOTICE);
 date_default_timezone_set('Asia/Saigon');
 
 //Remove slash for get_magic_quote_gpc
-//if ( in_array( strtolower( ini_get( 'magic_quotes_gpc' ) ), array( '1', 'on' ) ) )
-//{
-//    $_POST = array_map( 'stripslashes', $_POST );
-//    $_GET = array_map( 'stripslashes', $_GET );
-//    $_COOKIE = array_map( 'stripslashes', $_COOKIE );
-//}
 $process = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
 while (list($key, $val) = each($process)) {
     foreach ($val as $k => $v) {
@@ -30,26 +24,29 @@ unset($process);
 //define area
 define('_hostName'  , 'localhost');	
 
-//define('_userName'  , 'psmedia_mekong');	
-//define('_dbName'    , 'psmedia_mekong');	
-//define('_pass'      , 'RrcUEaZ4');
-
-
-define('_userName'  , 'pspmedia');	
-define('_dbName'    , 'pspmedia');	
-define('_pass'      , 't80vyBMVTe54bkhR');
+define('_userName'  , 'tung');	
+define('_dbName'    , 't4vietna_db');	
+define('_pass'      , 'tung');
+//define('_userName'  , 't4vietna_admin');	
+//define('_dbName'    , 't4vietna_db');	
+//define('_pass'      , 'wh~g@bk]SWhC');
 
 //define('_userName'  , 'root');	
-//define('_dbName'    , 'mekogas');	
+//define('_dbName'    , 't4');	
 //define('_pass'      , '');
 
-define('myWeb'      , '/');
-define('myPath'     , '../file/upload/');
-define('webPath'    , '/file/upload/');
+define('domain'     ,'lavoine.vn');
+define('root'       ,$_SERVER['DOCUMENT_ROOT']);
+define('myWeb'      ,'/');
+define('myPath'     ,'../file/upload/');
+define('webPath'    ,'/file/upload/');
 define('selfPath'   ,'/file/self/');
 
-define('phpLib'     , 'object/');
-define('jsLib'      , myWeb.'js/');
+define('phpLib'     ,root.'/object/');
+define('pageLib'    ,root.'/page/');
+define('widgetLib'  ,root.'/widget/');
+define('priceIncreaseL'  ,8000);
+
 
 
 //define area end

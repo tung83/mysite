@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\MenuRepository;
 use App\Repositories\CustomerRepository;
 use App\Repositories\FaqRepository;
-use App\Repositories\RecruitRepository;
+use App\Repositories\CareerRepository;
 use App\Repositories\ServiceCategoryRepository;
 use App\Repositories\ProjectCategoryRepository;
 use App\Repositories\ProjectRepository;
@@ -20,7 +20,7 @@ class HomeController extends Controller
     protected $menuRepository;
     protected $customerRepository;
     protected $faqRepository;
-    protected $recruitRepository;
+    protected $careerRepository;
     protected $serviceCategoryRepository;
     protected $projectCategoryRepository;
     protected $projectRepository;
@@ -32,7 +32,7 @@ class HomeController extends Controller
     public function __construct(MenuRepository $menuRepository
             ,CustomerRepository $customerRepository
             ,FaqRepository $faqRepository
-            ,RecruitRepository $recruitRepository
+            ,CareerRepository $careerRepository
             , ServiceCategoryRepository $serviceCategoryRepository
             , ProjectCategoryRepository $projectCategoryRepository
             , ProjectRepository $projectRepository
@@ -44,7 +44,7 @@ class HomeController extends Controller
         $this->menuRepository = $menuRepository;
         $this->customerRepository = $customerRepository;
         $this->faqRepository = $faqRepository;
-        $this->recruitRepository = $recruitRepository;
+        $this->careerRepository = $careerRepository;
         $this->serviceCategoryRepository = $serviceCategoryRepository;
         $this->projectCategoryRepository = $projectCategoryRepository;
         $this->projectRepository = $projectRepository;
@@ -72,16 +72,16 @@ class HomeController extends Controller
         $news = getPaginateByPidData('news',$newsCategories[0], $this->newsRepository, 3);
         $customers = $this->customerRepository->getActive(20);
         $faqs = $this->faqRepository->getActive(6);
-        $recruits = $this->recruitRepository->getActive(3);
-        $qtextRecruit = $this->qtextRepository->getRecruit();
+        $careers = $this->careerRepository->getActive(3);
         $qtextContact = $this->qtextRepository->getFooterContact();
+        $qtextRecruit = $this->qtextRepository->getRecruit();
         $qtextIntroduction = $this->qtextRepository->getIntroduction();
         $basicConfigs = $this->basicConfigRepository->getAll();
         
 	
         return view('front.home.index', compact('menus', 'services'
                 , 'projectCategories','projects', 'newsCategories','news', 'customers', 'faqs',
-                'recruits','qtextRecruit'
+                'careers','qtextRecruit'
                 , 'qtextContact'
                 , 'qtextIntroduction'
                 , 'basicConfigs'));

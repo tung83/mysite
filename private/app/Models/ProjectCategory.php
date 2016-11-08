@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ProjectCategory extends Model
 {
-    protected $table = 'project_category';
+    protected $table = 'project_cate';
 
     public $timestamps = false;
 
@@ -24,8 +24,6 @@ class ProjectCategory extends Model
         'e_meta_description',
         'img',
         'icon',
-        'pId',
-        'lev',
         'ind',
         'active'
     ];
