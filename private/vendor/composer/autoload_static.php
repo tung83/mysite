@@ -84,6 +84,10 @@ class ComposerStaticInit21ad9530f93b064db299878db08e5ade
         array (
             'Illuminate\\' => 11,
         ),
+        'G' => 
+        array (
+            'Greggilbert\\Recaptcha\\' => 22,
+        ),
         'F' => 
         array (
             'Faker\\' => 6,
@@ -230,6 +234,10 @@ class ComposerStaticInit21ad9530f93b064db299878db08e5ade
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
         ),
+        'Greggilbert\\Recaptcha\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/greggilbert/recaptcha/src',
+        ),
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
@@ -336,13 +344,15 @@ class ComposerStaticInit21ad9530f93b064db299878db08e5ade
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Admin\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminController.php',
+        'App\\Http\\Controllers\\Admin\\AdminControllerBase' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminControllerBase.php',
         'App\\Http\\Controllers\\Admin\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Admin\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Auth/LoginController.php',
         'App\\Http\\Controllers\\Admin\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Admin\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Admin\\FilemanagerController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/FilemanagerController.php',
-        'App\\Http\\Controllers\\Admin\\PageController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PageController.php',
+        'App\\Http\\Controllers\\Admin\\MenuController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/MenuController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\DatatablesController' => __DIR__ . '/../..' . '/app/Http/Controllers/DatatablesController.php',
         'App\\Http\\Controllers\\Front\\ContactFormController' => __DIR__ . '/../..' . '/app/Http/Controllers/Front/ContactFormController.php',
         'App\\Http\\Controllers\\Front\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Front/HomeController.php',
         'App\\Http\\Controllers\\Front\\LanguageController' => __DIR__ . '/../..' . '/app/Http/Controllers/Front/LanguageController.php',
@@ -370,6 +380,7 @@ class ComposerStaticInit21ad9530f93b064db299878db08e5ade
         'App\\Http\\Requests\\UserCreateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserCreateRequest.php',
         'App\\Http\\Requests\\UserUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserUpdateRequest.php',
         'App\\Models\\BasicConfig' => __DIR__ . '/../..' . '/app/Models/BasicConfig.php',
+        'App\\Models\\Career' => __DIR__ . '/../..' . '/app/Models/Career.php',
         'App\\Models\\Comment' => __DIR__ . '/../..' . '/app/Models/Comment.php',
         'App\\Models\\Contact' => __DIR__ . '/../..' . '/app/Models/Contact.php',
         'App\\Models\\Customer' => __DIR__ . '/../..' . '/app/Models/Customer.php',
@@ -385,7 +396,6 @@ class ComposerStaticInit21ad9530f93b064db299878db08e5ade
         'App\\Models\\Project' => __DIR__ . '/../..' . '/app/Models/Project.php',
         'App\\Models\\ProjectCategory' => __DIR__ . '/../..' . '/app/Models/ProjectCategory.php',
         'App\\Models\\Qtext' => __DIR__ . '/../..' . '/app/Models/Qtext.php',
-        'App\\Models\\Recruit' => __DIR__ . '/../..' . '/app/Models/Recruit.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
         'App\\Models\\ServiceCategory' => __DIR__ . '/../..' . '/app/Models/ServiceCategory.php',
         'App\\Models\\Tag' => __DIR__ . '/../..' . '/app/Models/Tag.php',
@@ -399,6 +409,7 @@ class ComposerStaticInit21ad9530f93b064db299878db08e5ade
         'App\\Repositories\\BaseRepository' => __DIR__ . '/../..' . '/app/Repositories/BaseRepository.php',
         'App\\Repositories\\BasicConfigRepository' => __DIR__ . '/../..' . '/app/Repositories/BasicConfigRepository.php',
         'App\\Repositories\\BlogRepository' => __DIR__ . '/../..' . '/app/Repositories/BlogRepository.php',
+        'App\\Repositories\\CareerRepository' => __DIR__ . '/../..' . '/app/Repositories/CareerRepository.php',
         'App\\Repositories\\CommentRepository' => __DIR__ . '/../..' . '/app/Repositories/CommentRepository.php',
         'App\\Repositories\\ContactRepository' => __DIR__ . '/../..' . '/app/Repositories/ContactRepository.php',
         'App\\Repositories\\CustomerRepository' => __DIR__ . '/../..' . '/app/Repositories/CustomerRepository.php',
@@ -409,7 +420,6 @@ class ComposerStaticInit21ad9530f93b064db299878db08e5ade
         'App\\Repositories\\ProjectCategoryRepository' => __DIR__ . '/../..' . '/app/Repositories/ProjectCategoryRepository.php',
         'App\\Repositories\\ProjectRepository' => __DIR__ . '/../..' . '/app/Repositories/ProjectRepository.php',
         'App\\Repositories\\QtextRepository' => __DIR__ . '/../..' . '/app/Repositories/QtextRepository.php',
-        'App\\Repositories\\RecruitRepository' => __DIR__ . '/../..' . '/app/Repositories/RecruitRepository.php',
         'App\\Repositories\\RoleRepository' => __DIR__ . '/../..' . '/app/Repositories/RoleRepository.php',
         'App\\Repositories\\ServiceCategoryRepository' => __DIR__ . '/../..' . '/app/Repositories/ServiceCategoryRepository.php',
         'App\\Repositories\\UserRepository' => __DIR__ . '/../..' . '/app/Repositories/UserRepository.php',
@@ -471,6 +481,7 @@ class ComposerStaticInit21ad9530f93b064db299878db08e5ade
         'DeepCopy\\Reflection\\ReflectionHelper' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Reflection/ReflectionHelper.php',
         'DeepCopy\\TypeFilter\\ReplaceFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/ReplaceFilter.php',
         'DeepCopy\\TypeFilter\\ShallowCopyFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/ShallowCopyFilter.php',
+        'DeepCopy\\TypeFilter\\Spl\\SplDoublyLinkedList' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/Spl/SplDoublyLinkedList.php',
         'DeepCopy\\TypeFilter\\TypeFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/TypeFilter.php',
         'DeepCopy\\TypeMatcher\\TypeMatcher' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeMatcher/TypeMatcher.php',
         'Doctrine\\Common\\Inflector\\Inflector' => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector/Inflector.php',
@@ -988,6 +999,12 @@ class ComposerStaticInit21ad9530f93b064db299878db08e5ade
         'FontLib\\WOFF\\File' => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib/WOFF/File.php',
         'FontLib\\WOFF\\Header' => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib/WOFF/Header.php',
         'FontLib\\WOFF\\TableDirectoryEntry' => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib/WOFF/TableDirectoryEntry.php',
+        'Greggilbert\\Recaptcha\\Facades\\Recaptcha' => __DIR__ . '/..' . '/greggilbert/recaptcha/src/Facades/Recaptcha.php',
+        'Greggilbert\\Recaptcha\\Recaptcha' => __DIR__ . '/..' . '/greggilbert/recaptcha/src/Recaptcha.php',
+        'Greggilbert\\Recaptcha\\RecaptchaServiceProvider' => __DIR__ . '/..' . '/greggilbert/recaptcha/src/RecaptchaServiceProvider.php',
+        'Greggilbert\\Recaptcha\\Service\\CheckRecaptcha' => __DIR__ . '/..' . '/greggilbert/recaptcha/src/Service/CheckRecaptcha.php',
+        'Greggilbert\\Recaptcha\\Service\\CheckRecaptchaV2' => __DIR__ . '/..' . '/greggilbert/recaptcha/src/Service/CheckRecaptchaV2.php',
+        'Greggilbert\\Recaptcha\\Service\\RecaptchaInterface' => __DIR__ . '/..' . '/greggilbert/recaptcha/src/Service/RecaptchaInterface.php',
         'HTML5_Data' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Data.php',
         'HTML5_InputStream' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/InputStream.php',
         'HTML5_Parser' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Parser.php',

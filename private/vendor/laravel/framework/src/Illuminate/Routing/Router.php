@@ -287,19 +287,19 @@ class Router implements RegistrarContract
     public function auth()
     {
         // Authentication Routes...
-        $this->get('admin@@/login', 'Admin\Auth\LoginController@showLoginForm')->name('login');
-        $this->post('admin@@/login', 'Admin\Auth\LoginController@login');
-        $this->post('admin@@/logout', 'Admin\Auth\LoginController@logout')->name('logout');
+        $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
+        $this->post('login', 'Auth\LoginController@login');
+        $this->post('logout', 'Auth\LoginController@logout')->name('logout');
 
         // Registration Routes...
-        $this->get('admin@@/register', 'Admin\Auth\RegisterController@showRegistrationForm');
-        $this->post('admin@@/register', 'Admin\Auth\RegisterController@register');
+        $this->get('register', 'Auth\RegisterController@showRegistrationForm');
+        $this->post('register', 'Auth\RegisterController@register');
 
         // Password Reset Routes...
-        $this->get('password/reset', 'Admin\Auth\ForgotPasswordController@showLinkRequestForm');
-        $this->post('password/email', 'Admin\Auth\ForgotPasswordController@sendResetLinkEmail');
-        $this->get('password/reset/{token}', 'Admin\Auth\ResetPasswordController@showResetForm');
-        $this->post('password/reset', 'Admin\Auth\ResetPasswordController@reset');
+        $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+        $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+        $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+        $this->post('password/reset', 'Auth\ResetPasswordController@reset');
     }
 
     /**
