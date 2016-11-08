@@ -89,6 +89,16 @@ if (!function_exists('getPaginateByPidData')) {
     }
 }
 
+if (!function_exists('adminSetCellContent')) {
+    function adminSetCellContent($pName, $pData, $repository, $pageSize)
+    {
+        $paginateData = $repository->paginateByPid($pData->id, $pageSize);
+        $customUrl = url(getCategorySlugLink($pName, $pData));
+        $paginateData->setPath($customUrl);
+        return $paginateData;    
+    }
+}
+
 
 
 
