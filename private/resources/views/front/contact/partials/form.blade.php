@@ -5,8 +5,8 @@
     {!! Form::controlBootstrap('text', 12, 'phone', $errors, null, null, null, trans('front/contact.phone'), 'required') !!}
     {!! Form::controlBootstrap('text', 12, 'fax', $errors, null, null, null, trans('front/contact.fax')) !!}
     {!! Form::controlBootstrap('email', 12, 'email', $errors, null, null, null, trans('front/contact.email'),'required') !!}
-    {!! Form::controlBootstrap('email', 12, 'department', $errors, null, null, null, trans('front/contact.department')) !!}
-    {!! Form::controlBootstrap('textarea', 12, 'message', $errors, null, null, null, trans('front/contact.message'),'required') !!}
+    {!! Form::controlBootstrap('text', 12, 'department', $errors, null, null, null, trans('front/contact.department')) !!}
+    {!! Form::controlBootstrap('textarea', 12, 'content', $errors, null, null, null, trans('front/contact.content'),'required') !!}
     <div class="form-group has-feedback col-lg-12 ">
         {!! Recaptcha::render() !!}           
     </div>

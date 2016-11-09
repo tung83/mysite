@@ -11,9 +11,8 @@ class ContactRequest extends Request
      */
     public function rules()
     {
-        return [
-            'email' => 'required|email',            
-            'g-recaptcha-response' => 'required|recaptcha'
+        return [      
+            'email' => 'bail|required|email',    
         ];
     }
 }

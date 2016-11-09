@@ -59,8 +59,12 @@ class ContactController extends Controller
      * @param  ContactRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ContactRequest $request)
+    public function store(Request $request)
     {
+        $this->validate($request, [
+        'g-recaptcha-response' => 'required|recaptcha',
+            'email' => 'bail|required|email'
+        ]);
         $this->contactRepository->store($request->all());
 
         return redirect('/')->with('ok', trans('front/contact.ok'));

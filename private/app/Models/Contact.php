@@ -9,6 +9,8 @@ class Contact extends Model
 {
     use DatePresenter;
 
+    protected $table = 'contact';
+    public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *
