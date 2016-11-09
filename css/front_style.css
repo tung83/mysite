@@ -23,6 +23,18 @@ body {
     color: #565656;
     text-align: right;        
 }
+::-webkit-input-placeholder {
+   font-style: italic;
+}
+:-moz-placeholder {
+   font-style: italic;  
+}
+::-moz-placeholder {
+   font-style: italic;  
+}
+:-ms-input-placeholder {  
+   font-style: italic; 
+}
 
     .slick a:hover, .slick a:focus, .project a:hover, .project a:focus
     , .faqs a:hover, .faqs a:focus{

@@ -37,7 +37,7 @@ class ContactRepository extends BaseRepository
     {
         $this->model->create($inputs);
     }
-
+    
     /**
      * Update a contact.
      *

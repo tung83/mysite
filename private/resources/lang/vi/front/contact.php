@@ -7,5 +7,13 @@ return [
     'email' => 'Votre Email',
     'message' => 'Votre message',
     'ok' => 'Votre message a bien été enregistré, nous vous répondrons dès que possible.',
-    'send' => 'Gửi'
+    'send' => 'Gửi',    
+    'fullName' => 'Full mame',
+    'companyName' => 'Công ty',
+    'address' => 'Địa chỉ',
+    'phone' => 'Điện thoại',
+    'fax' => 'Fax',
+    'email' => 'Email',
+    'department' => 'Phòng ban',
+    'message' => 'Nội dung',
 ];

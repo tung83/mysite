@@ -46,8 +46,10 @@ Route::group(['namespace' => 'Front'], function() {
     Route::get('/ajax/news','NewsAjaxController@partialNewsData');
 
     //Contact
-    Route::get('contact', 'ContactFormController@index');
-    Route::get('lien-he', 'ContactFormController@index');
+    Route::get('contact', 'ContactController@index');
+    Route::get('lien-he', 'ContactController@index');
+    Route::post('contact', 'ContactController@store');
+    Route::post('lien-he', 'ContactController@store');
 
 
     Route::get('/ajax/homeProject','ProjectAjaxController@partialHomeData');

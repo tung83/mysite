@@ -12,9 +12,8 @@ class ContactRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'bail|required|max:50',
-            'email' => 'bail|required|email',
-            'message' => 'bail|required|max:1000'
+            'email' => 'required|email',            
+            'g-recaptcha-response' => 'required|recaptcha'
         ];
     }
 }
