@@ -74,11 +74,15 @@ function contact($db)
 					<thead>
 						<tr>
 							<th>ID</th>							
-							<th>Họ&Tên</th>
+							<th>Họ&Tên</th>						
+							<th>Công ty</th>
 							<th>Địa chỉ</th>							
+							<th>Điện thoại</th>						
+							<th>Fax</th>							
 							<th>Email</th>
-							<th>Chủ đề</th>
+							<th>Phòng ban</th>
 							<th width="40%">Nội dung</th>
+							<th width="150px">Thời gian</th>
 							<th style="width:10% !important">Options</th>
 						</tr>
 					</thead>
@@ -95,11 +99,15 @@ function contact($db)
 		$str.='
 		<tr>
 			<td>'.$item['id'].'</td>
-			<td>'.$item['name'].'</td>
-			<td>'.$item['adds'].'</td>
+			<td>'.$item['fullName'].'</td>
+			<td>'.$item['company'].'</td>
+			<td>'.$item['address'].'</td>
+			<td>'.$item['phone'].'</td>
+			<td>'.$item['fax'].'</td>
 			<td><a href="mailto:'.$item['email'].'">'.$item['email'].'</a></td>
-			<td>'.$item['subject'].'</td>
+			<td>'.$item['department'].'</td>
 			<td>'.nl2br($item['content']).'</td>
+			<td>'.$item['dates'].'</td>
 			<td align="center">
 		';
 	

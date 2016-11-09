@@ -32,8 +32,8 @@ function ad_menu()
                     array(5,'Danh sách tin tức','type=news'),  
                     array(6,'Danh mục dự án','type=project_cate'),
                     array(6,'Danh sách dự án','type=project'),
-                    array(7,'Danh mục dịch vụ','type=service_cate'),
-                    array(7,'Danh sách dịch vụ','type=service'),       
+//                    array(7,'Danh mục dịch vụ','type=service_cate'),
+//                    array(7,'Danh sách dịch vụ','type=service'),       
                     array(12,"HotLine","id=2"),
 					array(12,"Liên hệ","id=3"),
                    
