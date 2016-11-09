@@ -8,7 +8,10 @@
     </div>
 <div class="row">
     <div id="contact-leftside" class="col-md-6">
-        
+        <div>
+            
+        </div>
+        <img src="{{asset('img/contact-items.png')}}" class="img-responsive" alt="" title="">
     </div>
     <div id="contact-rightside" class="col-md-6">
         @include('front.contact.partials.form')
