@@ -109,108 +109,9 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-                $('#logout').click(function(e) {
-                    e.preventDefault();
-                    $('#logout-form').submit();
-                })
-                
-                $('.slick').slick({
-                    dots: false,
-                    autoplay: true,
-                    autoplaySpeed: 2000,
-                    infinite: true,
-                    speed: 300,
-                    slidesToShow: 6,
-                    slidesToScroll: 1,
-                    responsive: [
-                      {
-                        breakpoint: 1024,
-                        settings: {
-                          slidesToShow: 3,
-                          slidesToScroll: 1,
-                          infinite: true,
-                          dots: true
-                        }
-                      },
-                      {
-                        breakpoint: 600,
-                        settings: {
-                          slidesToShow: 2,
-                          slidesToScroll: 1
-                        }
-                      },
-                      {
-                        breakpoint: 480,
-                        settings: {
-                          slidesToShow: 1,
-                          slidesToScroll: 1
-                        }
-                      }
-                      // You can unslick at a given breakpoint now by adding:
-                      // settings: "unslick"
-                      // instead of a settings object
-                    ]
-                  });
-
             });
-        $(function() {
-            var divh=$('.service-sum').height();
-            $('.service-sum p').each( function( index, element ){
-                while ($(this).outerHeight()>divh) {
-                    $(this).text(function (index, text) {
-                    return text.replace(/\W*\s(\S)*$/, '...');
-                });
-            }
-            });
-            $( ".slick-slide" ).hover(
-                function() {
-                  $( this ).find( "h5, p" ).css( "color", "#ffca9d" );
-                },function() {
-                  $( this ).find( "h5, p" ).css( "color", "" );
-                }
-              );
-        });
-        
-        /*==================== PAGINATION =========================*/
-        $(document).on('click','#contact-category-content .pagination a', function(e){
-                e.preventDefault();               
-                var valuesPart = $(this).attr('href').match(/([0-9]+)\?page=([0-9]+)$/g);  
-                var values = valuesPart[0].split('?page=');
-                var id = values[0];
-                var page = values[1];
-                 getProjects(id, page);
-        });
 
-        function getProjects(id, page){
-                $.ajax({
-                    url: '{{ url('/ajax/contact') }}' + '?pId=' + id + '&page=' + page,
-                    type: 'GET'
-                }).done(function(data){
-                        $('#contact-category-content').html(data);
-                })
-                .fail(function() {                            
-                });
-        }
-        
-        $(document).on('click','#contact-category .list-inline a', function(e){
-                e.preventDefault();                
-                $('#contact-category .list-inline a').removeClass('active');
-                $(this).addClass('active');
-                var id = $(this).attr('href').match(/([0-9]+)$/g)[0];  
-                getProjectCategory(id);
-        });
 
-        function getProjectCategory(id){
-                $.ajax({
-                    url: '{{ url('/ajax/contact') }}' + '?pId=' + id,
-                    type: 'GET'
-                }).done(function(data){
-                        $('#contact-category-content').html(data);
-                })
-                .fail(function() {                            
-                });
-        }
-        
         /*==================== google maps =========================*/
         function initMap() {
           createGoogleMap('contact-google-map');
@@ -244,7 +145,7 @@
                 
         </script>
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVWAnZRS56JnP5Nr5otnuzg47TsmJoKBM&callback=initMap">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVWAnZRS56JnP5Nr5otnuzg47TsmJoKBM&callback=initMap&language={!!session('locale')!!}&region={!!session('locale')!!}">
     </script>
     @stack('scripts')
     <script type="text/javascript">

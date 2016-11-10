@@ -61,6 +61,7 @@ body {
       padding: 15px 15px 15px 15px;    
         font-family: 'Open Sans Condensed', sans-serif;
         font-weight: bold;
+        font-size: 21px;
        }
     
     .navbar {
@@ -573,7 +574,7 @@ footer ul#footer-services li:first-child{
         height: 152px;
     }
     .navbar {
-        padding-bottom: 10px;
+        padding-bottom: 0px;
         padding-left: 146px;
     }
     #header-right-bottom {
