@@ -14,10 +14,9 @@ class LanguageController extends Controller
      */
     public function __invoke($lang)
     {
-        $language = in_array($lang, config('app.languages')) ? $lang : config('app.fallback_locale');
-        
+        $language = in_array($lang, config('app.languages')) ? $lang : config('app.fallback_locale');        
         session()->set('locale', $language);
-
+        app()->setLocale(session()->get('locale'));
         return back();
     }
 }

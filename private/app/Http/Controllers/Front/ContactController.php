@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Front\FrontControllerBase;
 use Illuminate\Http\Request;
 use App\Repositories\ContactRepository;
 use App\Http\Requests\ContactRequest;
@@ -11,7 +11,7 @@ use App\Repositories\ServiceCategoryRepository;
 use App\Repositories\QtextRepository;
 use App\Repositories\BasicConfigRepository;
 
-class ContactController extends Controller
+class ContactController extends FrontControllerBase
 {    
     protected $menuRepository;
     protected $projectCategoryRepository;
@@ -24,7 +24,8 @@ class ContactController extends Controller
             , QtextRepository $qtextRepository
             , BasicConfigRepository $basicConfigRepository,
             ContactRepository $contactRepository)
-    {
+    {        
+        parent::__construct();
         $this->menuRepository = $menuRepository;
         $this->serviceCategoryRepository = $serviceCategoryRepository;
         $this->qtextRepository = $qtextRepository;

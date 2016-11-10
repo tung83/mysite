@@ -2,24 +2,28 @@
     ,'qtextContact' => $qtextContact, 'qtextIntroduction' => $qtextIntroduction
     , 'basicConfigs' => $basicConfigs])
 @section('main')
-    <div id="project-list" class="row text-center">        
+    <div class="contact row">
+    <div id="contact-header" class="row text-center">
         <h2 class="title">{{trans('front/contact.title')}}</h2>
-        <p>{{ trans('front/contact.text') }}</p>           
+        <p>{{ trans('front/contact.text') }}</p>
     </div>
-<div class="row">
-    <div id="contact-leftside" class="col-md-6">
-        <div>
-            
+    <div class="row">
+        <div id="contact-leftside" class="col-md-6">
+            <div>
+            </div>
+            <img src="{{asset('img/contact-items.png')}}" class="img-responsive" alt="" title="">
         </div>
-        <img src="{{asset('img/contact-items.png')}}" class="img-responsive" alt="" title="">
+        <div id="contact-rightside" class="col-md-6">
+            @include('front.contact.partials.form')
+        </div>
     </div>
-    <div id="contact-rightside" class="col-md-6">
-        @include('front.contact.partials.form')
+    </div>
+    <div class="clearfix"></div>
+    <div id="contact-google-map" class="row">
     </div>    
-</div>
-<div class="clearfix"></div>
-<div id="contact-google-map" class="row"> 
-    
-</div>
-    
 @endsection
+@push('javascript')
+<script>
+    // blog based javascript
+</script>
+@endpush

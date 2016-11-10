@@ -15,5 +15,5 @@ return [
     'fax' => 'Fax',
     'email' => 'Email',
     'department' => 'Phòng ban',
-    'message' => 'Nội dung',
+    'content' => 'Nội dung',
 ];

@@ -72,7 +72,7 @@ $(document).ready(function(){
                         'background-size'  : '80px 80px'
                     });
                     $('.project-page #logo').css({
-                        'bottom'  : '0',
+                        'bottom'  : '0px',
                         'left' : '30px'
 
                     });
@@ -126,7 +126,7 @@ $(document).ready(function(){
                         'background-size'  : '80px 80px'
                     });
                     $('.news-page #logo').css({
-                        'bottom'  : '-10px'                            
+                        'bottom'  : '-5px'                            
                     });
             }
             else {

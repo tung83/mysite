@@ -9,8 +9,8 @@ class AdminControllerBase extends Controller
 {
     public function __construct()
     {
-        session()->put('admin-locale', 'en');
-        session()->save();
-        app()->setLocale(Session::get('admin-locale'));
+        //session()->put('admin-locale', 'en');
+        //session()->save();
+        //app()->setLocale(Session::get('admin-locale'));
     }    
 }

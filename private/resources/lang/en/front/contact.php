@@ -15,5 +15,5 @@ return [
     'fax' => 'Fax',
     'email' => 'Email',
     'department' => 'Department',
-    'message' => 'Message',
+    'content' => 'Content'
 ];
