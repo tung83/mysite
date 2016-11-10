@@ -656,6 +656,8 @@ footer ul#footer-services li:first-child{
     .list-inline li a.active, .list-inline li a:hover {
         color: #ca0000;
     }
+    
+@media (min-width: 768px){
     .list-inline li a:before {
         width: 11px;
         height: 11px;
@@ -672,6 +674,8 @@ footer ul#footer-services li:first-child{
         margin-top: -2px;
         transition: .1s;
     }
+}
+    
     .list-inline li a:before, .list-inline li a:after {
         content: '';
         position: absolute;

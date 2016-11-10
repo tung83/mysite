@@ -20,6 +20,9 @@
     </div>
     </div>
     <div class="clearfix"></div>
+    <div id="contact-image-bar" class="row">
+       <img src="{{asset('img/contact-banner.png')}}" class="img-responsive" alt="" title="">
+    </div>
     <div id="contact-google-map" class="row">
     </div>    
 @endsection

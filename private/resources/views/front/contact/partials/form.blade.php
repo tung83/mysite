@@ -11,39 +11,38 @@
     {!! Form::controlBootstrap('text', 12, 'department', $errors, null, null, null, trans('front/contact.department')) !!}
     {!! Form::controlBootstrap('textarea', 12, 'content', $errors, null, null, null, trans('front/contact.content'),'required') !!}
     <div class="form-group has-feedback col-lg-12 ">
-        {!! Recaptcha::render() !!}           
+        {!! Recaptcha::render([ 'lang' => session('locale'),'callback' => 'recaptchaCallback' ]); !!}           
     </div>
+    
     {!! Form::submitResetBootstrap(trans('front/contact.send'), 'col-lg-12', trans('front/contact.reset')) !!}
 {!! Form::close() !!}
 @push('scripts')
 <script>
 $(function() {
-    $('form input').keyup(function() {
-
-        var empty = false;
-        $('form input').each(function() {
-            var attr = $(this).attr('required');
-            if (typeof attr !== typeof undefined && attr !== false && $(this).val() == '' ) {
-                empty = true;
-            }
-        });
-        if(empty == false)
-        {
-            $('form textarea').each(function() {
-                var attr = $(this).attr('required');
-                if (typeof attr !== typeof undefined && attr !== false && $(this).val() == '' ) {
-                    empty = true;
-                }
-            });
-        }
-
-        if (empty) {
-            $('.submit-button').addClass('disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
-        } else {
-            $('.submit-button').removeClass('disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
-        }
+    $('form input,form textarea').keyup(function() {
+        ToogleEnableSubmitButton();
     });
 });
+var recaptchaChecked = false;
+function recaptchaCallback() {
+    recaptchaChecked = true;
+    ToogleEnableSubmitButton();
+};
+function ToogleEnableSubmitButton(){
+    var empty = false;
+    $('form input,form textarea').each(function() {
+        var attr = $(this).attr('required');
+        if (typeof attr !== typeof undefined && attr !== false && $(this).val() == '' ) {
+            empty = true;
+        }
+    });
+
+    if (empty || !recaptchaChecked) {
+        $('.submit-button').addClass('disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
+    } else {
+        $('.submit-button').removeClass('disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
+    }
+}
 </script>
 @endpush
 
