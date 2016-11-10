@@ -7,9 +7,9 @@ APP_URL=http://localhost
 
 DB_CONNECTION=mysql
 DB_HOST=localhost
-DB_DATABASE=pspmedia_dat
-DB_USERNAME=pspmedia
-DB_PASSWORD=PS123@
+DB_DATABASE=pspmedia_demo1
+DB_USERNAME=pspmedia_demo1
+DB_PASSWORD=671977
 
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file

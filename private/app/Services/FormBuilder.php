@@ -23,6 +23,11 @@ class FormBuilder
             'cancelLink',
             'cancelText'
         ]);
+        Form::component('submitResetBootstrap', 'components.submitReset', [
+            'value',
+            'class' => '',
+            'resetText'
+        ]);
         Form::component('destroyBootstrap', 'components.destroy', [
             'value',
             'message',

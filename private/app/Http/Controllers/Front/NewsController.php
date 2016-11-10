@@ -45,7 +45,7 @@ class NewsController extends Controller
         $newsCategories = $this->newsCategoryRepository->getActive(3);           
         $newsList = getPaginateByPidData('news',$newsCategories[0], $this->newsRepository, 6);
         $qtextRecruit = $this->qtextRepository->getRecruit();
-        $qtextContact = $this->qtextRepository->getFooterContact();
+        $qtextFooterContact = $this->qtextRepository->getFooterContact();
         $qtextIntroduction = $this->qtextRepository->getIntroduction();
         $basicConfigs = $this->basicConfigRepository->getAll();
         $most_saw_newsList = $this->newsCategoryRepository->getActive();
@@ -53,7 +53,7 @@ class NewsController extends Controller
         return view('front.news.index', compact('menus','services' 
                 , 'newsCategories','newsList', 'most_saw_newsList' 
                 ,'qtextRecruit'
-                , 'qtextContact'
+                , 'qtextFooterContact'
                 , 'qtextIntroduction'
                 , 'basicConfigs'));
     }
@@ -67,7 +67,7 @@ class NewsController extends Controller
         $newsCategories = $this->newsCategoryRepository->getActive(3);           
         $news = $this->newsRepository->getById($itemId);
         $qtextRecruit = $this->qtextRepository->getRecruit();
-        $qtextContact = $this->qtextRepository->getFooterContact();
+        $qtextFooterContact = $this->qtextRepository->getFooterContact();
         $qtextIntroduction = $this->qtextRepository->getIntroduction();
         $basicConfigs = $this->basicConfigRepository->getAll();
         
@@ -75,7 +75,7 @@ class NewsController extends Controller
         return view('front.news.itemIndex', compact('menus','services' 
                 , 'newsCategories','news' 
                 ,'qtextRecruit'
-                , 'qtextContact'
+                , 'qtextFooterContact'
                 , 'qtextIntroduction'
                 , 'basicConfigs'));
     }

@@ -4,7 +4,7 @@
                             <img alt="company name" src="{{asset('img/footer-small-company-name.png')}}">                           
                         </div>
                         <div id="address-details" style="color: #bababa">
-                            {!! languageTransform($qtextContact, 'content')!!}
+                            {!! languageTransform($qtextFooterContact, 'content')!!}
                         </div>       
                     </div>
                     <div id="google-map" class="col-sm-3">      

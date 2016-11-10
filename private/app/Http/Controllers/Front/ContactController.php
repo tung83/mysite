@@ -12,12 +12,7 @@ use App\Repositories\QtextRepository;
 use App\Repositories\BasicConfigRepository;
 
 class ContactController extends FrontControllerBase
-{    
-    protected $menuRepository;
-    protected $projectCategoryRepository;
-    protected $projectRepository;
-    protected $qtextRepository;
-    protected $basicConfigRepository;
+{   
     protected $contactRepository;
     public function __construct(MenuRepository $menuRepository
             , ServiceCategoryRepository $serviceCategoryRepository
@@ -25,11 +20,7 @@ class ContactController extends FrontControllerBase
             , BasicConfigRepository $basicConfigRepository,
             ContactRepository $contactRepository)
     {        
-        parent::__construct();
-        $this->menuRepository = $menuRepository;
-        $this->serviceCategoryRepository = $serviceCategoryRepository;
-        $this->qtextRepository = $qtextRepository;
-        $this->basicConfigRepository = $basicConfigRepository;
+        parent::__construct($menuRepository, $serviceCategoryRepository, $qtextRepository,$basicConfigRepository);
         $this->contactRepository = $contactRepository;
     }
     /**
@@ -39,19 +30,14 @@ class ContactController extends FrontControllerBase
      */
     public function index()
     {
-        $menus = $this->menuRepository->getActive();
-        $services = $this->serviceCategoryRepository->getActive(10); 
-        $qtextRecruit = $this->qtextRepository->getRecruit();
-        $qtextContact = $this->qtextRepository->getFooterContact();
-        $qtextIntroduction = $this->qtextRepository->getIntroduction();
-        $basicConfigs = $this->basicConfigRepository->getAll();
-        
-	
-        return view('front.contact.index', compact('menus','services' 
-                ,'qtextRecruit'
-                , 'qtextContact'
-                , 'qtextIntroduction'
-                , 'basicConfigs'));
+        parent::GetPageData();
+        $qtextContact = $this->qtextRepository->getContact();
+        return view('front.contact.index', ['menus' => $this->menus,'services' => $this->services 
+                ,'qtextRecruit' => $this->qtextRecruit
+                , 'qtextFooterContact' => $this->qtextFooterContact
+                , 'qtextIntroduction' => $this->qtextIntroduction
+                , 'basicConfigs' => $this->basicConfigs
+                , 'qtextContact' => $qtextContact]);
     }
     
     /**

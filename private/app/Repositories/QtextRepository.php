@@ -24,6 +24,11 @@ class QtextRepository extends BaseRepository
     
     public function getFooterContact()
     {
+        return $this->model->where('key', 'footerContact')->firstOrFail();
+    }
+    
+    public function getContact()
+    {
         return $this->model->where('key', 'contact')->firstOrFail();
     }
     

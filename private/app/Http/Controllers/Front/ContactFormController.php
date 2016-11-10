@@ -37,14 +37,14 @@ class ContactFormController extends Controller
         $menus = $this->menuRepository->getActive();
         $services = $this->serviceCategoryRepository->getActive(10); 
         $qtextRecruit = $this->qtextRepository->getRecruit();
-        $qtextContact = $this->qtextRepository->getFooterContact();
+        $qtextFooterContact = $this->qtextRepository->getFooterContact();
         $qtextIntroduction = $this->qtextRepository->getIntroduction();
         $basicConfigs = $this->basicConfigRepository->getAll();
         
 	
         return view('front.contact.index', compact('menus','services' 
                 ,'qtextRecruit'
-                , 'qtextContact'
+                , 'qtextFooterContact'
                 , 'qtextIntroduction'
                 , 'basicConfigs'));
     }

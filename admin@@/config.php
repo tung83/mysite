@@ -28,9 +28,9 @@ define('_userName'  , 'tung');
 define('_dbName'    , 'psmedia');	
 define('_pass'      , 'tung');
 
-define('_userName'  , 'pspmedia');	
-define('_dbName'    , 'pspmedia');	
-define('_pass'      , 't80vyBMVTe54bkhR');
+//define('_userName'  , 'pspmedia_demo1');	
+//define('_dbName'    , 'pspmedia_demo1');	
+//define('_pass'      , '671977');
 //define('_userName'  , 'pspmedia_mekogas');	
 //define('_dbName'    , 'pspmedia_mekogas');	
 //define('_pass'      , 'PS123@');

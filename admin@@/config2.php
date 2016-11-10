@@ -24,15 +24,19 @@ unset($process);
 //define area
 define('_hostName'  , 'localhost');	
 
-define('_userName'  , 'tung');	
-define('_dbName'    , 't4vietna_db');	
-define('_pass'      , 'tung');
-//define('_userName'  , 't4vietna_admin');	
-//define('_dbName'    , 't4vietna_db');	
-//define('_pass'      , 'wh~g@bk]SWhC');
+//define('_userName'  , 'tung');	
+//define('_dbName'    , 'psmedia');	
+//define('_pass'      , 'tung');
+
+define('_userName'  , 'pspmedia_demo1');	
+define('_dbName'    , 'pspmedia_demo1');	
+define('_pass'      , '671977');
+//define('_userName'  , 'pspmedia_mekogas');	
+//define('_dbName'    , 'pspmedia_mekogas');	
+//define('_pass'      , 'PS123@');
 
 //define('_userName'  , 'root');	
-//define('_dbName'    , 't4');	
+//define('_dbName'    , 'acura');	
 //define('_pass'      , '');
 
 define('domain'     ,'lavoine.vn');
@@ -42,11 +46,8 @@ define('myPath'     ,'../file/upload/');
 define('webPath'    ,'/file/upload/');
 define('selfPath'   ,'/file/self/');
 
-define('phpLib'     ,root.'/object/');
-define('pageLib'    ,root.'/page/');
-define('widgetLib'  ,root.'/widget/');
-define('priceIncreaseL'  ,8000);
-
+define('phpLib'     ,dirname(__FILE__).'/object/');
+define('widgetLib'  ,dirname(__FILE__).'/widget/');
 
 
 //define area end

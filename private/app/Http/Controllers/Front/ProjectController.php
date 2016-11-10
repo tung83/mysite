@@ -45,7 +45,7 @@ class ProjectController extends Controller
         $projectCategories = $this->projectCategoryRepository->getActive(3);           
         $projects = getPaginateByPidData('project',$projectCategories[0], $this->projectRepository, 6);
         $qtextRecruit = $this->qtextRepository->getRecruit();
-        $qtextContact = $this->qtextRepository->getFooterContact();
+        $qtextFooterContact = $this->qtextRepository->getFooterContact();
         $qtextIntroduction = $this->qtextRepository->getIntroduction();
         $basicConfigs = $this->basicConfigRepository->getAll();
         
@@ -53,7 +53,7 @@ class ProjectController extends Controller
         return view('front.project.index', compact('menus','services' 
                 , 'projectCategories','projects' 
                 ,'qtextRecruit'
-                , 'qtextContact'
+                , 'qtextFooterContact'
                 , 'qtextIntroduction'
                 , 'basicConfigs'));
     }
@@ -67,7 +67,7 @@ class ProjectController extends Controller
         $projectCategories = $this->projectCategoryRepository->getActive(3);           
         $project = $this->projectRepository->getById($itemId);
         $qtextRecruit = $this->qtextRepository->getRecruit();
-        $qtextContact = $this->qtextRepository->getFooterContact();
+        $qtextFooterContact = $this->qtextRepository->getFooterContact();
         $qtextIntroduction = $this->qtextRepository->getIntroduction();
         $basicConfigs = $this->basicConfigRepository->getAll();
         
@@ -75,7 +75,7 @@ class ProjectController extends Controller
         return view('front.project.itemIndex', compact('menus','services' 
                 , 'projectCategories','project' 
                 ,'qtextRecruit'
-                , 'qtextContact'
+                , 'qtextFooterContact'
                 , 'qtextIntroduction'
                 , 'basicConfigs'));
     }

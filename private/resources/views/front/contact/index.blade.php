@@ -1,5 +1,5 @@
 @extends('front.contact.template', ['menus' => $menus, 'services' => $services
-    ,'qtextContact' => $qtextContact, 'qtextIntroduction' => $qtextIntroduction
+    ,'qtextFooterContact' => $qtextFooterContact, 'qtextIntroduction' => $qtextIntroduction
     , 'basicConfigs' => $basicConfigs])
 @section('main')
     <div class="contact row">
@@ -9,7 +9,8 @@
     </div>
     <div class="row">
         <div id="contact-leftside" class="col-md-6">
-            <div>
+            <div id="contact-info">
+               {!! languageTransform($qtextContact, 'content')!!}
             </div>
             <img src="{{asset('img/contact-items.png')}}" class="img-responsive" alt="" title="">
         </div>

@@ -73,7 +73,7 @@ class HomeController extends Controller
         $customers = $this->customerRepository->getActive(20);
         $faqs = $this->faqRepository->getActive(6);
         $careers = $this->careerRepository->getActive(3);
-        $qtextContact = $this->qtextRepository->getFooterContact();
+        $qtextFooterContact = $this->qtextRepository->getFooterContact();
         $qtextRecruit = $this->qtextRepository->getRecruit();
         $qtextIntroduction = $this->qtextRepository->getIntroduction();
         $basicConfigs = $this->basicConfigRepository->getAll();
@@ -82,7 +82,7 @@ class HomeController extends Controller
         return view('front.home.index', compact('menus', 'services'
                 , 'projectCategories','projects', 'newsCategories','news', 'customers', 'faqs',
                 'careers','qtextRecruit'
-                , 'qtextContact'
+                , 'qtextFooterContact'
                 , 'qtextIntroduction'
                 , 'basicConfigs'));
     }

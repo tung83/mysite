@@ -6,7 +6,18 @@
     top: 0; 
     z-index: 99999;
 }
-
+.btn-primary {
+    background-color: #d20707;
+    border-color: #fc0808;
+}
+.btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled.focus, .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled].focus, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary.focus {
+    background-color: #950303;
+    border-color: #800202;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
+    background-color: #950303;
+    border-color: #800202;
+}
 .project-page .fixed {
     height: 78px;
 }
@@ -252,10 +263,12 @@ body {
 .news, .project, .contact{
     background-color: #fff;
 }
-.news h2.title, .project h2.title {
-    padding: 0 60px 5px 60px;
+h2.title {
+    padding: 0 50px 5px 50px;
     border-bottom: 3px solid #ff0000;
     display: inline-block;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 .project{
     padding-top: 10px;    
@@ -303,8 +316,7 @@ body {
 }
 
 .news h2.title{
-    padding: 40px 20px 5px 20px;
-    font-weight: 700;
+    padding: 40px 50px 5px 50px;
 }
 .news #news-category{
     margin: 35px 0 60px 0;
@@ -700,6 +712,15 @@ footer ul#footer-services li:first-child{
         padding-left: 120px;
         padding-right: 120px;
     }
+}
+#contact-header p{
+    margin: 25px 0 75px 0;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 16px;
+}
+#contact-info{
+    margin-bottom: 55px;
 }
     
 /*project page*/ 

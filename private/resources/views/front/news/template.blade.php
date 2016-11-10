@@ -97,7 +97,7 @@
 
     </div>
         <footer class="container">            
-            @include('front.footer', ['services' => $services, 'qtextContact' => $qtextContact
+            @include('front.footer', ['services' => $services, 'qtextFooterContact' => $qtextFooterContact
             , 'qtextIntroduction' => $qtextIntroduction
             , 'basicConfigs' => $basicConfigs])               
         </footer>
