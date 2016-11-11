@@ -11,13 +11,10 @@ use App\Repositories\NewsRepository;
 use App\Repositories\QtextRepository;
 use App\Repositories\BasicConfigRepository;
 
-class NewsController extends Controller
+class NewsController extends FrontControllerBase
 {    
-    protected $menuRepository;
     protected $newsCategoryRepository;
     protected $newsRepository;
-    protected $qtextRepository;
-    protected $basicConfigRepository;
     
     public function __construct(MenuRepository $menuRepository
             , ServiceCategoryRepository $serviceCategoryRepository
@@ -25,13 +22,10 @@ class NewsController extends Controller
             , NewsRepository $newsRepository
             , QtextRepository $qtextRepository
             , BasicConfigRepository $basicConfigRepository)
-    {
-        $this->menuRepository = $menuRepository;
-        $this->serviceCategoryRepository = $serviceCategoryRepository;
+    {        
+        parent::__construct("news", $menuRepository, $serviceCategoryRepository, $qtextRepository,$basicConfigRepository);
         $this->newsCategoryRepository = $newsCategoryRepository;
         $this->newsRepository = $newsRepository;
-        $this->qtextRepository = $qtextRepository;
-        $this->basicConfigRepository = $basicConfigRepository;
     }
     /**
      * Display the home page.
@@ -40,44 +34,39 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $menus = $this->menuRepository->getActive();
-        $services = $this->serviceCategoryRepository->getActive(10);        
+        parent::GetPageData();  
         $newsCategories = $this->newsCategoryRepository->getActive(3);           
-        $newsList = getPaginateByPidData('news',$newsCategories[0], $this->newsRepository, 6);
-        $qtextRecruit = $this->qtextRepository->getRecruit();
-        $qtextFooterContact = $this->qtextRepository->getFooterContact();
-        $qtextIntroduction = $this->qtextRepository->getIntroduction();
-        $basicConfigs = $this->basicConfigRepository->getAll();
+        $newsList = getPaginateByPidData($this->currentMenu,$newsCategories[0], $this->newsRepository, 6);
         $most_saw_newsList = $this->newsCategoryRepository->getActive();
 	
-        return view('front.news.index', compact('menus','services' 
-                , 'newsCategories','newsList', 'most_saw_newsList' 
-                ,'qtextRecruit'
-                , 'qtextFooterContact'
-                , 'qtextIntroduction'
-                , 'basicConfigs'));
+        return view('front.news.index',  ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
+                ,'menus' => $this->menus
+                ,'services' => $this->services 
+                ,'qtextRecruit' => $this->qtextRecruit
+                ,'qtextFooterContact' => $this->qtextFooterContact
+                ,'qtextIntroduction' => $this->qtextIntroduction
+                ,'basicConfigs' => $this->basicConfigs
+                ,'newsCategories' => $newsCategories
+                ,'newsList' => $newsList
+                ,'most_saw_newsList' => $most_saw_newsList] );
     }
     
     public function getItem(Request $request, $newsItem)
-    {        
+    {       
+        parent::GetPageData();  
         preg_match('/(.*)-i(?P<digit>\d+)$/', $newsItem, $matches);
-        $itemId = $matches['digit'];
-        $menus = $this->menuRepository->getActive();
-        $services = $this->serviceCategoryRepository->getActive(10);        
+        $itemId = $matches['digit'];   
         $newsCategories = $this->newsCategoryRepository->getActive(3);           
         $news = $this->newsRepository->getById($itemId);
-        $qtextRecruit = $this->qtextRepository->getRecruit();
-        $qtextFooterContact = $this->qtextRepository->getFooterContact();
-        $qtextIntroduction = $this->qtextRepository->getIntroduction();
-        $basicConfigs = $this->basicConfigRepository->getAll();
-        
-	
-        return view('front.news.itemIndex', compact('menus','services' 
-                , 'newsCategories','news' 
-                ,'qtextRecruit'
-                , 'qtextFooterContact'
-                , 'qtextIntroduction'
-                , 'basicConfigs'));
+        return view('front.news.itemIndex',  ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
+                ,'menus' => $this->menus
+                ,'services' => $this->services 
+                ,'qtextRecruit' => $this->qtextRecruit
+                ,'qtextFooterContact' => $this->qtextFooterContact
+                ,'qtextIntroduction' => $this->qtextIntroduction
+                ,'basicConfigs' => $this->basicConfigs
+                ,'newsCategories' => $newsCategories
+                ,'news' => $news] );
     }
     
 }

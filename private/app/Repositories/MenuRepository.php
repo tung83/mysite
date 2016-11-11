@@ -41,4 +41,9 @@ class MenuRepository extends BaseRepository
         $this->model = $this->getById($id);
         $this->store($inputs);
     }
+    
+    public function getByEView($name)
+    {
+        return $this->model->where('e_view', $name)->first();;
+    }
 }

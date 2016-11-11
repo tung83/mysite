@@ -34,8 +34,10 @@ Route::group(['namespace' => 'Front'], function() {
     // Project
     Route::get('projects', 'ProjectController@index');
     Route::get('du-an', 'ProjectController@index');
-    Route::get('projects/{projectItem}', 'ProjectController@getItem');
-    Route::get('du-an/{projectItem}', 'ProjectController@getItem');
+    Route::get('projects/{projectItem}', 'ProjectController@getItem')->where('projectItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
+    Route::get('du-an/{projectItem}', 'ProjectController@getItem')->where('projectItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
+    Route::get('projects/{projectCategory}', 'ProjectController@getCategory')->where('projectCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
+    Route::get('du-an/{projectCategory}', 'ProjectController@getCategory')->where('projectCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
     Route::get('/ajax/projects','ProjectAjaxController@partialProjectData');
 
     // News
@@ -52,7 +54,7 @@ Route::group(['namespace' => 'Front'], function() {
     Route::post('lien-he', 'ContactController@store');
 
 
-    Route::get('/ajax/homeProject','ProjectAjaxController@partialHomeData');
+    Route::get('/ajax/homeProjects','ProjectAjaxController@partialHomeData');
     Route::get('/ajax/homeNews','NewsAjaxController@partialHomeData');
     
 

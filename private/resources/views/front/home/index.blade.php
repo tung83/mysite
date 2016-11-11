@@ -15,45 +15,6 @@
 {!! HTML::script('js/slick.js') !!}
 
 <script>    
-    /*==================== PAGINATION =========================*/
-    $(document).on('click','#project-category-content .pagination a', function(e){
-        e.preventDefault();               
-        var valuesPart = $(this).attr('href').match(/([0-9]+)\?page=([0-9]+)$/g);  
-        var values = valuesPart[0].split('?page=');
-        var id = values[0];
-        var page = values[1];
-         getProjects(id, page);
-    });
-
-    function getProjects(id, page){
-        $.ajax({
-            url: '{{ url('/ajax/projects') }}' + '?pId=' + id + '&page=' + page,
-            type: 'GET'
-        }).done(function(data){
-                $('#project-category-content').html(data);
-        })
-        .fail(function() {                            
-        });
-    }
-
-    $(document).on('click','#project-category .list-inline a', function(e){
-        e.preventDefault();                
-        $('#project-category .list-inline a').removeClass('active');
-        $(this).addClass('active');
-        var id = $(this).attr('href').match(/([0-9]+)$/g)[0];  
-        getProjectCategory(id);
-    });
-
-    function getProjectCategory(id){
-        $.ajax({
-            url: '{{ url('/ajax/projects') }}' + '?pId=' + id,
-            type: 'GET'
-        }).done(function(data){
-                $('#project-category-content').html(data);
-        })
-        .fail(function() {                            
-        });
-    }
     
     $(function() {
         // slick
@@ -109,9 +70,10 @@
                 $( this ).find( "h5, p" ).css( "color", "" );
               }
           );
-  /*==================== PAGINATION =========================*/
-        $(document).on('click','#project-rightside .pagination a', function(e){
-                e.preventDefault();               
+        
+        /*==================== PAGINATION =========================*/
+        $(document).on('click','#project-category-content .pagination a', function(e){
+                e.preventDefault();        
                 var valuesPart = $(this).attr('href').match(/([0-9]+)\?page=([0-9]+)$/g);  
                 var values = valuesPart[0].split('?page=');
                 var id = values[0];
@@ -121,7 +83,7 @@
 
         function getProjects(id, page){
                 $.ajax({
-                    url: '{{ url('/ajax/homeProject') }}' + '?pId=' + id + '&page=' + page,
+                    url: '{{ url('/ajax/homeProjects') }}' + '?pId=' + id + '&page=' + page,
                     type: 'GET'
                 }).done(function(data){
                         $('#project-rightside').html(data);
@@ -133,14 +95,14 @@
         $(document).on('click','#project-category .list-inline a', function(e){
                 e.preventDefault();                
                 $('#project-category .list-inline a').removeClass('active');
-                $(this).addClass('active');
-                var id = $(this).attr('href').match(/([0-9]+)$/g)[0];  
-                getProjectCategory(id);
+                $(this).addClass('active'); 
+                var id = $(this).attr('href').match(/([0-9]+)$/g)[0]; 
+                getProjectsCategory(id);
         });
 
-        function getProjectCategory(id){
+        function getProjectsCategory(id){
                 $.ajax({
-                    url: '{{ url('/ajax/homeProject') }}' + '?pId=' + id,
+                    url: '{{ url('/ajax/homeProjects') }}' + '?pId=' + id,
                     type: 'GET'
                 }).done(function(data){
                         $('#project-category-content').html(data);
@@ -148,7 +110,6 @@
                 .fail(function() {                            
                 });
         }
-        
         
         /*==================== PAGINATION =========================*/
         $(document).on('click','#news-category-content .pagination a', function(e){

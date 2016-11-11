@@ -7,7 +7,7 @@
             <ul class="list-inline list-inline-sm">
                 @foreach($newsCategories as $index => $newsCategory) 
                 <li>
-                    <a href="{{ url(getCategorySlugLink('news', $newsCategory)) }}"
+                    <a href="{{ url(getCategorySlugLink($currentMenu, $newsCategory)) }}"
                        class="{{ $index ==  0 ? 'active' : ''  }}">
                        {{languageTransform($newsCategory, 'title')}}  
                     </a>
@@ -23,15 +23,15 @@
                     @include('front.news.partials.news-category',['newsCategory' => $newsCategories[0]])   
                 </div>
                 <div class="col-md-8">
-                    @include('front.news.partials.news-items-horizontal',['newsList' => $newsList]) 
+                    @include('front.news.partials.news-items-horizontal',compact('currentMenu','newsList')) 
                 </div>            
             </div>
             <div class="row">
                 <div class="col-md-9">
-                    @include('front.news.partials.news-items-vertical',['newsList' => $newsList]) 
+                    @include('front.news.partials.news-items-vertical',compact('currentMenu','newsList')) 
                 </div>
                 <div class="col-md-3">
-                    @include('front.news.partials.news-items-most-saw',['most_saw_newsList' => $most_saw_newsList])                     
+                    @include('front.news.partials.news-items-most-saw',compact('currentMenu', 'most_saw_newsList'))                     
                 </div>
                 
             </div>

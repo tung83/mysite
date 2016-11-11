@@ -56,58 +56,6 @@ $(document).ready(function(){
                 }
         );
     }
-    
-       
-    
-    //News Page
-    if($('.news-page').length){
-        $(window).bind('scroll', function() {
-        var navHeight = 244;
-
-        if($(window).width() >= 992)
-        {
-            if ( $(window).scrollTop() > navHeight) {
-                    $('.news-page #header-bottom').addClass('fixed');
-                    $('.news-page #logo a').css({
-                        'background-size'  : '80px 80px'
-                    });
-                    $('.news-page #logo').css({
-                        'bottom'  : '-5px'                            
-                    });
-            }
-            else {
-                    $('.news-page #header-bottom').removeClass('fixed');
-                    $('.news-page #logo a').css({
-                        'background-size'  : '149px 149px'
-                    });
-                    $('.news-page #logo').css({
-                        'bottom'  : '-25px'
-                    });
-            }
-        }
-        });
-
-        $(window).scroll(function(){
-                var scrollTop = $(window).scrollTop();
-                if(scrollTop > 244 && !$('.news-page #header-bottom').is(":hover"))
-                        $('.news-page #header-bottom').stop().animate({'opacity':'0.9'},725);
-                else	
-                        $('.news-page #header-bottom').stop().animate({'opacity':'1'},725);
-        });
-
-        $('.news-page #header-bottom').hover(
-                function (e) {
-                        var scrollTop = $(window).scrollTop();
-                        $('.news-page #header-bottom').stop().animate({'opacity':'1'},725);
-                },
-                function (e) {
-                        var scrollTop = $(window).scrollTop();
-                        if(scrollTop > 244){
-                                $('.news-page #header-bottom').stop().animate({'opacity':'0.9'},725);
-                        }
-                }
-        );
-    };
  });
  
         
