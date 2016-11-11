@@ -28,7 +28,10 @@ class FrontControllerBase extends Controller
     protected $qtextFooterContact;
     protected $qtextIntroduction;
     protected $basicConfigs;
-    public function __construct(MenuRepository $menuRepository
+    protected $currentMenu;
+    protected $serviceMenu;
+    protected $currentMenuName;
+    public function __construct($currentMenuName, MenuRepository $menuRepository
             , ServiceCategoryRepository $serviceCategoryRepository
             , QtextRepository $qtextRepository
             , BasicConfigRepository $basicConfigRepository)
@@ -38,6 +41,7 @@ class FrontControllerBase extends Controller
         $this->qtextRepository = $qtextRepository;
         $this->basicConfigRepository = $basicConfigRepository;
         $this->middleware('front');
+        $this->currentMenuName = $currentMenuName;
     }    
     public function GetPageData(){
         $this->menus = $this->menuRepository->getActive();
@@ -45,6 +49,12 @@ class FrontControllerBase extends Controller
         $this->qtextRecruit = $this->qtextRepository->getRecruit();
         $this->qtextFooterContact = $this->qtextRepository->getFooterContact();
         $this->qtextIntroduction = $this->qtextRepository->getIntroduction();
-        $this->basicConfigs = $this->basicConfigRepository->getAll();
+        $this->basicConfigs = $this->basicConfigRepository->getAll();   
+        $this->currentMenu = $this->menus->first(function ($value, $key) {
+            return $value->e_view == $this->currentMenuName;
+        }); 
+        $this->serviceMenu = $this->menus->first(function ($value, $key) {
+            return $value->e_view == 'services';
+        });
     }
 }

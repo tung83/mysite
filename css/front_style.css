@@ -18,7 +18,7 @@
     background-color: #950303;
     border-color: #800202;
 }
-.project-page .fixed {
+.projects-page .fixed {
     height: 78px;
 }
 
@@ -729,18 +729,18 @@ footer ul#footer-services li:first-child{
 }
     
 /*project page*/ 
-.project-page header {
+.projects-page header {
     background: #ca0000 url("../img/project-header-bg.png") no-repeat left bottom;
 }
 @media (min-width: 992px){
-    .project-page header {
+    .projects-page header {
         height: 326px;
     }
-    .project-page #header-bottom {
+    .projects-page #header-bottom {
         padding-bottom: 14px;   
         background: #ca0000 url("../img/project-header-bg.png") no-repeat left bottom;
     }
-    .project-page #logo a {
+    .projects-page #logo a {
         display: block;
         background-size: 149px 149px;
         width: 170px;

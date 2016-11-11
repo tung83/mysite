@@ -26,17 +26,17 @@ Route::group(['namespace' => 'Front'], function() {
         ->where('lang', implode('|', config('app.languages')));
 
     // Service
-    Route::get('service', 'ServiceController');
-    Route::get('service/{serviceCategory}', 'ServiceController');
+    Route::get('services', 'ServiceController');
+    Route::get('services/{serviceCategory}', 'ServiceController');
     Route::get('dich-vu', 'ServiceController');
     Route::get('dich-vu/{serviceCategory}', 'ServiceController');
 
     // Project
-    Route::get('project', 'ProjectController@index');
+    Route::get('projects', 'ProjectController@index');
     Route::get('du-an', 'ProjectController@index');
-    Route::get('project/{projectItem}', 'ProjectController@getItem');
+    Route::get('projects/{projectItem}', 'ProjectController@getItem');
     Route::get('du-an/{projectItem}', 'ProjectController@getItem');
-    Route::get('/ajax/project','ProjectAjaxController@partialProjectData');
+    Route::get('/ajax/projects','ProjectAjaxController@partialProjectData');
 
     // News
     Route::get('news', 'NewsController@index');

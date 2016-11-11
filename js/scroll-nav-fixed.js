@@ -57,60 +57,6 @@ $(document).ready(function(){
         );
     }
     
-    //Project Page
-    if($('.project-page').length)
-    {
-        $(window).bind('scroll', function() {
-
-        var navHeight = 248;
-
-        if($(window).width() >= 992)
-        {
-            if ( $(window).scrollTop() > navHeight) {
-                    $('.project-page #header-bottom').addClass('fixed');
-                    $('.project-page #logo a').css({
-                        'background-size'  : '80px 80px'
-                    });
-                    $('.project-page #logo').css({
-                        'bottom'  : '0px',
-                        'left' : '30px'
-
-                    });
-            }
-            else {
-                    $('.project-page #header-bottom').removeClass('fixed');
-                    $('.project-page #logo a').css({
-                        'background-size'  : '149px 149px'
-                    });
-                    $('.project-page #logo').css({
-                        'bottom'  : '-25px', 
-                        'left' : '5px'
-                    });
-            }
-        }
-        });
-
-        $(window).scroll(function(){
-                var scrollTop = $(window).scrollTop();
-                if(scrollTop > 248 && !$('.project-page #header-bottom').is(":hover"))
-                        $('.project-page #header-bottom').stop().animate({'opacity':'0.9'},725);
-                else	
-                        $('.project-page #header-bottom').stop().animate({'opacity':'1'},725);
-        });
-
-        $('.project-page #header-bottom').hover(
-                function (e) {
-                        var scrollTop = $(window).scrollTop();
-                        $('.project-page #header-bottom').stop().animate({'opacity':'1'},725);
-                },
-                function (e) {
-                        var scrollTop = $(window).scrollTop();
-                        if(scrollTop > 248){
-                                $('.project-page #header-bottom').stop().animate({'opacity':'0.9'},725);
-                        }
-                }
-        );
-    };
        
     
     //News Page

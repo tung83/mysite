@@ -1,6 +1,6 @@
  <div class="row">
     <div id='project-leftside'class="col-md-5">
-        <a href="{{ url(getCategorySlugLink('project', $projectCategory)) }}">                   
+        <a href="{{ url(getCategorySlugLink($currentMenu, $projectCategory)) }}">                   
         <figure>
             <figcaption class="text-center">
                 <p>

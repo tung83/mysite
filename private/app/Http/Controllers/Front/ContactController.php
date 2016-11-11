@@ -20,7 +20,7 @@ class ContactController extends FrontControllerBase
             , BasicConfigRepository $basicConfigRepository,
             ContactRepository $contactRepository)
     {        
-        parent::__construct($menuRepository, $serviceCategoryRepository, $qtextRepository,$basicConfigRepository);
+        parent::__construct("contact", $menuRepository, $serviceCategoryRepository, $qtextRepository,$basicConfigRepository);
         $this->contactRepository = $contactRepository;
     }
     /**
@@ -32,12 +32,14 @@ class ContactController extends FrontControllerBase
     {
         parent::GetPageData();
         $qtextContact = $this->qtextRepository->getContact();
-        return view('front.contact.index', ['menus' => $this->menus,'services' => $this->services 
+        return view('front.contact.index', ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
+                ,'menus' => $this->menus
+                ,'services' => $this->services 
                 ,'qtextRecruit' => $this->qtextRecruit
-                , 'qtextFooterContact' => $this->qtextFooterContact
-                , 'qtextIntroduction' => $this->qtextIntroduction
-                , 'basicConfigs' => $this->basicConfigs
-                , 'qtextContact' => $qtextContact]);
+                ,'qtextFooterContact' => $this->qtextFooterContact
+                ,'qtextIntroduction' => $this->qtextIntroduction
+                ,'basicConfigs' => $this->basicConfigs
+                ,'qtextContact' => $qtextContact]);
     }
     
     /**

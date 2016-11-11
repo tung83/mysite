@@ -62,28 +62,28 @@ if (!function_exists('languageTransform')) {
 }
 
 if (!function_exists('getCategorySlugLink')) {
-    function getCategorySlugLink($menuName, $category)
+    function getCategorySlugLink($menu, $category)
     {
         $title_link = languageTransform($category, 'title');
-        $menu_link = trans('front/site.'. $menuName);
-        return $link_to_service = '/' . $menu_link . '/' . str_slug($title_link) .'-p' . strval($category->id);
+        $menu_link = languageTransform($menu,'view');
+        return '/' . $menu_link . '/' . str_slug($title_link) .'-p' . strval($category->id);
     }
 }
 
 if (!function_exists('getItemSlugLink')) {
-    function getItemSlugLink($menuName, $item)
+    function getItemSlugLink($menu, $item)
     {
         $title_link = languageTransform($item, 'title');
-        $menu_link = trans('front/site.'. $menuName);
-        return $link_to_service = '/' . $menu_link . '/' . str_slug($title_link) .'-i' . strval($item->id);
+        $menu_link = languageTransform($menu,'view');
+        return '/' . $menu_link . '/' . str_slug($title_link) .'-i' . strval($item->id);
     }
 }
 
 if (!function_exists('getPaginateByPidData')) {
-    function getPaginateByPidData($pName, $pData, $repository, $pageSize)
+    function getPaginateByPidData($menu, $pData, $repository, $pageSize)
     {
         $paginateData = $repository->paginateByPid($pData->id, $pageSize);
-        $customUrl = url(getCategorySlugLink($pName, $pData));
+        $customUrl = url(getCategorySlugLink($menu, $pData));
         $paginateData->setPath($customUrl);
         return $paginateData;    
     }

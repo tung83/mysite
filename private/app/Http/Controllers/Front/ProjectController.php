@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Front\FrontControllerBase;
 use Illuminate\Http\Request;
 use App\Repositories\MenuRepository;
 use App\Repositories\ServiceCategoryRepository;
@@ -11,13 +11,10 @@ use App\Repositories\ProjectRepository;
 use App\Repositories\QtextRepository;
 use App\Repositories\BasicConfigRepository;
 
-class ProjectController extends Controller
+class ProjectController extends FrontControllerBase
 {    
-    protected $menuRepository;
     protected $projectCategoryRepository;
     protected $projectRepository;
-    protected $qtextRepository;
-    protected $basicConfigRepository;
     
     public function __construct(MenuRepository $menuRepository
             , ServiceCategoryRepository $serviceCategoryRepository
@@ -26,12 +23,9 @@ class ProjectController extends Controller
             , QtextRepository $qtextRepository
             , BasicConfigRepository $basicConfigRepository)
     {
-        $this->menuRepository = $menuRepository;
-        $this->serviceCategoryRepository = $serviceCategoryRepository;
+        parent::__construct("projects", $menuRepository, $serviceCategoryRepository, $qtextRepository,$basicConfigRepository);        
         $this->projectCategoryRepository = $projectCategoryRepository;
         $this->projectRepository = $projectRepository;
-        $this->qtextRepository = $qtextRepository;
-        $this->basicConfigRepository = $basicConfigRepository;
     }
     /**
      * Display the home page.
@@ -40,44 +34,37 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $menus = $this->menuRepository->getActive();
-        $services = $this->serviceCategoryRepository->getActive(10);        
-        $projectCategories = $this->projectCategoryRepository->getActive(3);           
-        $projects = getPaginateByPidData('project',$projectCategories[0], $this->projectRepository, 6);
-        $qtextRecruit = $this->qtextRepository->getRecruit();
-        $qtextFooterContact = $this->qtextRepository->getFooterContact();
-        $qtextIntroduction = $this->qtextRepository->getIntroduction();
-        $basicConfigs = $this->basicConfigRepository->getAll();
-        
-	
-        return view('front.project.index', compact('menus','services' 
-                , 'projectCategories','projects' 
-                ,'qtextRecruit'
-                , 'qtextFooterContact'
-                , 'qtextIntroduction'
-                , 'basicConfigs'));
+        parent::GetPageData();    
+        $projectCategories = $this->projectCategoryRepository->getActive(3); 
+        $projects = getPaginateByPidData($this->currentMenu,$projectCategories[0], $this->projectRepository, 6);     
+        return view('front.project.index', ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
+                ,'menus' => $this->menus
+                ,'services' => $this->services 
+                ,'qtextRecruit' => $this->qtextRecruit
+                ,'qtextFooterContact' => $this->qtextFooterContact
+                ,'qtextIntroduction' => $this->qtextIntroduction
+                ,'basicConfigs' => $this->basicConfigs
+                ,'projectCategories' => $projectCategories
+                ,'projects' => $projects] );
     }
     
     public function getItem(Request $request, $projectItem)
     {        
+        parent::GetPageData();  
         preg_match('/(.*)-i(?P<digit>\d+)$/', $projectItem, $matches);
-        $itemId = $matches['digit'];
-        $menus = $this->menuRepository->getActive();
-        $services = $this->serviceCategoryRepository->getActive(10);        
+        $itemId = $matches['digit'];    
         $projectCategories = $this->projectCategoryRepository->getActive(3);           
-        $project = $this->projectRepository->getById($itemId);
-        $qtextRecruit = $this->qtextRepository->getRecruit();
-        $qtextFooterContact = $this->qtextRepository->getFooterContact();
-        $qtextIntroduction = $this->qtextRepository->getIntroduction();
-        $basicConfigs = $this->basicConfigRepository->getAll();
-        
+        $project = $this->projectRepository->getById($itemId);       
 	
-        return view('front.project.itemIndex', compact('menus','services' 
-                , 'projectCategories','project' 
-                ,'qtextRecruit'
-                , 'qtextFooterContact'
-                , 'qtextIntroduction'
-                , 'basicConfigs'));
+        return view('front.project.itemIndex', ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
+                ,'menus' => $this->menus
+                ,'services' => $this->services 
+                ,'qtextRecruit' => $this->qtextRecruit
+                ,'qtextFooterContact' => $this->qtextFooterContact
+                ,'qtextIntroduction' => $this->qtextIntroduction
+                ,'basicConfigs' => $this->basicConfigs
+                ,'projectCategories' => $projectCategories
+                ,'project' => $project] );
     }
     
 }
