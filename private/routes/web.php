@@ -26,10 +26,10 @@ Route::group(['namespace' => 'Front'], function() {
         ->where('lang', implode('|', config('app.languages')));
 
     // Service
-    Route::get('services', 'ServiceController');
-    Route::get('services/{serviceCategory}', 'ServiceController');
-    Route::get('dich-vu', 'ServiceController');
-    Route::get('dich-vu/{serviceCategory}', 'ServiceController');
+    Route::get('services', 'ServiceController@index');
+    Route::get('dich-vu', 'ServiceController@index');
+    Route::get('services/{serviceItem}', 'ServiceController@getItem')->where('serviceItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
+    Route::get('dich-vu/{serviceItem}', 'ServiceController@getItem')->where('serviceItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
 
     // Project
     Route::get('projects', 'ProjectController@index');
