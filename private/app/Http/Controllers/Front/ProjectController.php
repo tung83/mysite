@@ -34,9 +34,25 @@ class ProjectController extends FrontControllerBase
      */
     public function index()
     {
-        parent::GetPageData();    
+        parent::GetPageData();      
+        return $this->showIndex();
+    }
+    
+    public function getCategory(Request $request, $projectItem)
+    {        
+        parent::GetPageData();  
+        preg_match('/(.*)-p(?P<digit>\d+)$/', $projectItem, $matches);
+        $categoryId = $matches['digit'];           
+        $currentProjectCategory = $this->projectCategoryRepository->getById($categoryId);       
+        return $this->showIndex($currentProjectCategory);
+    }
+    
+    private function showIndex($currentProjectCategory = null){
         $projectCategories = $this->projectCategoryRepository->getActive(3); 
-        $projects = getPaginateByPidData($this->currentMenu,$projectCategories[0], $this->projectRepository, 6);     
+        if(!$currentProjectCategory){
+            $currentProjectCategory = $projectCategories[0];
+        }
+        $projects = getPaginateByPidData($this->currentMenu,$currentProjectCategory, $this->projectRepository, 6);             
         return view('front.project.index', ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
                 ,'menus' => $this->menus
                 ,'services' => $this->services 
@@ -45,7 +61,8 @@ class ProjectController extends FrontControllerBase
                 ,'qtextIntroduction' => $this->qtextIntroduction
                 ,'basicConfigs' => $this->basicConfigs
                 ,'projectCategories' => $projectCategories
-                ,'projects' => $projects] );
+                ,'projects' => $projects,
+                'currentProjectCategory' => $currentProjectCategory]);
     }
     
     public function getItem(Request $request, $projectItem)
@@ -66,5 +83,6 @@ class ProjectController extends FrontControllerBase
                 ,'projectCategories' => $projectCategories
                 ,'project' => $project] );
     }
+    
     
 }

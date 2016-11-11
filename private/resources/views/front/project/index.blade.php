@@ -1,6 +1,6 @@
 @extends('front.frontTemplate', compact('currentMenu', 'serviceMenu', 'menus', 'services','qtextFooterContact','qtextIntroduction','basicConfigs'))
 @section('main')
-    @include('front.project.partials.projects', compact('currentMenu', 'projectCategories', 'projects'))
+    @include('front.project.partials.projects', compact('currentProjectCategory','currentMenu', 'projectCategories', 'projects'))
 @endsection
 @push('scripts')
 <script>    
