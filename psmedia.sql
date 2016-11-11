@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2016 at 09:46 AM
+-- Generation Time: Nov 11, 2016 at 09:01 AM
 -- Server version: 5.7.11
 -- PHP Version: 5.6.19
 
@@ -98,6 +98,36 @@ INSERT INTO `career` (`id`, `title`, `sum`, `content`, `img`, `meta_keyword`, `m
 (1, 'Sale manager', 'Yes. Once you’ve upgraded to Windows 10 using the free upgrade offer, you can reinstall or perform a clean installation on the same device. You won’t need a product key to re-activate Windows 10 on the same hardware. For more info on how to create your own Windows 10 installation media, go to the Microsoft software download website. If the manufacturer set up your PC to run from a compressed Windows image file (also known as Windows image file boot or WIMBoot) and included the option to restore factory settings, that option will no longer be available after you upgrade to Windows 10. The easiest way to get the free upgrade is to use the Get Windows 10 app. The app includes info about Windows 10, provides a compatibility report that makes sure your apps, programs, and devices will work with Windows 10, and info on how to reserve your free upgrade.\r\n\r\nIf you have an eligible device running genuine Windows 7 SP 1 or  Windows 8.1 Update with automatic updates from Windows Update turned on, the Get  Windows 8.1 Update app shows up automatically as a Windows icon in the notification area at the right end of the taskbar. Click or tap the icon to open the Get Windows 10 app and get started. \r\n\r\nAfter you reserve your upgrade, you\'ll get a notification when Windows 10 is ready for your device, and you can choose to start the upgrade right away or select a time that\'s more convenient to you.', '<p>Lorem ipsum dolor sit amet, eam ei iisque recteque, vix et mollis doctus timeam, amet dicit mentitum te pro. Vim inani legendos euripidis ut, cu purto ancillae percipitur qui. An case decore ius. Id pri falli laoreet perfecto, usu ea alia lobortis platonem, est solum causae regione ex.<br />\r\n<br />\r\nOmnium debitis vim ea. Et dicta aliquando duo. At pro ipsum consequat. Cum ex meis fabulas, ius ea veniam ridens scripserit, aeterno disputando mei eu.<br />\r\n<br />\r\nVidit noster necessitatibus te pri, labore antiopam quo in, quodsi persius eum in. Id aliquando persequeris dissentiunt per, vim ipsum scripta an, an mel autem impedit neglegentur. Sea ut hinc consequuntur, eu laudem labores liberavisse duo, id vulputate efficiantur eum. No platonem comprehensam qui, dolorum insolens id quo. Debet saepe corpora no qui. Recteque electram cu sed, nam soleat nominati no.<br />\r\n<br />\r\nDicat postea pri ex. Melius vidisse ex eam, ei novum minimum definiebas cum. Vis te nominavi copiosae vivendum. Quando veniam legere eu eum, in movet labore voluptatum est, usu congue debitis lucilius cu. Est in zril soleat melius, facer inani mea ei. Ne suavitate definitionem interpretaris eos, duo alii purto urbanitas ne, usu id inani exerci appareat.<br />\r\n<br />\r\nDuo ei legimus splendide. Pro ne quidam instructior complectitur, vel ei essent inimicus liberavisse. Regione eruditi argumentum qui ne. Ea dicant minimum sed, denique propriae at pri. At vocent invidunt vim, no feugiat lobortis mea.</p>\r\n', '1458837503unnamed-368x244.png', '', '', 'Giới Thiệu', '<strong>LỊCH SỬ CÔNG TY MEKONG</strong>\r\n    \r\n Thành lập ngày : 2-6-1992\r\nTôn chỉ hoạt động : Lắng nghe - Tận tâm - Phát triển\r\nNhân viên hơn 300 người\r\n\r\n<strong>NGÀNH NGHỀ KINH DOANH</strong>\r\n\r\nNhập khẩu, sản xuất và phân phối các sản phẩm bếp & thiết bị nhà bếp\r\nBếp âm tủ kệ, máy hút khói, máy sấy chén, máy nước nóng, nồi cơm điện, nồi cơm gas - điện, bếp gas bànn, nồi áp suất & các sản phẩm...', '<p style=\\"text-align:justify\\"><span style=\\"color:rgb(0, 0, 0)\\"><strong>LỊCH SỬ CÔNG TY MEKONG</strong></span></p>\r\n\r\n<ul>\r\n	<li style=\\"text-align:justify\\"><span style=\\"color:rgb(0, 51, 255)\\">&nbsp;Thành lập ngày: 2-6-1992</span></li>\r\n	<li style=\\"text-align:justify\\"><span style=\\"color:rgb(0, 51, 255)\\">&nbsp;Tôn chỉ hoạt động: Lắng nghe - Tận tâm - Phát triển</span></li>\r\n	<li style=\\"text-align:justify\\"><span style=\\"color:rgb(0, 51, 255)\\">&nbsp;Nhân viên: 300 người</span></li>\r\n</ul>\r\n\r\n<p style=\\"text-align:justify\\"><span style=\\"color:rgb(0, 0, 0)\\"><strong>NGÀNH NGHỀ KINH DOANH</strong></span></p>\r\n\r\n<ul>\r\n	<li style=\\"text-align:justify\\"><span style=\\"color:rgb(0, 51, 255)\\">&nbsp;Nhập khẩu, sản xuất và phân phối các sản phẩm bếp &amp; thiết bị nhà bếp</span></li>\r\n	<li style=\\"text-align:justify\\"><span style=\\"color:rgb(0, 51, 255)\\">&nbsp;Bếp âm tử kệ, máy hút khói, máy sấy chén, máy nước nóng, nồi cơm điện, nồi cơm gas - điện, bếp gas bàn, nồi áp suất &amp; các sản phẩm dùng cho gia đình và nhà hàng.</span></li>\r\n	<li style=\\"text-align:justify\\"><span style=\\"color:rgb(0, 51, 255)\\">&nbsp;Là nhà phân phối độc quyền tại Đông Dương của tập đoàn SAKURA - TAIWAN.</span></li>\r\n	<li style=\\"text-align:justify\\"><span style=\\"color:rgb(0, 51, 255)\\">&nbsp;Là nhà phân phối chính thức tại Việt Nam của Tập đòa PALOMA - JAPAN.</span></li>\r\n</ul>\r\n', '', '', 1, 1, '2016-03-25 01:57:18'),
 (2, 'Project supervision', 'Lorem ipsum dolor sit amet, eam ei iisque recteque, vix et mollis doctus timeam, amet dicit mentitum te pro.', '<span style="line-height:20.8px">Lorem ipsum dolor sit amet, eam ei iisque recteque, vix et mollis doctus timeam, amet dicit mentitum te pro. Vim inani legendos euripidis ut, cu purto ancillae percipitur qui. An case decore ius. Id pri falli laoreet perfecto, usu ea alia lobortis platonem, est solum causae regione ex.</span><br />\r\n<br />\r\n<span style="line-height:20.8px">Omnium debitis vim ea. Et dicta aliquando duo. At pro ipsum consequat. Cum ex meis fabulas, ius ea veniam ridens scripserit, aeterno disputando mei eu.</span><br />\r\n<br />\r\n<span style="line-height:20.8px">Vidit noster necessitatibus te pri, labore antiopam quo in, quodsi persius eum in. Id aliquando persequeris dissentiunt per, vim ipsum scripta an, an mel autem impedit neglegentur. Sea ut hinc consequuntur, eu laudem labores liberavisse duo, id vulputate efficiantur eum. No platonem comprehensam qui, dolorum insolens id quo. Debet saepe corpora no qui. Recteque electram cu sed, nam soleat nominati no.</span><br />\r\n<br />\r\n<span style="line-height:20.8px">Dicat postea pri ex. Melius vidisse ex eam, ei novum minimum definiebas cum. Vis te nominavi copiosae vivendum. Quando veniam legere eu eum, in movet labore voluptatum est, usu congue debitis lucilius cu. Est in zril soleat melius, facer inani mea ei. Ne suavitate definitionem interpretaris eos, duo alii purto urbanitas ne, usu id inani exerci appareat.</span><br />\r\n<br />\r\n<span style="line-height:20.8px">Duo ei legimus splendide. Pro ne quidam instructior complectitur, vel ei essent inimicus liberavisse. Regione eruditi argumentum qui ne. Ea dicant minimum sed, denique propriae at pri. At vocent invidunt vim, no feugiat lobortis mea.</span>', '1458837534top_terrace-368x244.jpg', '', '', 'NGÀNH NGHỀ KINH DOANH', 'Nhập khẩu, sản xuất và phân phối các sản phẩm bếp & thiết bị nhà bếp Bếp âm tử kệ, máy hút khói, máy sấy chén, máy nước nóng, nồi cơm điện, nồi cơm gas - điện, bếp gas bàn, nồi áp suất & các sản phẩm dùng cho gia đình và nhà hàng. Là nhà phân phối độc quyền tại Đông Dương của tập đoàn SAKURA - TAIWAN. \r\nLà nhà phân phối chính thức tại Việt Nam của Tập đòa PALOMA - JAPAN.', '<span style="font-family:arial; line-height:22px">Nhập khẩu, sản xuất và phân phối các sản phẩm bếp &amp; thiết bị nhà bếp Bếp âm tử kệ, máy hút khói, máy sấy chén, máy nước nóng, nồi cơm điện, nồi cơm gas - điện, bếp gas bàn, nồi áp suất &amp; các sản phẩm dùng cho gia đình và nhà hàng. Là nhà phân phối độc quyền tại Đông Dương của tập đoàn SAKURA - TAIWAN. Là nhà phân phối chính thức tại Việt Nam của Tập đòa PALOMA - JAPAN.</span>', '', '', 2, 1, '2016-03-24 16:38:54'),
 (3, 'Chief architech', 'Lorem ipsum dolor sit amet, eam ei iisque recteque, vix et mollis doctus timeam, amet dicit mentitum te pro. ', '<span style="line-height:20.8px">Lorem ipsum dolor sit amet, eam ei iisque recteque, vix et mollis doctus timeam, amet dicit mentitum te pro. Vim inani legendos euripidis ut, cu purto ancillae percipitur qui. An case decore ius. Id pri falli laoreet perfecto, usu ea alia lobortis platonem, est solum causae regione ex.</span><br />\r\n<br />\r\n<span style="line-height:20.8px">Omnium debitis vim ea. Et dicta aliquando duo. At pro ipsum consequat. Cum ex meis fabulas, ius ea veniam ridens scripserit, aeterno disputando mei eu.</span><br />\r\n<br />\r\n<span style="line-height:20.8px">Vidit noster necessitatibus te pri, labore antiopam quo in, quodsi persius eum in. Id aliquando persequeris dissentiunt per, vim ipsum scripta an, an mel autem impedit neglegentur. Sea ut hinc consequuntur, eu laudem labores liberavisse duo, id vulputate efficiantur eum. No platonem comprehensam qui, dolorum insolens id quo. Debet saepe corpora no qui. Recteque electram cu sed, nam soleat nominati no.</span><br />\r\n<br />\r\n<span style="line-height:20.8px">Dicat postea pri ex. Melius vidisse ex eam, ei novum minimum definiebas cum. Vis te nominavi copiosae vivendum. Quando veniam legere eu eum, in movet labore voluptatum est, usu congue debitis lucilius cu. Est in zril soleat melius, facer inani mea ei. Ne suavitate definitionem interpretaris eos, duo alii purto urbanitas ne, usu id inani exerci appareat.</span><br />\r\n<br />\r\n<span style="line-height:20.8px">Duo ei legimus splendide. Pro ne quidam instructior complectitur, vel ei essent inimicus liberavisse. Regione eruditi argumentum qui ne. Ea dicant minimum sed, denique propriae at pri. At vocent invidunt vim, no feugiat lobortis mea.</span>\r\n<h2>&nbsp;</h2>\r\n', '1458837559stacks-image-997E9F7-368x244.jpg', '', '', '', '', '', '', '', 3, 1, '2016-03-24 16:39:19');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact`
+--
+
+CREATE TABLE `contact` (
+  `id` int(11) NOT NULL,
+  `fullName` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `fax` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `department` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `dates` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`id`, `fullName`, `company`, `address`, `phone`, `fax`, `email`, `department`, `content`, `dates`) VALUES
+(1, 't', 'c', 'add', 'p', 'fax', 'email@com', 'd', 'ee', '2016-11-09 04:53:48'),
+(2, 'f', 'com', 'add', 'f', 'f', 'admin@la.fr', 'e', 'ffd', '2016-11-09 07:05:05'),
+(3, 'f', 'see', 'f', 'ee', 'rrr', 'd@mail.com', 'dfsdf', 'erwerw', '2016-11-09 07:14:27'),
+(4, 'f', 'see', 'f', 'ee', 'rrr', 'd@mail.com', 'dfsdf', 'erwerw', '2016-11-09 07:23:50'),
+(5, 'dfdsf', 'fsdfds', 'fsdfd', 'dfsdf', '', 'nguyenthanhtungdits@yahoo.com', 'dfdsf', 'sdfsdfsdf', '2016-11-09 07:34:02');
 
 -- --------------------------------------------------------
 
@@ -212,9 +242,9 @@ INSERT INTO `menu` (`id`, `title`, `meta_keyword`, `meta_description`, `view`, `
 (2, 'Dịch Vụ', 'du an, quang cao', 'chuyen cung cap quang cao', 'dich-vu', 'Services', 'project, design', 'this is project', 'services', 2, 1),
 (3, 'Nhận Diện Thương Hiệu', '', '', 'nhan-dien-thuong-hieu', 'Brand Name', '', '', 'brand-name', 3, 1),
 (4, 'Dự án', '', '', 'du-an', 'Projects', '', '', 'projects', 4, 1),
-(5, 'Sự kiện', '', '', 'Events', 'Events', '', '', 'Events', 5, 1),
+(5, 'tin tức', '', '', 'tin-tuc', 'News', '', '', 'news', 5, 1),
 (6, 'Tư vấn', '', '', 'tu-van', 'Advisory', '', '', 'advisory', 6, 1),
-(7, 'Tuyển dụng', '', '', 'tuyen-dung', 'Career', '', '', 'career', 7, 1),
+(7, 'Tuyển dụng', '', '', 'tuyen-dung', 'Careers', '', '', 'careers', 7, 1),
 (8, 'Liên Hệ', '', '', 'lien-he', 'Contact', '', '', 'contact', 8, 1);
 
 -- --------------------------------------------------------
@@ -380,7 +410,7 @@ CREATE TABLE `qtext` (
 
 INSERT INTO `qtext` (`id`, `key`, `title`, `e_title`, `content`, `e_content`) VALUES
 (1, 'contact', 'Liên hệ', '', '<strong><img alt="" src="/file/ckfinder/userfiles/images/logo.png" /><br />\r\nCÔNG TY CỔ PHẦN THƯƠNG MẠI ĐIỆN TỬ&nbsp;</strong><br />\r\n<strong>EMSVN ( EMSVN J.S.C )</strong>\r\n<hr />Cao ốc Bùi Đình Tuý, Phường 24, Quận Bình Thạnh.<br />\r\nPhone: 3-512-8400 ( 3 lines )<br />\r\nHotline: 0123.456.7898<br />\r\nFax:&nbsp;3-512-8400<br />\r\nMST: 123456789', ''),
-(2, 'footer', 'Footer', '', ' <div id="company-info">\r\n            <img alt="" src="/file/ckfinder/userfiles/images/logo.png" style="height: 52px; width: 177px" />        \r\n        <p style="color: #FFF0F5"><strong>\r\n            CÔNG TY CỔ PHẦN THƯƠNG MẠI ĐIỆN TỬ&nbsp;</strong></p>\r\n        <p style="color: #f3a401"><strong>EMSVN (EMSVN J.S.C)</strong></p>\r\n    </div>\r\n    <hr />\r\n    <div id="address-details" style="color: #bababa">\r\n        <p class="location">Cao ốc Bùi Đình Tuý, Phường 24, Quận Bình Thạnh.</p>\r\n        <p class="phone">Phone: <strong>3-512-8400</strong> ( 3 lines )</p>\r\n        <p class="hotline">Hotline: 0123.456.7898</p>\r\n        <p class="fax">Fax:&nbsp;<span style="line-height: 20.8px" />3-512-8400</p>\r\n        <p class="mst">MST: 123456789</p>\r\n        <p class="email">Email: <a href="mailto:info@emsvn.com">info@emsvn.com</a></p>\r\n        <p class="website">Website: <a href="mailto:info@emsvn.com">info@emsvn.com</a></p>\r\n    </div>', ''),
+(2, 'footerContact', 'Footer', '', ' <div id="company-info">\r\n            <img alt="" src="/file/ckfinder/userfiles/images/logo.png" style="height: 52px; width: 177px" />        \r\n        <p style="color: #FFF0F5"><strong>\r\n            CÔNG TY CỔ PHẦN THƯƠNG MẠI ĐIỆN TỬ&nbsp;</strong></p>\r\n        <p style="color: #f3a401"><strong>EMSVN (EMSVN J.S.C)</strong></p>\r\n    </div>\r\n    <hr />\r\n    <div id="address-details" style="color: #bababa">\r\n        <p class="location">Cao ốc Bùi Đình Tuý, Phường 24, Quận Bình Thạnh.</p>\r\n        <p class="phone">Phone: <strong>3-512-8400</strong> ( 3 lines )</p>\r\n        <p class="hotline">Hotline: 0123.456.7898</p>\r\n        <p class="fax">Fax:&nbsp;<span style="line-height: 20.8px" />3-512-8400</p>\r\n        <p class="mst">MST: 123456789</p>\r\n        <p class="email">Email: <a href="mailto:info@emsvn.com">info@emsvn.com</a></p>\r\n        <p class="website">Website: <a href="mailto:info@emsvn.com">info@emsvn.com</a></p>\r\n    </div>', ''),
 (3, 'introduction', 'Giới thiệu', 'introduction', 'Các tờ báo, hãng tin Mỹ sử dụng rất nhiều từ ngữ mang tính tiêu cực khi mô tả về cuộc tranh luận lần hai giữa hai ứng viên tổng thống đảng Cộng hòa và Dân chủ.', 'The virus may inevitably find its way up to mosquito-infested northern provinces and cities after recent two non-travel related cases.'),
 (4, 'recruit', 'Tuyển dụng', '', 'Tỉnh Long An cho rằng văn bản yêu cầu các sở, ngành "bảo mật thông tin" dự án Khu công nghệ môi trường xanh đã gây hiểu nhầm về', '');
 
@@ -438,6 +468,12 @@ ALTER TABLE `basic_config`
 -- Indexes for table `career`
 --
 ALTER TABLE `career`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contact`
+--
+ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -517,6 +553,11 @@ ALTER TABLE `basic_config`
 --
 ALTER TABLE `career`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `customer`
 --
