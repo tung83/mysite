@@ -2,7 +2,7 @@
     <div class="col-md-9"
         @foreach($customers as $customer) 
             <div class="col-md-4">
-                <a href="{{ url(getCategorySlugLink('customer', $customer)) }}">
+                <a href="{{ url($customer->lnk)}}">
                    {{languageTransform($customer, 'title')}}  
                 </a>
             </div>

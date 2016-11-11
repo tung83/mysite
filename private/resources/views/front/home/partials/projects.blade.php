@@ -7,7 +7,7 @@
             <ul class="list-inline list-inline-sm">
                 @foreach($projectCategories as $index => $projectCategory) 
                 <li>
-                    <a href="{{ url(getCategorySlugLink($currentMenu, $projectCategory)) }}"
+                    <a href="{{ url(getCategorySlugLink($projectMenu, $projectCategory)) }}"
                        class="{{ $index ==  0 ? 'active' : ''  }}">
                        {{languageTransform($projectCategory, 'title')}}  
                     </a>

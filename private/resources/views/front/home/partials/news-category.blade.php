@@ -1,6 +1,6 @@
  <div class="row">
     <div id='news-leftside'class="col-md-4">
-        <a href="{{ url(getCategorySlugLink('news', $newsCategory)) }}">                   
+        <a href="{{ url(getCategorySlugLink($newsMenu, $newsCategory)) }}">                   
             <figure>
                 <figcaption class="text-center sum">
                     <p>

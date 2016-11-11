@@ -2,7 +2,7 @@
 <div class="service row">
     <div class="slick text-center">
         @foreach($services as $service_category) 
-            <a href="{{ url(getCategorySlugLink('service', $service_category)) }}">
+            <a href="{{ url(getCategorySlugLink($serviceMenu, $service_category)) }}">
                 <i class="service-ico {{$service_category->icon}}">
                 </i>
                 <h5>

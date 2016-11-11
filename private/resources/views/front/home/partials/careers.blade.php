@@ -9,7 +9,7 @@
     <ol>
         @foreach($careers as $index => $career) 
             <li class="career-item item{{$index+1}}">
-                <a href="{{ url(getCategorySlugLink('career', $career)) }}">
+                <a href="{{ url(getCategorySlugLink($careerMenu, $career)) }}">
                    {{languageTransform($career, 'title')}}  
                 </a>
             </li>

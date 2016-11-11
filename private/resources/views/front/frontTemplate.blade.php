@@ -18,7 +18,7 @@
         {!! HTML::style('css/front_style.css') !!}
     </head>
   <body>
-    <div class="{{$currentMenu->e_view}}-page container">
+    <div class="{{ !empty($currentMenu)?$currentMenu->e_view:'home'}}-page container">
         <header class="row">
               
             <!--http://bootsnipp.com/snippets/featured/expanding-search-button-in-css-->
@@ -70,7 +70,7 @@
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
                             @foreach( $menus as $menu )
-                                <li class="{{ $menu->e_view == $currentMenu->e_view ? 'active' : ''}}">                            
+                                <li class="{{ $menu->e_view == (!empty($currentMenu)?$currentMenu->e_view:'home') ? 'active' : ''}}">                            
                                     {!! link_to(languageTransform($menu, 'view'), languageTransform($menu, 'title')) !!}                            
                                 </li>
                             @endforeach                    
