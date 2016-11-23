@@ -48,6 +48,7 @@ class NewsController extends FrontControllerBase
             $currentNewsCategory = $newsCategories[0];
         }
         $newsList = getPaginateByPidData($this->currentMenu,$currentNewsCategory, $this->newsRepository, 6);          
+        $most_saw_newsList = $this->newsCategoryRepository->getActive();
         return view('front.news.index', ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
                 ,'menus' => $this->menus
                 ,'services' => $this->services 
@@ -57,7 +58,8 @@ class NewsController extends FrontControllerBase
                 ,'basicConfigs' => $this->basicConfigs
                 ,'newsCategories' => $newsCategories
                 ,'newsList' => $newsList,
-                'currentNewsCategory' => $currentNewsCategory]);
+                'currentNewsCategory' => $currentNewsCategory,
+                'most_saw_newsList' =>$most_saw_newsList]);
     }
     
     public function getItem(Request $request, $newsItem)

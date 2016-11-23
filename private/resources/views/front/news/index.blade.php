@@ -1,6 +1,6 @@
 @extends('front.frontTemplate', compact('serviceMenu', 'menus', 'services','qtextFooterContact','qtextIntroduction','basicConfigs'))
 @section('main')
-    @include('front.news.partials.news', compact('currentNewsCategory','currentMenu', 'newsCategories', 'newsList', ''))
+    @include('front.news.partials.news', compact('currentNewsCategory','currentMenu', 'newsCategories', 'newsList', 'most_saw_newsList'))
 @endsection
 @push('scripts')
 <script>    
