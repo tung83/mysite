@@ -1,6 +1,6 @@
 @extends('front.frontTemplate', compact('serviceMenu', 'menus', 'services','qtextFooterContact','qtextIntroduction','basicConfigs'))
 @section('main')
-    @include('front.news.partials.news', compact('currentMenu', 'newsCategories', 'newsList'))
+    @include('front.news.partials.news', compact('currentNewsCategory','currentMenu', 'newsCategories', 'newsList', ''))
 @endsection
 @push('scripts')
 <script>    
@@ -11,10 +11,10 @@
         var values = valuesPart[0].split('?page=');
         var id = values[0];
         var page = values[1];
-         getProjects(id, page);
+         getNews(id, page);
     });
 
-    function getProjects(id, page){
+    function getNews(id, page){
         $.ajax({
             url: '{{ url('/ajax/news') }}' + '?pId=' + id + '&page=' + page,
             type: 'GET'
@@ -30,10 +30,10 @@
         $('#news-category .list-inline a').removeClass('active');
         $(this).addClass('active');
         var id = $(this).attr('href').match(/([0-9]+)$/g)[0];  
-        getProjectCategory(id);
+        getNewsCategory(id);
     });
 
-    function getProjectCategory(id){
+    function getNewsCategory(id){
         $.ajax({
             url: '{{ url('/ajax/news') }}' + '?pId=' + id,
             type: 'GET'
@@ -93,7 +93,6 @@
                             }
                     }
             );
-        };
         };
     });
 </script>

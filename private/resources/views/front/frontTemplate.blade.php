@@ -100,7 +100,6 @@
 
         {!! HTML::script('https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js') !!}
         {!! HTML::script('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js') !!}
-        {!! HTML::script('js/slick.js') !!}
         <script>
             $(function() {
                 $.ajaxSetup({
@@ -143,9 +142,10 @@
         }
                 
         </script>
+        
+    @stack('scripts')    
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVWAnZRS56JnP5Nr5otnuzg47TsmJoKBM&callback=initMap&language={!!session('locale')!!}&region={!!session('locale')!!}">
     </script>
-    @stack('scripts')    
   </body>
 </html>

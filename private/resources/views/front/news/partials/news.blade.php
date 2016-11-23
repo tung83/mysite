@@ -8,7 +8,7 @@
                 @foreach($newsCategories as $index => $newsCategory) 
                 <li>
                     <a href="{{ url(getCategorySlugLink($currentMenu, $newsCategory)) }}"
-                       class="{{ $index ==  0 ? 'active' : ''  }}">
+                        class="{{ $newsCategory->id ==  $currentNewsCategory->id ? 'active' : ''  }}">
                        {{languageTransform($newsCategory, 'title')}}  
                     </a>
                 </li>
