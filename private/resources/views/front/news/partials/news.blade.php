@@ -7,8 +7,7 @@
             <ul class="list-inline list-inline-sm">
                 @foreach($newsCategories as $index => $newsCategory) 
                 <li>
-                    <a href="{{ url(getCategorySlugLink($currentMenu, $newsCategory)) }}"
-                       class="{{ $index ==  0 ? 'active' : ''  }}">
+                    <a href="{{ url(getCategorySlugLink($currentMenu, $newsCategory)) }}">
                        {{languageTransform($newsCategory, 'title')}}  
                     </a>
                 </li>

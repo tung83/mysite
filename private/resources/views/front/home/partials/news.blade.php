@@ -22,3 +22,26 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<script>    
+    /*==================== PAGINATION =========================*/   
+    $(document).on('click','#news-category .list-inline a', function(e){
+        e.preventDefault();                
+        $('#news-category .list-inline a').removeClass('active');
+        $(this).addClass('active'); 
+        var id = $(this).attr('href').match(/([0-9]+)$/g)[0]; 
+        getNewsCategory(id);
+    });
+
+    function getNewsCategory(id){
+        $.ajax({
+            url: '{{ url('/ajax/homeNews') }}' + '?pId=' + id,
+            type: 'GET'
+        }).done(function(data){
+                $('#news-category-content').html(data);
+        })
+        .fail(function() {                            
+        });
+    };
+</script>
+@endpush
