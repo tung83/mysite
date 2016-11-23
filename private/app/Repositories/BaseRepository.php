@@ -32,6 +32,11 @@ abstract class BaseRepository
     {
         return $this->model->findOrFail($id);
     }
+    
+    public function getFirst()
+    {
+        return $this->model->whereActive(true)->first();
+    }
 
     /**
      * Get Model by id.
