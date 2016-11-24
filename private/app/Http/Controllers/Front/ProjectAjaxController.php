@@ -58,6 +58,6 @@ class ProjectAjaxController extends Controller
         $pid = $request->input('pId');
         $projectCategory = $this->projectCategoryRepository->getById($pid);
         $projects = getPaginateByPidData($currentMenu,$projectCategory, $this->projectRepository, 6);
-        return view('front.project.partials.project-category', compact('currentMenu','projects'))->render();  
+        return view('front.project.partials.project-items', compact('currentMenu','projects'))->render();  
     }
 }

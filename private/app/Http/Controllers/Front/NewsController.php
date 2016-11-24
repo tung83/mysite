@@ -27,19 +27,30 @@ class NewsController extends FrontControllerBase
         $this->newsCategoryRepository = $newsCategoryRepository;
         $this->newsRepository = $newsRepository;
     }
-    /**
-     * Display the home page.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
+        parent::GetPageData();      
+        return $this->showIndex();
+    }
+    
+    public function getCategory(Request $request, $newsItem)
+    {        
         parent::GetPageData();  
-        $newsCategories = $this->newsCategoryRepository->getActive(3);           
-        $newsList = getPaginateByPidData($this->currentMenu,$newsCategories[0], $this->newsRepository, 6);
+        preg_match('/(.*)-p(?P<digit>\d+)$/', $newsItem, $matches);
+        $categoryId = $matches['digit'];           
+        $currentNewsCategory = $this->newsCategoryRepository->getById($categoryId);       
+        return $this->showIndex($currentNewsCategory);
+    }
+    
+    private function showIndex($currentNewsCategory = null){
+        $newsCategories = $this->newsCategoryRepository->getActive(); 
+        if(!$currentNewsCategory){
+            $currentNewsCategory = $newsCategories[0];
+        }
+        $newsList = getPaginateByPidData($this->currentMenu,$currentNewsCategory, $this->newsRepository, 6);          
         $most_saw_newsList = $this->newsCategoryRepository->getActive();
-	
-        return view('front.news.index',  ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
+
+        return view('front.news.index', ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
                 ,'menus' => $this->menus
                 ,'services' => $this->services 
                 ,'qtextRecruit' => $this->qtextRecruit
@@ -47,8 +58,9 @@ class NewsController extends FrontControllerBase
                 ,'qtextIntroduction' => $this->qtextIntroduction
                 ,'basicConfigs' => $this->basicConfigs
                 ,'newsCategories' => $newsCategories
-                ,'newsList' => $newsList
-                ,'most_saw_newsList' => $most_saw_newsList] );
+                ,'newsList' => $newsList,
+                'currentNewsCategory' => $currentNewsCategory,
+                'most_saw_newsList'=>$most_saw_newsList]);
     }
     
     public function getItem(Request $request, $newsItem)
