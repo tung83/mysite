@@ -1,10 +1,10 @@
-@extends('front.frontTemplate', compact('serviceMenu', 'menus', 'services','qtextFooterContact','qtextIntroduction','basicConfigs'))
+@extends('front.frontTemplate', compact('serviceMenu', 'menus', 'serviceCategories','qtextFooterContact','qtextIntroduction','basicConfigs'))
 @section('head')
     {!! HTML::style('css/slick.css') !!}
 @endsection
 
 @section('main')
-    @include('front.home.partials.services', compact('serviceMenu', 'services'))
+    @include('front.home.partials.services', compact('serviceMenu', 'serviceCategories'))
     @include('front.home.partials.projects', compact('projectMenu', 'projectCategories', 'projects'))
     @include('front.home.partials.news', compact('newsMenu', 'newsCategories', 'news'))
     @include('front.home.partials.faqs', compact('faqMenu', 'faqs'))

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Http\Controllers\Controller;
 use App\Repositories\MenuRepository;
 use App\Repositories\CustomerRepository;
 use App\Repositories\FaqRepository;
@@ -82,7 +81,7 @@ class HomeController extends FrontControllerBase
                 ,'careerMenu' =>$careerMenu
                 ,'serviceMenu' =>$this->serviceMenu
                 ,'menus' => $this->menus
-                ,'services' => $this->services 
+                ,'serviceCategories' => $this->serviceCategories 
                 ,'qtextRecruit' => $this->qtextRecruit
                 ,'qtextFooterContact' => $this->qtextFooterContact
                 ,'qtextIntroduction' => $this->qtextIntroduction

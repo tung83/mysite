@@ -52,7 +52,7 @@ class NewsController extends FrontControllerBase
 
         return view('front.news.index', ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
                 ,'menus' => $this->menus
-                ,'services' => $this->services 
+                ,'serviceCategories' => $this->serviceCategories 
                 ,'qtextRecruit' => $this->qtextRecruit
                 ,'qtextFooterContact' => $this->qtextFooterContact
                 ,'qtextIntroduction' => $this->qtextIntroduction
@@ -72,7 +72,7 @@ class NewsController extends FrontControllerBase
         $news = $this->newsRepository->getById($itemId);
         return view('front.news.itemIndex',  ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
                 ,'menus' => $this->menus
-                ,'services' => $this->services 
+                ,'serviceCategories' => $this->serviceCategories 
                 ,'qtextRecruit' => $this->qtextRecruit
                 ,'qtextFooterContact' => $this->qtextFooterContact
                 ,'qtextIntroduction' => $this->qtextIntroduction

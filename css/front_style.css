@@ -21,6 +21,9 @@
 .projects-page .fixed {
     height: 78px;
 }
+.services-page .fixed {
+    height: 78px;
+}
 
 .home-page .fixed {
     height: 58px; 
@@ -50,7 +53,7 @@ body {
 }
 
     .slick a:hover, .slick a:focus, .project a:hover, .project a:focus
-    , .faqs a:hover, .faqs a:focus{
+    , .faqs a:hover, .faqs a:focus, .service a:hover, .service a:focus{
         text-decoration: none; 
     }
     #header-right-bottom span{
@@ -261,7 +264,7 @@ body {
         }
 
 /*Projects home page*/
-.news, .project, .contact{
+.news, .project, .contact, .service{
     background-color: #fff;
 }
 h2.title {
@@ -741,6 +744,39 @@ footer ul#footer-services li:first-child{
         background: #ca0000 url("../img/project-header-bg.png") no-repeat left bottom;
     }
     .projects-page #logo a {
+        display: block;
+        background-size: 149px 149px;
+        width: 170px;
+        height: 152px;
+    }
+    .image-container img{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    .image-container {
+        position: relative;
+        height: 224px;
+    }
+    .md-5th{
+        width: 20%;
+    }
+    
+/*service page*/ 
+.services-page header {
+    background: #ca0000 url("../img/service-header-bg.png") no-repeat left bottom;
+}
+@media (min-width: 992px){
+    .services-page header {
+        height: 326px;
+    }
+    .services-page #header-bottom {
+        padding-bottom: 14px;   
+        background: #ca0000 url("../img/service-header-bg.png") no-repeat left bottom;
+    }
+    .services-page #logo a {
         display: block;
         background-size: 149px 149px;
         width: 170px;

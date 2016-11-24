@@ -44,7 +44,7 @@
                         </ul>
                         <div class="clear"></div>
                         <ul id="footer-services">
-                            @foreach($services as $service_category)   
+                            @foreach($serviceCategories as $service_category)   
                                  <li>
                                      <a href="{{ url(getCategorySlugLink($serviceMenu, $service_category)) }}">
                                          {{languageTransform($service_category, 'title')}} 

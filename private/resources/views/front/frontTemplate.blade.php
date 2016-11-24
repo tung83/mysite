@@ -93,7 +93,7 @@
 
     </div>
         <footer class="container">            
-            @include('front.footer', compact('serviceMenu', 'services', 'qtextFooterContact'
+            @include('front.footer', compact('serviceMenu', 'serviceCategories', 'qtextFooterContact'
             , 'qtextIntroduction'
             , 'basicConfigs'))               
         </footer>

@@ -1,52 +1,52 @@
 @extends('front.frontTemplate', compact('currentMenu', 'serviceMenu', 'menus', 'serviceCategories','qtextFooterContact','qtextIntroduction','basicConfigs'))
 @section('main')
-    @include('front.project.partials.projects', compact('currentProjectCategory','currentMenu', 'projectCategories', 'projects'))
+    @include('front.service.partials.services', compact('currentServiceCategory','currentMenu', 'serviceCategories', 'services'))
 @endsection
 @push('scripts')
 <script>    
     /*==================== PAGINATION =========================*/
-    $(document).on('click','#project-category-content .pagination a', function(e){
+    $(document).on('click','#service-category-content .pagination a', function(e){
         e.preventDefault();               
         var valuesPart = $(this).attr('href').match(/([0-9]+)\?page=([0-9]+)$/g);  
         var values = valuesPart[0].split('?page=');
         var id = values[0];
         var page = values[1];
-         getProjects(id, page);
+         getServices(id, page);
     });
 
-    function getProjects(id, page){
+    function getServices(id, page){
         $.ajax({
-            url: '{{ url('/ajax/projects') }}' + '?pId=' + id + '&page=' + page,
+            url: '{{ url('/ajax/services') }}' + '?pId=' + id + '&page=' + page,
             type: 'GET'
         }).done(function(data){
-                $('#project-category-content').html(data);
+                $('#service-category-content').html(data);
         })
         .fail(function() {                            
         });
     }
 
-    $(document).on('click','#project-category .list-inline a', function(e){
+    $(document).on('click','#service-category .list-inline a', function(e){
         e.preventDefault();                
-        $('#project-category .list-inline a').removeClass('active');
+        $('#service-category .list-inline a').removeClass('active');
         $(this).addClass('active');
         var id = $(this).attr('href').match(/([0-9]+)$/g)[0];  
-        getProjectCategory(id);
+        getServiceCategory(id);
     });
 
-    function getProjectCategory(id){
+    function getServiceCategory(id){
         $.ajax({
-            url: '{{ url('/ajax/projects') }}' + '?pId=' + id,
+            url: '{{ url('/ajax/services') }}' + '?pId=' + id,
             type: 'GET'
         }).done(function(data){
-                $('#project-category-content').html(data);
+                $('#service-category-content').html(data);
         })
         .fail(function() {                            
         });
     }
     
     $(function() {
-        //Project Page scroll fixed head top menu
-        if($('.projects-page').length)
+        //Service Page scroll fixed head top menu
+        if($('.services-page').length)
         {
             $(window).bind('scroll', function() {
 
@@ -55,22 +55,22 @@
             if($(window).width() >= 992)
             {
                 if ( $(window).scrollTop() > navHeight) {
-                        $('.projects-page #header-bottom').addClass('fixed');
-                        $('.projects-page #logo a').css({
+                        $('.services-page #header-bottom').addClass('fixed');
+                        $('.services-page #logo a').css({
                             'background-size'  : '80px 80px'
                         });
-                        $('.projects-page #logo').css({
+                        $('.services-page #logo').css({
                             'bottom'  : '0px',
                             'left' : '30px'
 
                         });
                 }
                 else {
-                        $('.projects-page #header-bottom').removeClass('fixed');
-                        $('.projects-page #logo a').css({
+                        $('.services-page #header-bottom').removeClass('fixed');
+                        $('.services-page #logo a').css({
                             'background-size'  : '149px 149px'
                         });
-                        $('.projects-page #logo').css({
+                        $('.services-page #logo').css({
                             'bottom'  : '-25px', 
                             'left' : '5px'
                         });
@@ -80,21 +80,21 @@
 
             $(window).scroll(function(){
                     var scrollTop = $(window).scrollTop();
-                    if(scrollTop > 248 && !$('.projects-page #header-bottom').is(":hover"))
-                            $('.projects-page #header-bottom').stop().animate({'opacity':'0.9'},725);
+                    if(scrollTop > 248 && !$('.services-page #header-bottom').is(":hover"))
+                            $('.services-page #header-bottom').stop().animate({'opacity':'0.9'},725);
                     else	
-                            $('.projects-page #header-bottom').stop().animate({'opacity':'1'},725);
+                            $('.services-page #header-bottom').stop().animate({'opacity':'1'},725);
             });
 
-            $('.projects-page #header-bottom').hover(
+            $('.services-page #header-bottom').hover(
                     function (e) {
                             var scrollTop = $(window).scrollTop();
-                            $('.projects-page #header-bottom').stop().animate({'opacity':'1'},725);
+                            $('.services-page #header-bottom').stop().animate({'opacity':'1'},725);
                     },
                     function (e) {
                             var scrollTop = $(window).scrollTop();
                             if(scrollTop > 248){
-                                    $('.projects-page #header-bottom').stop().animate({'opacity':'0.9'},725);
+                                    $('.services-page #header-bottom').stop().animate({'opacity':'0.9'},725);
                             }
                     }
             );

@@ -1,4 +1,4 @@
-@extends('front.frontTemplate', compact('serviceMenu', 'menus', 'services','qtextFooterContact','qtextIntroduction','basicConfigs'))
+@extends('front.frontTemplate', compact('serviceMenu', 'menus', 'serviceCategories','qtextFooterContact','qtextIntroduction','basicConfigs'))
 @section('main')
     @include('front.news.partials.news', compact('currentNewsCategory','currentMenu', 'newsCategories', 'newsList', 'most_saw_newsList'))
 @endsection

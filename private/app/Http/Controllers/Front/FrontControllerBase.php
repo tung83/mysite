@@ -23,7 +23,7 @@ class FrontControllerBase extends Controller
     
     //variable    
     protected $menus;
-    protected $services; 
+    protected $serviceCategories; 
     protected $qtextRecruit;
     protected $qtextFooterContact;
     protected $qtextIntroduction;
@@ -45,7 +45,7 @@ class FrontControllerBase extends Controller
     }    
     public function GetPageData(){
         $this->menus = $this->menuRepository->getActive();
-        $this->services = $this->serviceCategoryRepository->getActive(10); 
+        $this->serviceCategories = $this->serviceCategoryRepository->getActive(10); 
         $this->qtextRecruit = $this->qtextRepository->getRecruit();
         $this->qtextFooterContact = $this->qtextRepository->getFooterContact();
         $this->qtextIntroduction = $this->qtextRepository->getIntroduction();

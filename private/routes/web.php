@@ -40,6 +40,15 @@ Route::group(['namespace' => 'Front'], function() {
     Route::get('du-an/{projectCategory}', 'ProjectController@getCategory')->where('projectCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
     Route::get('/ajax/projects','ProjectAjaxController@partialProjectData');
 
+    // Service
+    Route::get('services', 'ServiceController@index');
+    Route::get('dich-vu', 'ServiceController@index');
+    Route::get('services/{serviceItem}', 'ServiceController@getItem')->where('serviceItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
+    Route::get('dich-vu/{serviceItem}', 'ServiceController@getItem')->where('serviceItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
+    Route::get('services/{serviceCategory}', 'ServiceController@getCategory')->where('serviceCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
+    Route::get('dich-vu/{serviceCategory}', 'ServiceController@getCategory')->where('serviceCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
+    Route::get('/ajax/services','ServiceAjaxController@partialServiceData');
+
     // News
     Route::get('news', 'NewsController@index');
     Route::get('tin-tuc', 'NewsController@index');
@@ -57,6 +66,7 @@ Route::group(['namespace' => 'Front'], function() {
 
 
     Route::get('/ajax/homeProjects','ProjectAjaxController@partialHomeData');
+    Route::get('/ajax/homeServices','ServiceAjaxController@partialHomeData');
     Route::get('/ajax/homeNews','NewsAjaxController@partialHomeData');
     
 

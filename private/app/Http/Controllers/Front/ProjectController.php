@@ -55,7 +55,7 @@ class ProjectController extends FrontControllerBase
         $projects = getPaginateByPidData($this->currentMenu,$currentProjectCategory, $this->projectRepository, 6);             
         return view('front.project.index', ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
                 ,'menus' => $this->menus
-                ,'services' => $this->services 
+                ,'serviceCategories' => $this->serviceCategories 
                 ,'qtextRecruit' => $this->qtextRecruit
                 ,'qtextFooterContact' => $this->qtextFooterContact
                 ,'qtextIntroduction' => $this->qtextIntroduction
@@ -75,7 +75,7 @@ class ProjectController extends FrontControllerBase
 	
         return view('front.project.itemIndex', ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
                 ,'menus' => $this->menus
-                ,'services' => $this->services 
+                ,'serviceCategories' => $this->serviceCategories 
                 ,'qtextRecruit' => $this->qtextRecruit
                 ,'qtextFooterContact' => $this->qtextFooterContact
                 ,'qtextIntroduction' => $this->qtextIntroduction

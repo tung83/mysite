@@ -34,7 +34,7 @@ class ContactController extends FrontControllerBase
         $qtextContact = $this->qtextRepository->getContact();
         return view('front.contact.index', ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
                 ,'menus' => $this->menus
-                ,'services' => $this->services 
+                ,'serviceCategories' => $this->serviceCategories 
                 ,'qtextRecruit' => $this->qtextRecruit
                 ,'qtextFooterContact' => $this->qtextFooterContact
                 ,'qtextIntroduction' => $this->qtextIntroduction
