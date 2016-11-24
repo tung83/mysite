@@ -72,7 +72,7 @@ class ServiceController extends FrontControllerBase
                 ,'qtextFooterContact' => $this->qtextFooterContact
                 ,'qtextIntroduction' => $this->qtextIntroduction
                 ,'basicConfigs' => $this->basicConfigs
-                ,'serviceCategories' => $serviceCategories
+                ,'serviceCategories' => $this->serviceCategories
                 ,'service' => $service] );
     }
     
