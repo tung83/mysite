@@ -44,9 +44,9 @@ Route::group(['namespace' => 'Front'], function() {
     Route::get('news', 'NewsController@index');
     Route::get('tin-tuc', 'NewsController@index');
     Route::get('news/{newsItem}', 'NewsController@getItem')->where('newsItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
-    Route::get('du-an/{newsItem}', 'NewsController@getItem')->where('newsItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
+    Route::get('tin-tuc/{newsItem}', 'NewsController@getItem')->where('newsItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
     Route::get('news/{newsCategory}', 'NewsController@getCategory')->where('newsCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
-    Route::get('du-an/{newsCategory}', 'NewsController@getCategory')->where('newsCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
+    Route::get('tin-tuc/{newsCategory}', 'NewsController@getCategory')->where('newsCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
     Route::get('/ajax/news','NewsAjaxController@partialNewsData');
 
     //Contact
