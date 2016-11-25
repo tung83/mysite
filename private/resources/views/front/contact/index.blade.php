@@ -83,6 +83,12 @@
                     }
             );
         };
-    });
+    });  
+
+    /*==================== google maps =========================*/
+    function initMap() {
+        createGoogleMap('contact-google-map');
+        createGoogleMap('google-map');
+    }    
 </script>
 @endpush

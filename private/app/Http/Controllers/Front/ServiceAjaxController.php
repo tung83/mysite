@@ -18,6 +18,7 @@ class ServiceAjaxController extends Controller
     private $menuEView;
     protected $menuRepository;
     protected $serviceRepository;
+    protected $serviceCategoryRepository;
 
     /**
      * Create a new ServiceAjaxController instance.
@@ -31,6 +32,7 @@ class ServiceAjaxController extends Controller
     {
         $this->menuRepository = $menuRepository;
         $this->serviceRepository = $serviceRepository;
+        $this->serviceCategoryRepository = $serviceCategoryRepository;
         $this->middleware('ajax');
         $this->menuEView = 'services';
     }

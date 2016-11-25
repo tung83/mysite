@@ -1,5 +1,9 @@
 @extends('front.frontTemplate', compact('currentMenu', 'serviceMenu', 'menus', 'serviceCategories','qtextFooterContact','qtextIntroduction','basicConfigs'))
+@section('head')
+    {!! HTML::style('css/slick.css') !!}
+@endsection
 @section('main')
+    @include('front.home.partials.services', compact('serviceMenu', 'serviceCategories'))
     @include('front.service.partials.services', compact('currentServiceCategory','currentMenu', 'serviceCategories', 'services'))
 @endsection
 @push('scripts')

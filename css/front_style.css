@@ -195,9 +195,14 @@ body {
         padding: 100px 0 50px 0; 
         margin: 0 15px;
     }
+    .slick-list{ 
+        overflow: visible;
+    }
     .slick-slide {
         margin: 0 35px;
-        transition: 0.8s        
+        transition: 0.8s;
+        position: relative;
+            
      }
       
     .slick-slide:hover {
@@ -583,6 +588,7 @@ footer ul#footer-services li:first-child{
     #header-right-bottom {
         color: #eb2000;
         margin-top: 36px;
+        margin-right: 8px;
     }
 }
 
@@ -628,7 +634,7 @@ footer ul#footer-services li:first-child{
         padding-bottom: 9px;
         background: #ca0000 url(../img/index_header_bg.png) no-repeat bottom center;
     }   
-    .home-page #header-right-bottom {
+    .home-page #header-right-bottom{
         margin-top: 15px;
         margin-right: 12px;
         color: #ffff00;
@@ -712,6 +718,10 @@ footer ul#footer-services li:first-child{
     .contact-page header {
         height: 319px;
     }
+    
+    .services-page #header-right-bottom {
+        color: #ffff00;
+    }
     .contact-page #header-bottom {
     padding-bottom: 14px;   
     background: #ca0000 url("../img/contact-header-bg.png") no-repeat left bottom;
@@ -768,6 +778,10 @@ footer ul#footer-services li:first-child{
 .services-page header {
     background: #ca0000 url("../img/service-header-bg.png") no-repeat left bottom;
 }
+
+.service-content{
+    background-color: #fff; 
+}
 @media (min-width: 992px){
     .services-page header {
         height: 326px;
@@ -795,6 +809,21 @@ footer ul#footer-services li:first-child{
     }
     .md-5th{
         width: 20%;
+    }
+    
+    .services-page .slick-slide:before {
+        margin-bottom: -8px;
+        box-sizing: border-box;
+        position: absolute;
+        bottom: -57px;
+        z-index: 999999999999;
+        left: 47%;
+        border: 8px solid transparent;
+        border-top-color: #ca0000;
+        content: ' ';
+        height: 0;
+        width: 0;
+        pointer-events: none;
     }
 
 
