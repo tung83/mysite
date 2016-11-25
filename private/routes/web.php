@@ -49,6 +49,14 @@ Route::group(['namespace' => 'Front'], function() {
     Route::get('dich-vu/{serviceCategory}', 'ServiceController@getCategory')->where('serviceCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
     Route::get('/ajax/services','ServiceAjaxController@partialServiceData');
 
+    // BrandName
+    Route::get('brand-name', 'BrandNameController@index');
+    Route::get('nhan-dien-thuong-hieu', 'BrandNameController@index');
+    Route::get('brand-name/{serviceItem}', 'BrandNameController@getItem')->where('serviceItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
+    Route::get('nhan-dien-thuong-hieu/{serviceItem}', 'BrandNameController@getItem')->where('serviceItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
+    Route::get('nhan-dien-thuong-hieu/{serviceCategory}', 'BrandNameController@getCategory')->where('serviceCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
+    Route::get('/ajax/brand-name','BrandNameAjaxController@partialBrandNameData');
+
     // News
     Route::get('news', 'NewsController@index');
     Route::get('tin-tuc', 'NewsController@index');

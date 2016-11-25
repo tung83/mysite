@@ -811,12 +811,12 @@ footer ul#footer-services li:first-child{
         width: 20%;
     }
     
-    .services-page .slick-slide:before {
+    .services-page .slick-slider a.active:before {
         margin-bottom: -8px;
         box-sizing: border-box;
         position: absolute;
         bottom: -57px;
-        z-index: 999999999999;
+        z-index: 99999999;
         left: 47%;
         border: 8px solid transparent;
         border-top-color: #ca0000;
