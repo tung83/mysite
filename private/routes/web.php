@@ -66,6 +66,15 @@ Route::group(['namespace' => 'Front'], function() {
     Route::get('tin-tuc/{newsCategory}', 'NewsController@getCategory')->where('newsCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
     Route::get('/ajax/news','NewsAjaxController@partialNewsData');
 
+    // Faq
+    Route::get('faqs', 'FaqController@index');
+    Route::get('tu-van', 'FaqController@index');
+    Route::get('faqs/{faqItem}', 'FaqController@getItem')->where('faqItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
+    Route::get('tu-van/{faqItem}', 'FaqController@getItem')->where('faqItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
+    Route::get('faqs/{faqCategory}', 'FaqController@getCategory')->where('faqCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
+    Route::get('tu-van/{faqCategory}', 'FaqController@getCategory')->where('faqCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
+    Route::get('/ajax/faqs','FaqAjaxController@partialFaqData');
+
     //Contact
     Route::get('contact', 'ContactController@index');
     Route::get('lien-he', 'ContactController@index');
