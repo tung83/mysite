@@ -1,15 +1,15 @@
-<div class="project row">
+<div class="faq row">
     <div class="container">
-        <div id="project-list" class="row text-center">        
-            <h2 class="title">{{trans('front/site.projects')}}</h2>
+        <div id="faq-list" class="row text-center">        
+            <h2 class="title">{{trans('front/site.faqs')}}</h2>
         </div>
-        <div id="project-category" class="row text-center ">
+        <div id="faq-category" class="row text-center ">
             <ul class="list-inline list-inline-sm">
-                @foreach($projectCategories as $index => $projectCategory) 
+                @foreach($faqCategories as $index => $faqCategory) 
                 <li>
-                    <a href="{{ url(getCategorySlugLink($currentMenu, $projectCategory)) }}"
-                       class="{{ $projectCategory->id ==  $currentProjectCategory->id ? 'active' : ''  }}">
-                       {{languageTransform($projectCategory, 'title')}}  
+                    <a href="{{ url(getCategorySlugLink($currentMenu, $faqCategory)) }}"
+                       class="{{ $faqCategory->id ==  $currentFaqCategory->id ? 'active' : ''  }}">
+                       {{languageTransform($faqCategory, 'title')}}  
                     </a>
                 </li>
                 @endforeach
@@ -17,9 +17,9 @@
         </div>
         <div class="clear">
         </div>
-        <div id="project-category-content">
+        <div id="faq-category-content">
             <div class="row"> 
-                @include('front.project.partials.project-items',compact('currentMenu','projects'))   
+                @include('front.faq.partials.faq-items',compact('currentMenu','faqs'))   
             </div>
         </div>
     </div>
