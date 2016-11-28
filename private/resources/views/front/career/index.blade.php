@@ -1,52 +1,52 @@
 @extends('front.frontTemplate', compact('currentMenu', 'serviceMenu', 'menus', 'serviceCategories','qtextFooterContact','qtextIntroduction','basicConfigs'))
 @section('main')
-    @include('front.about.partials.abouts', compact('currentAboutCategory','currentMenu', 'aboutCategories', 'abouts'))
+    @include('front.career.partials.careers', compact('currentMenu', 'careers'))
 @endsection
 @push('scripts')
 <script>    
     /*==================== PAGINATION =========================*/
-    $(document).on('click','#about-category-content .pagination a', function(e){
+    $(document).on('click','#career-category-content .pagination a', function(e){
         e.preventDefault();               
         var valuesPart = $(this).attr('href').match(/([0-9]+)\?page=([0-9]+)$/g);  
         var values = valuesPart[0].split('?page=');
         var id = values[0];
         var page = values[1];
-         getAbouts(id, page);
+         getCareers(id, page);
     });
 
-    function getAbouts(id, page){
+    function getCareers(id, page){
         $.ajax({
-            url: '{{ url('/ajax/abouts') }}' + '?pId=' + id + '&page=' + page,
+            url: '{{ url('/ajax/careers') }}' + '?pId=' + id + '&page=' + page,
             type: 'GET'
         }).done(function(data){
-                $('#about-category-content').html(data);
+                $('#career-category-content').html(data);
         })
         .fail(function() {                            
         });
     }
 
-    $(document).on('click','#about-category .list-inline a', function(e){
+    $(document).on('click','#career-category .list-inline a', function(e){
         e.preventDefault();                
-        $('#about-category .list-inline a').removeClass('active');
+        $('#career-category .list-inline a').removeClass('active');
         $(this).addClass('active');
         var id = $(this).attr('href').match(/([0-9]+)$/g)[0];  
-        getAboutCategory(id);
+        getCareerCategory(id);
     });
 
-    function getAboutCategory(id){
+    function getCareerCategory(id){
         $.ajax({
-            url: '{{ url('/ajax/abouts') }}' + '?pId=' + id,
+            url: '{{ url('/ajax/careers') }}' + '?pId=' + id,
             type: 'GET'
         }).done(function(data){
-                $('#about-category-content').html(data);
+                $('#career-category-content').html(data);
         })
         .fail(function() {                            
         });
     }
     
     $(function() {
-        //About Page scroll fixed head top menu
-        if($('.abouts-page').length)
+        //Career Page scroll fixed head top menu
+        if($('.careers-page').length)
         {
             $(window).bind('scroll', function() {
 
@@ -55,22 +55,22 @@
             if($(window).width() >= 992)
             {
                 if ( $(window).scrollTop() > navHeight) {
-                        $('.abouts-page #header-bottom').addClass('fixed');
-                        $('.abouts-page #logo a').css({
+                        $('.careers-page #header-bottom').addClass('fixed');
+                        $('.careers-page #logo a').css({
                             'background-size'  : '80px 80px'
                         });
-                        $('.abouts-page #logo').css({
+                        $('.careers-page #logo').css({
                             'bottom'  : '0px',
                             'left' : '30px'
 
                         });
                 }
                 else {
-                        $('.abouts-page #header-bottom').removeClass('fixed');
-                        $('.abouts-page #logo a').css({
+                        $('.careers-page #header-bottom').removeClass('fixed');
+                        $('.careers-page #logo a').css({
                             'background-size'  : '149px 149px'
                         });
-                        $('.abouts-page #logo').css({
+                        $('.careers-page #logo').css({
                             'bottom'  : '-25px', 
                             'left' : '5px'
                         });
@@ -80,21 +80,21 @@
 
             $(window).scroll(function(){
                     var scrollTop = $(window).scrollTop();
-                    if(scrollTop > 248 && !$('.abouts-page #header-bottom').is(":hover"))
-                            $('.abouts-page #header-bottom').stop().animate({'opacity':'0.9'},725);
+                    if(scrollTop > 248 && !$('.careers-page #header-bottom').is(":hover"))
+                            $('.careers-page #header-bottom').stop().animate({'opacity':'0.9'},725);
                     else	
-                            $('.abouts-page #header-bottom').stop().animate({'opacity':'1'},725);
+                            $('.careers-page #header-bottom').stop().animate({'opacity':'1'},725);
             });
 
-            $('.abouts-page #header-bottom').hover(
+            $('.careers-page #header-bottom').hover(
                     function (e) {
                             var scrollTop = $(window).scrollTop();
-                            $('.abouts-page #header-bottom').stop().animate({'opacity':'1'},725);
+                            $('.careers-page #header-bottom').stop().animate({'opacity':'1'},725);
                     },
                     function (e) {
                             var scrollTop = $(window).scrollTop();
                             if(scrollTop > 248){
-                                    $('.abouts-page #header-bottom').stop().animate({'opacity':'0.9'},725);
+                                    $('.careers-page #header-bottom').stop().animate({'opacity':'0.9'},725);
                             }
                     }
             );

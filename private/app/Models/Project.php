@@ -26,6 +26,7 @@ class Project extends Model
         'e_meta_description',
         'pId',
         'img',
+        'home',
         'active',
         'ind'
     ];

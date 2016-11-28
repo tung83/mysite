@@ -5,35 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Faq
+ * Class AboutCategory
  */
-class Faq extends Model
+class AboutCategory extends Model
 {
-    protected $table = 'faq';
+    protected $table = 'about_cate';
 
     public $timestamps = false;
 
     protected $fillable = [
         'title',
         'sum',
-        'content',
         'meta_keyword',
         'meta_description',
         'e_title',
         'e_sum',
-        'e_content',
         'e_meta_keyword',
         'e_meta_description',
-        'pId',
-        'maps',
-        'city',
-        'district',
         'img',
-        'home',
-        'best',
-        'active',
-        'dates',
-        'ind'
+        'icon',
+        'ind',
+        'active'
     ];
 
     protected $guarded = [];

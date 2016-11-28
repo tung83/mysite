@@ -24,6 +24,7 @@ class About extends Model
         'e_content',
         'e_meta_keyword',
         'e_meta_description',
+        'pId',
         'img',
         'active',
         'ind'

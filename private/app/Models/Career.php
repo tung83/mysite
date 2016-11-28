@@ -25,6 +25,7 @@ class Career extends Model
         'e_meta_keyword',
         'e_meta_description',
         'img',
+        'home',
         'active',
         'dates',
         'ind'

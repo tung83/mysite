@@ -75,6 +75,15 @@ Route::group(['namespace' => 'Front'], function() {
     Route::get('tu-van/{faqCategory}', 'FaqController@getCategory')->where('faqCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
     Route::get('/ajax/faqs','FaqAjaxController@partialFaqData');
 
+    // About
+    Route::get('abouts', 'AboutController@index');
+    Route::get('gioi-thieu', 'AboutController@index');
+    Route::get('abouts/{aboutItem}', 'AboutController@getItem')->where('aboutItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
+    Route::get('gioi-thieu/{aboutItem}', 'AboutController@getItem')->where('aboutItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
+    Route::get('abouts/{aboutCategory}', 'AboutController@getCategory')->where('aboutCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
+    Route::get('gioi-thieu/{aboutCategory}', 'AboutController@getCategory')->where('aboutCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
+    Route::get('/ajax/abouts','AboutAjaxController@partialAboutData');
+
     //Contact
     Route::get('contact', 'ContactController@index');
     Route::get('lien-he', 'ContactController@index');

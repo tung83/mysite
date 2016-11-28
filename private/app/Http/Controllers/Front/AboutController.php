@@ -4,23 +4,27 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Front\FrontControllerBase;
 use Illuminate\Http\Request;
-use App\Repositories\AboutRepository;
-use App\Http\Requests\AboutRequest;
 use App\Repositories\MenuRepository;
 use App\Repositories\ServiceCategoryRepository;
+use App\Repositories\AboutCategoryRepository;
+use App\Repositories\AboutRepository;
 use App\Repositories\QtextRepository;
 use App\Repositories\BasicConfigRepository;
 
 class AboutController extends FrontControllerBase
-{   
+{    
+    protected $aboutCategoryRepository;
     protected $aboutRepository;
+    
     public function __construct(MenuRepository $menuRepository
             , ServiceCategoryRepository $serviceCategoryRepository
+            , AboutCategoryRepository $aboutCategoryRepository
+            , AboutRepository $aboutRepository
             , QtextRepository $qtextRepository
-            , BasicConfigRepository $basicConfigRepository,
-            AboutRepository $aboutRepository)
-    {        
-        parent::__construct("about", $menuRepository, $serviceCategoryRepository, $qtextRepository,$basicConfigRepository);
+            , BasicConfigRepository $basicConfigRepository)
+    {
+        parent::__construct("abouts", $menuRepository, $serviceCategoryRepository, $qtextRepository,$basicConfigRepository);        
+        $this->aboutCategoryRepository = $aboutCategoryRepository;
         $this->aboutRepository = $aboutRepository;
     }
     /**
@@ -30,33 +34,54 @@ class AboutController extends FrontControllerBase
      */
     public function index()
     {
-        parent::GetPageData();
-        $about = $this->aboutRepository->getFirst();
-        return view('front.about.index', ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
-                ,'menus' => $this->menus
-                ,'services' => $this->services 
-                ,'qtextRecruit' => $this->qtextRecruit
-                ,'qtextFooterAbout' => $this->qtextFooterAbout
-                ,'qtextIntroduction' => $this->qtextIntroduction
-                ,'basicConfigs' => $this->basicConfigs
-                ,'about' => $about]);
+        parent::GetPageData();      
+        return $this->showIndex();
     }
     
-    /**
-     * Store a newly created about in storage.
-     *
-     * @param  AboutRequest $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-        'g-recaptcha-response' => 'required|recaptcha',
-            'email' => 'bail|required|email'
-        ]);
-        $this->aboutRepository->store($request->all());
-
-        return redirect('/')->with('ok', trans('front/about.ok'));
+    public function getCategory(Request $request, $aboutItem)
+    {        
+        parent::GetPageData();  
+        preg_match('/(.*)-p(?P<digit>\d+)$/', $aboutItem, $matches);
+        $categoryId = $matches['digit'];           
+        $currentAboutCategory = $this->aboutCategoryRepository->getById($categoryId);       
+        return $this->showIndex($currentAboutCategory);
+    }
+    
+    private function showIndex($currentAboutCategory = null){
+        $aboutCategories = $this->aboutCategoryRepository->getActive(3); 
+        if(!$currentAboutCategory){
+            $currentAboutCategory = $aboutCategories[0];
+        }
+        $abouts = getPaginateByPidData($this->currentMenu,$currentAboutCategory, $this->aboutRepository, 6);             
+        return view('front.about.index', ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
+                ,'menus' => $this->menus
+                ,'serviceCategories' => $this->serviceCategories 
+                ,'qtextRecruit' => $this->qtextRecruit
+                ,'qtextFooterContact' => $this->qtextFooterContact
+                ,'qtextIntroduction' => $this->qtextIntroduction
+                ,'basicConfigs' => $this->basicConfigs
+                ,'aboutCategories' => $aboutCategories
+                ,'abouts' => $abouts,
+                'currentAboutCategory' => $currentAboutCategory]);
+    }
+    
+    public function getItem(Request $request, $aboutItem)
+    {        
+        parent::GetPageData();  
+        preg_match('/(.*)-i(?P<digit>\d+)$/', $aboutItem, $matches);
+        $itemId = $matches['digit'];    
+        $aboutCategories = $this->aboutCategoryRepository->getActive(3);           
+        $about = $this->aboutRepository->getById($itemId);       
+	
+        return view('front.about.itemIndex', ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
+                ,'menus' => $this->menus
+                ,'serviceCategories' => $this->serviceCategories 
+                ,'qtextRecruit' => $this->qtextRecruit
+                ,'qtextFooterContact' => $this->qtextFooterContact
+                ,'qtextIntroduction' => $this->qtextIntroduction
+                ,'basicConfigs' => $this->basicConfigs
+                ,'aboutCategories' => $aboutCategories
+                ,'about' => $about] );
     }
     
     

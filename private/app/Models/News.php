@@ -27,6 +27,8 @@ class News extends Model
         'e_meta_description',
         'pId',
         'img',
+        'home',
+        'most_viewed',
         'active',
         'ind',
         'posted_datetime'
