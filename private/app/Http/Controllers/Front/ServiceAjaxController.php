@@ -42,7 +42,7 @@ class ServiceAjaxController extends Controller
         $serviceMenu = $this->menuRepository->getByEView($this->menuEView);
         $pid = $request->input('pId');
         $serviceCategory = $this->serviceCategoryRepository->getById($pid);
-        $services = getPaginateByPidData($serviceMenu,$serviceCategory, $this->serviceRepository, 6);
+        $services = getPaginateHomeByPidData($serviceMenu,$serviceCategory, $this->serviceRepository, 6);
         if(!$request->input('page'))
         {
             return view('front.home.partials.service-category', ['serviceMenu' => $serviceMenu, 'services' => $services, 'serviceCategory' => $serviceCategory])->render();        

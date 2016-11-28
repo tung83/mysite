@@ -23,7 +23,8 @@
             "database"
         ],
         "files": [
-            "app/helpers.php"
+            "app/helpers.php",
+            "config/front_menu.php"
         ],
         "psr-4": {
             "App\\": "app/"

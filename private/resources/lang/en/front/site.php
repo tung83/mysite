@@ -19,9 +19,10 @@ return [
     'service' => 'services',
     'projects' => 'PROJECTS',
     'project' => 'projects',
-    'news-title' => 'News',
     'faq' => 'faq',
     'introduction' => 'introduction',    
     'readmore' => 'read more...',
-    'news-mostsaw' => 'Most Read',
+    'news-mostsaw' => 'Most Viewed',
+    'best-faqs' => 'Best Faqs',
+    
 ];

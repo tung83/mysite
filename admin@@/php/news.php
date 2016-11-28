@@ -184,6 +184,8 @@ function news($db)
         $e_meta_kw=htmlspecialchars($_POST['e_meta_keyword']);
         $e_meta_desc=htmlspecialchars($_POST['e_meta_description']);
         
+        $home=$_POST['home']=="on"?1:0;
+        $most_viewed=$_POST['most_viewed']=="on"?1:0;
         $active=$_POST['active']=="on"?1:0;
         $file=time().$_FILES['file']['name'];
         $ind=intval($_POST['ind']);
@@ -207,7 +209,7 @@ function news($db)
             
             'e_title'=>$e_title,'e_sum'=>$e_sum,'e_content'=>$e_content,
             
-            'active'=>$active,'ind'=>$ind,'pId'=>$pId
+            'home'=>$home,'most_viewed'=>$most_viewed,'active'=>$active,'ind'=>$ind,'pId'=>$pId
         );
 		try{
             $recent = $db->insert($table,$insert);
@@ -227,7 +229,7 @@ function news($db)
             
             'e_title'=>$e_title,'e_sum'=>$e_sum,'e_content'=>$e_content,
             
-            'active'=>$active,'ind'=>$ind,'pId'=>$pId
+            'home'=>$home,'most_viewed'=>$most_viewed,'active'=>$active,'ind'=>$ind,'pId'=>$pId
         );
         if(common::file_check($_FILES['file'])){
             WideImage::load('file')->resize(217,162, 'fill')->saveToFile(myPath.$file);
@@ -321,6 +323,8 @@ function news($db)
         <div class="col-lg-12">
             '.$form->file('file',array('label'=>'Hình ảnh<code>217,162</code>')).'
             '.$form->number('ind',array('label'=>'Thứ tự')).'
+            '.$form->checkbox('home',array('label'=>'Trang chủ','checked'=>true)).'
+            '.$form->checkbox('most_viewed',array('label'=>'Xem nhiều nhất','checked'=>true)).'
             '.$form->checkbox('active',array('label'=>'Hiển Thị','checked'=>true)).'
         </div>
     

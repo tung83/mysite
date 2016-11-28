@@ -42,7 +42,7 @@ class FaqAjaxController extends Controller
         $faqMenu = $this->menuRepository->getByEView($this->menuEView);
         $pid = $request->input('pId');
         $faqCategory = $this->faqCategoryRepository->getById($pid);
-        $faqs = getPaginateByPidData($faqMenu,$faqCategory, $this->faqRepository, 6);
+        $faqs = getPaginateHomeByPidData($faqMenu,$faqCategory, $this->faqRepository, 6);
         if(!$request->input('page'))
         {
             return view('front.home.partials.faq-category', ['faqMenu' => $faqMenu, 'faqs' => $faqs, 'faqCategory' => $faqCategory])->render();        

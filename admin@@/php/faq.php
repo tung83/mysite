@@ -2,20 +2,20 @@
 function mainProcess($db)
 {
     switch($_GET['type']){
-        case 'project_cate':
-            return project_cate($db);
+        case 'faq_cate':
+            return faq_cate($db);
             break;
         default:
-            return project($db);
+            return faq($db);
             break;
     }
 }
-function project_cate($db)
+function faq_cate($db)
 {
 	$msg='';
-    $act='project';
-    $type='project_cate';
-    $table='project_cate';
+    $act='faq';
+    $type='faq_cate';
+    $table='faq_cate';
     $lev=1;
     if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
 		$db->where('id',$_POST['idLoad']);
@@ -96,7 +96,7 @@ function project_cate($db)
         }
 	}
     $page_head= array(
-                    array('#','Danh mục dự án')
+                    array('#','Danh mục tin tức')
                 );
 	$str=$form->breadcumb($page_head);
 	$str.=$form->message($msg);
@@ -156,12 +156,12 @@ function project_cate($db)
 	';	
 	return $str;	
 }
-function project($db)
+function faq($db)
 {
 	$msg='';
-    $act='project';
-    $type='project';
-    $table='project';
+    $act='faq';
+    $type='faq';
+    $table='faq';
     if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
 		$db->where('id',$_POST['idLoad']);
         $list = $db->getOne($table);
@@ -185,6 +185,7 @@ function project($db)
         $e_meta_desc=htmlspecialchars($_POST['e_meta_description']);
         
         $home=$_POST['home']=="on"?1:0;
+        $best=$_POST['best']=="on"?1:0;
         $active=$_POST['active']=="on"?1:0;
         $file=time().$_FILES['file']['name'];
         $ind=intval($_POST['ind']);
@@ -208,7 +209,7 @@ function project($db)
             
             'e_title'=>$e_title,'e_sum'=>$e_sum,'e_content'=>$e_content,
             
-            'home'=>$home,'active'=>$active,'ind'=>$ind,'pId'=>$pId
+            'home'=>$home,'best'=>$best,'active'=>$active,'ind'=>$ind,'pId'=>$pId
         );
 		try{
             $recent = $db->insert($table,$insert);
@@ -228,7 +229,7 @@ function project($db)
             
             'e_title'=>$e_title,'e_sum'=>$e_sum,'e_content'=>$e_content,
             
-            'home'=>$home,'active'=>$active,'ind'=>$ind,'pId'=>$pId
+            'home'=>$home,'best'=>$best,'active'=>$active,'ind'=>$ind,'pId'=>$pId
         );
         if(common::file_check($_FILES['file'])){
             WideImage::load('file')->resize(217,162, 'fill')->saveToFile(myPath.$file);
@@ -255,12 +256,12 @@ function project($db)
 	}
     
     $page_head= array(
-                    array('#','Danh sách dự án')
+                    array('#','Danh sách tin tức')
                 );
 	$str=$form->breadcumb($page_head);
 	$str.=$form->message($msg);
     
-    $str.=$form->search_area($db,$act,'project_cate',$_GET['hint'],1);
+    $str.=$form->search_area($db,$act,'faq_cate',$_GET['hint'],1);
     
     $head_title=array('Tiêu đề<code>Vi/En</code>','Hình ảnh','Danh mục','Hiện/Ẩn','STT');
 	$str.=$form->table_start($head_title);
@@ -277,7 +278,7 @@ function project($db)
 
     if($db->count!=0){
         foreach($list as $item){
-            $cate=$db->where('id',$item['pId'])->getOne('project_cate','id,title');
+            $cate=$db->where('id',$item['pId'])->getOne('faq_cate','id,title');
             $item_content = array(
                 array($item['title'].'<br/><code>'.$item['e_title'].'</code>','text'),
                 array(myPath.$item['img'],'image'),
@@ -295,7 +296,7 @@ function project($db)
 	<div class="row">
     	<div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
         <div class="col-lg-12">
-            '.$form->cate_group($db,'project_cate',1).'
+            '.$form->cate_group($db,'faq_cate',1).'
         </div>
         <div class="col-lg-12 admin-tabs">
             <ul class="nav nav-tabs">
@@ -320,9 +321,9 @@ function project($db)
     		</div>
         </div>
         <div class="col-lg-12">
-            '.$form->file('file',array('label'=>'Hình ảnh<code>217,162</code>')).'
             '.$form->number('ind',array('label'=>'Thứ tự')).'
             '.$form->checkbox('home',array('label'=>'Trang chủ','checked'=>true)).'
+            '.$form->checkbox('best',array('label'=>'Câu hỏi hay','checked'=>true)).'
             '.$form->checkbox('active',array('label'=>'Hiển Thị','checked'=>true)).'
         </div>
     

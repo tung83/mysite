@@ -4,13 +4,12 @@ function ad_menu()
 {
 	$topNav=array(
                     array(1,"Slider","slider","table"),
-                    /*array(10,'Banner quảng cáo','ads_banner','diamond'),*/
-                    array(2,'Quản lý sản phẩm',"product","star"),
-					/*array(3,"Quản lý phụ tùng","accessary","pencil"),	*/	
+                    /*array(10,'Banner quảng cáo','ads_banner','diamond'),*/	
                     array(4,"Giới thiệu","about","fire"),
                     array(5,'Tin tức - Sự Kiện','news','random'), 
                     array(6,'Dự án','project','star'),   
-                    array(7,'Dịch vụ','service','usd'),                        
+                    array(7,'Dịch vụ','service','usd'),          
+                    array(9,'Hỗ trợ','faq','usd'),                     
                     array(8,'Tuyển dụng','career','bell-o'),
                     //array(9,'Video','video','youtube'),
                     /*array(14,'Hỗ trợ trực tuyến','support_online','headphones'),*/
@@ -32,6 +31,8 @@ function ad_menu()
                     array(5,'Danh sách tin tức','type=news'),  
                     array(6,'Danh mục dự án','type=project_cate'),
                     array(6,'Danh sách dự án','type=project'),
+                    array(9,'Danh mục hỗ trợ','type=faq_cate'),
+                    array(9,'Danh sách hỗ trợ','type=faq'),  
 //                    array(7,'Danh mục dịch vụ','type=service_cate'),
 //                    array(7,'Danh sách dịch vụ','type=service'),       
                     array(12,"HotLine","id=2"),

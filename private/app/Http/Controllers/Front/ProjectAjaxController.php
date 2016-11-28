@@ -42,7 +42,7 @@ class ProjectAjaxController extends Controller
         $projectMenu = $this->menuRepository->getByEView($this->menuEView);
         $pid = $request->input('pId');
         $projectCategory = $this->projectCategoryRepository->getById($pid);
-        $projects = getPaginateByPidData($projectMenu,$projectCategory, $this->projectRepository, 6);
+        $projects = getPaginateHomeByPidData($projectMenu,$projectCategory, $this->projectRepository, 6);
         if(!$request->input('page'))
         {
             return view('front.home.partials.project-category', ['projectMenu' => $projectMenu, 'projects' => $projects, 'projectCategory' => $projectCategory])->render();        

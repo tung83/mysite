@@ -19,9 +19,9 @@ return [
     'service' => 'dich-vu',    
     'projects' => 'DỰ ÁN',
     'project' => 'du-an',
-    'news-title' => 'Tin tức',
     'faq' => 'hoi-dap',   
     'introduction' => 'gioi-thieu',     
     'readmore' => 'xem thêm...',
     'news-mostsaw' => 'Tin xem nhiều',
+    'best-faqs' => 'Câu hỏi hay',
 ];

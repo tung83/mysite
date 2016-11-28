@@ -43,7 +43,7 @@ define('domain'     ,'lavoine.vn');
 define('root'       ,$_SERVER['DOCUMENT_ROOT']);
 define('myWeb'      ,'/');
 define('myPath'     ,dirname(__FILE__).'/../file/upload/');
-define('webPath'    ,'/file/upload/');
+define('webPath'    ,dirname(__FILE__).'/../file/upload/');
 define('selfPath'   ,'/file/self/');
 
 define('phpLib'     ,dirname(__FILE__).'/object/');

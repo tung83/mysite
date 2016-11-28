@@ -89,6 +89,16 @@ if (!function_exists('getPaginateByPidData')) {
     }
 }
 
+if (!function_exists('getPaginateHomeByPidData')) {
+    function getPaginateHomeByPidData($menu, $pData, $repository, $pageSize)
+    {
+        $paginateData = $repository->paginateHomeByPid($pData->id, $pageSize);
+        $customUrl = url(getCategorySlugLink($menu, $pData));
+        $paginateData->setPath($customUrl);
+        return $paginateData;    
+    }
+}
+
 if (!function_exists('adminSetCellContent')) {
     function adminSetCellContent($pName, $pData, $repository, $pageSize)
     {

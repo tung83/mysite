@@ -61,17 +61,17 @@ class HomeController extends FrontControllerBase
             return $value->e_view == 'news';
         });  
         $faqMenu = $this->menus->first(function ($value, $key) {
-            return $value->e_view == 'advisory';
+            return $value->e_view == 'faqs';
         });  
         $careerMenu = $this->menus->first(function ($value, $key) {
             return $value->e_view == 'careers';
         }); 
-        $projectCategories = $this->projectCategoryRepository->getActive(3);           
-        $projects = getPaginateByPidData($projectMenu,$projectCategories[0], $this->projectRepository, 6);        
-        $newsCategories = $this->newsCategoryRepository->getActive(3);           
-        $news = getPaginateByPidData($newsMenu,$newsCategories[0], $this->newsRepository, 3);
-        $customers = $this->customerRepository->getActive(20);
-        $faqs = $this->faqRepository->getActive(6);
+        $projectCategories = $this->projectCategoryRepository->getActive();           
+        $projects = getPaginateHomeByPidData($projectMenu,$projectCategories[0], $this->projectRepository, 6);        
+        $newsCategories = $this->newsCategoryRepository->getActive();           
+        $news = getPaginateHomeByPidData($newsMenu,$newsCategories[0], $this->newsRepository, 3);
+        $customers = $this->customerRepository->getActive();
+        $faqs = $this->faqRepository->getActiveHome(6);
         $careers = $this->careerRepository->getActive(3);
       
 	

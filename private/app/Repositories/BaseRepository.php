@@ -51,7 +51,12 @@ abstract class BaseRepository
     
     public function paginateByPid($pId, $pageSize)
     {
-        return $this->model->where('pId', $pId)->paginate($pageSize);
+        return $this->model->where([['active', '=', 1],['pId', '=', $pId]])->paginate($pageSize);
+    }
+    
+    public function paginateHomeByPid($pId, $pageSize)
+    {
+        return $this->model->where([['active', '=', 1],['pId', '=', $pId], ['home', '=', 1]])->paginate($pageSize);
     }
     
     public function paginate($pageSize)
@@ -70,12 +75,33 @@ abstract class BaseRepository
             return $this->model
                     ->whereActive(true)
                     ->orderBy('ind', 'asc')
+                    ->orderBy('id')
                     ->paginate($n);
         }
         else{ 
             return $this->model
                     ->whereActive(true)
                     ->orderBy('ind', 'asc')
+                    ->orderBy('id')
+                    ->get();
+
+        }
+    }
+    
+    public function getActiveHome($n=null)
+    {
+        if($n){
+            return $this->model
+                    ->where([['active', '=', 1], ['home', '=', 1]])
+                    ->orderBy('ind', 'asc')
+                    ->orderBy('id')
+                    ->paginate($n);
+        }
+        else{ 
+            return $this->model
+                    ->where([['active', '=', 1], ['home', '=', 1]])
+                    ->orderBy('ind', 'asc')
+                    ->orderBy('id')
                     ->get();
 
         }

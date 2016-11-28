@@ -53,6 +53,7 @@ class FaqController extends FrontControllerBase
             $currentFaqCategory = $faqCategories[0];
         }
         $faqs = getPaginateByPidData($this->currentMenu,$currentFaqCategory, $this->faqRepository, 6);             
+        $best_faqs = $this->faqRepository->getActive(10);
         return view('front.faq.index', ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
                 ,'menus' => $this->menus
                 ,'serviceCategories' => $this->serviceCategories 
@@ -61,8 +62,9 @@ class FaqController extends FrontControllerBase
                 ,'qtextIntroduction' => $this->qtextIntroduction
                 ,'basicConfigs' => $this->basicConfigs
                 ,'faqCategories' => $faqCategories
-                ,'faqs' => $faqs,
-                'currentFaqCategory' => $currentFaqCategory]);
+                ,'faqs' => $faqs
+                ,'best_faqs' => $best_faqs
+                ,'currentFaqCategory' => $currentFaqCategory]);
     }
     
     public function getItem(Request $request, $faqItem)

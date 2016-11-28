@@ -21,6 +21,9 @@
 .projects-page .fixed {
     height: 78px;
 }
+.faq-page .fixed {
+    height: 78px;
+}
 .services-page .fixed {
     height: 78px;
 }
@@ -269,15 +272,21 @@ body {
         }
 
 /*Projects home page*/
-.news, .project, .contact{
+.news, .project, .contact, .faq{
     background-color: #fff;
+}
+.title {
+    border-bottom: 3px solid #ff0000;
+    display: inline-block;
+    text-transform: uppercase;
 }
 h2.title {
     padding: 0 50px 5px 50px;
-    border-bottom: 3px solid #ff0000;
-    display: inline-block;
     font-weight: 700;
-    text-transform: uppercase;
+}
+.title-sub {
+    width: 100%;
+    font-weight: 600;
 }
 .project{
     padding-top: 10px;    
@@ -324,7 +333,7 @@ h2.title {
     font-size: 50px;
 }
 
-.news h2.title{
+h2.title-main{
     padding: 40px 50px 5px 50px;
 }
 .news #news-category{
@@ -773,6 +782,56 @@ footer ul#footer-services li:first-child{
     .md-5th{
         width: 20%;
     }
+  
+    
+/*faq page*/ 
+.faqs-page header {
+    background: #ca0000 url("../img/faq-header-bg.png") no-repeat left bottom;
+}
+.faq-content{
+    margin-top:35px;
+}
+img#faqs-question{
+    margin-bottom: 40px;
+}
+#best-faq-items ul {  
+  padding-left: 0;
+}
+
+#best-faq-items li {
+  background: url('../img/faq-best-bullet.png') no-repeat left top;
+  padding: 3px 0px 0px 45px;
+  list-style: none;
+  margin: 30px 0 15px 0;
+}
+@media (min-width: 992px){
+    .faqs-page header {
+        height: 326px;
+    }
+    .faqs-page #header-bottom {
+        padding-bottom: 14px;   
+        background: #ca0000 url("../img/faq-header-bg.png") no-repeat left bottom;
+    }
+    .faqs-page #logo a {
+        display: block;
+        background-size: 149px 149px;
+        width: 170px;
+        height: 152px;
+    }
+    .image-container img{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    .image-container {
+        position: relative;
+        height: 224px;
+    }
+    .md-5th{
+        width: 20%;
+    }
     
 /*service page*/ 
 .services-page header {
@@ -867,7 +926,7 @@ footer ul#footer-services li:first-child{
 .news-page .news #news-list > h2{
     color: #000;
 }
-.news #news-items-most-saw{
+.right-side-gray{
     background-color: #efefef;
 }
 

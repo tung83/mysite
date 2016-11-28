@@ -42,7 +42,7 @@ class NewsAjaxController extends Controller
         $newsMenu = $this->menuRepository->getByEView($this->menuEView);
         $pid = $request->input('pId');
         $newsCategory = $this->newsCategoryRepository->getById($pid);
-        $news = getPaginateByPidData($newsMenu,$newsCategory, $this->newsRepository, 6);
+        $news = getPaginateHomeByPidData($newsMenu,$newsCategory, $this->newsRepository, 6);
         if(!$request->input('page'))
         {
             return view('front.home.partials.news-category', ['newsMenu' => $newsMenu, 'news' => $news, 'newsCategory' => $newsCategory])->render();        
