@@ -64,7 +64,8 @@ class BrandNameController extends FrontControllerBase
                 ,'qtextIntroduction' => $this->qtextIntroduction
                 ,'basicConfigs' => $this->basicConfigs
                 ,'serviceCategories' => $this->serviceCategories
-                ,'service' => $service] );
+                ,'service' => $service
+                ,'title'=>languageTransform($service, 'title')] );
     }
     
     

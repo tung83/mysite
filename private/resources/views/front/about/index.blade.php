@@ -46,7 +46,7 @@
     
     $(function() {
         //About Page scroll fixed head top menu
-        if($('.abouts-page').length)
+        if($('.about-us-page').length)
         {
             $(window).bind('scroll', function() {
 
@@ -55,22 +55,22 @@
             if($(window).width() >= 992)
             {
                 if ( $(window).scrollTop() > navHeight) {
-                        $('.abouts-page #header-bottom').addClass('fixed');
-                        $('.abouts-page #logo a').css({
+                        $('.about-us-page #header-bottom').addClass('fixed');
+                        $('.about-us-page #logo a').css({
                             'background-size'  : '80px 80px'
                         });
-                        $('.abouts-page #logo').css({
+                        $('.about-us-page #logo').css({
                             'bottom'  : '0px',
                             'left' : '30px'
 
                         });
                 }
                 else {
-                        $('.abouts-page #header-bottom').removeClass('fixed');
-                        $('.abouts-page #logo a').css({
+                        $('.about-us-page #header-bottom').removeClass('fixed');
+                        $('.about-us-page #logo a').css({
                             'background-size'  : '149px 149px'
                         });
-                        $('.abouts-page #logo').css({
+                        $('.about-us-page #logo').css({
                             'bottom'  : '-25px', 
                             'left' : '5px'
                         });
@@ -80,21 +80,21 @@
 
             $(window).scroll(function(){
                     var scrollTop = $(window).scrollTop();
-                    if(scrollTop > 248 && !$('.abouts-page #header-bottom').is(":hover"))
-                            $('.abouts-page #header-bottom').stop().animate({'opacity':'0.9'},725);
+                    if(scrollTop > 248 && !$('.about-us-page #header-bottom').is(":hover"))
+                            $('.about-us-page #header-bottom').stop().animate({'opacity':'0.9'},725);
                     else	
-                            $('.abouts-page #header-bottom').stop().animate({'opacity':'1'},725);
+                            $('.about-us-page #header-bottom').stop().animate({'opacity':'1'},725);
             });
 
-            $('.abouts-page #header-bottom').hover(
+            $('.about-us-page #header-bottom').hover(
                     function (e) {
                             var scrollTop = $(window).scrollTop();
-                            $('.abouts-page #header-bottom').stop().animate({'opacity':'1'},725);
+                            $('.about-us-page #header-bottom').stop().animate({'opacity':'1'},725);
                     },
                     function (e) {
                             var scrollTop = $(window).scrollTop();
                             if(scrollTop > 248){
-                                    $('.abouts-page #header-bottom').stop().animate({'opacity':'0.9'},725);
+                                    $('.about-us-page #header-bottom').stop().animate({'opacity':'0.9'},725);
                             }
                     }
             );

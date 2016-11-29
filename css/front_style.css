@@ -21,6 +21,12 @@
 .projects-page .fixed {
     height: 78px;
 }
+.about-us-page .fixed {
+    height: 78px;
+}
+.careers-page .fixed {
+    height: 78px;
+}
 .faq-page .fixed {
     height: 78px;
 }
@@ -37,6 +43,23 @@ html, body {
 } 
 body {
   font-family: Arial,sans-serif;
+}
+
+.scrollTo-top {
+    display: none;
+    position: fixed;
+    bottom: 16px;
+    right: 20px;
+    font-size: 32px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 0.3rem;
+    z-index: 500;
+}
+.scrollTo-top:hover{
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.scrollTo-top i {
+    padding: 3px 10px;color:#fff
 }
 .readmore{
     color: #565656;
@@ -207,11 +230,6 @@ body {
         position: relative;
             
      }
-      
-    .slick-slide:hover {
-        -webkit-transform: scale(1.03);
-        transform: scale(1.03);
-    }
     .slick h5, .slick p{
         color: #fff;        
     }
@@ -250,9 +268,6 @@ body {
             background-color: #ca0000;
             opacity: 0;
        }
-       i.service-ico:hover:before, i.service-ico:hover:after {
-            opacity: 0.2;
-        }
         .service-ico.search-barcode {
           background-position: 0 0;
         }
@@ -272,7 +287,7 @@ body {
         }
 
 /*Projects home page*/
-.news, .project, .contact, .faq{
+.news, .project, .contact, .faq, .about, .career{
     background-color: #fff;
 }
 .title {
@@ -379,36 +394,36 @@ h2.title-main{
 }
 
 /*career home page*/
-.career{
+.career-home{
     background: #fff url("../img/recruit-bg.png") no-repeat 0 100%;
     min-height: 560px;
     padding: 10px 0 10px 10px;
 }
-.career #career-sum{
+.career-home #career-sum{
     margin-top: 260px;
     margin-left: 100px;
     height: 200px;
     width: 400px;
 }
-.career #career-sum p{
+.career-home #career-sum p{
     text-align: right;
 }
-.career #career-sum .right, .career #career-sum .left {
+.career-home #career-sum .right, .career-home #career-sum .left {
   width: 90px;
   height: 100%;
 }
 
-.career #career-sum .right{
+.career-home #career-sum .right{
   -webkit-shape-outside: polygon(100% 0, 100% 100%, 0 100%);
   shape-outside: polygon(100% 0, 100% 100%, 0 100%);
   float: right;
 }
-.career #career-sum .left {
+.career-home #career-sum .left {
   -webkit-shape-outside: polygon(0 0, 100% 0, 0 100%);
   shape-outside: polygon( 0, 100% 0, 0 100%);
   float: left;
 }
-.career .career-item {
+.career-home .career-item {
     background-image: url("../img/recruit-item.png");
     background-repeat: no-repeat;
     color: #fff;
@@ -417,28 +432,28 @@ h2.title-main{
     height: 80px;    
     position: relative;
 }
-.career .career-item:before{
+.career-home .career-item:before{
     position: absolute;
     top: 30px;
     left: 36px;
 }
-.career .career-item.item1:before{
+.career-home .career-item.item1:before{
     content: "1";
 }
-.career .career-item.item2:before{
+.career-home .career-item.item2:before{
     content: "2";
 }
-.career .career-item.item3:before{
+.career-home .career-item.item3:before{
     content: "3";
 }
 @media (min-width: 992px){   
-    .career .career-item.item2{
+    .career-home .career-item.item2{
         margin-left: 60px;
     }
-    .career .career-item.item3{
+    .career-home .career-item.item3{
         margin-left: 120px;
     } 
-    .career ol{
+    .career-home ol{
         float: right;
         width: 485px;
         margin-top: 160px;
@@ -451,7 +466,7 @@ h2.title-main{
 .customer{
     background: #fff url("../img/customer-bg.png") no-repeat 0 100%;
     min-height: 555px;
-    padding: 10px 0 10px 10px;
+    padding: 100px 0 10px 10px;
 }
 
 /*customer home page*/
@@ -531,9 +546,6 @@ footer ul#footer-services li:first-child{
             background-color: #ca0000;
             opacity: 0;
        }
-       i.service-ico:hover:before, i.service-ico:hover:after {
-            opacity: 0.2;
-        }
         footer #footer-social-items a.footer-facebook {
           background-position: 0 0;
         }
@@ -573,7 +585,6 @@ footer ul#footer-services li:first-child{
     position: absolute;
     width: 1260px;
     bottom: 0px;
-    padding-bottom: 14px;   
     }
     #logo {
         position: absolute;
@@ -587,16 +598,16 @@ footer ul#footer-services li:first-child{
         display: block;
         background: transparent url(../img/logo.png) no-repeat left bottom;
         background-size: 149px 149px;
-        width: 170px;
+        width: 150px;
         height: 152px;
     }
     .navbar {
-        padding-bottom: 0px;
+        padding-bottom: 20px;
         padding-left: 146px;
     }
     #header-right-bottom {
         color: #eb2000;
-        margin-top: 36px;
+        margin-top: 50px;
         margin-right: 8px;
     }
 }
@@ -622,10 +633,16 @@ footer ul#footer-services li:first-child{
         height: 152px;
     }
     .home-page .navbar {
-        padding-bottom: 0px;
+        padding-bottom: 5px;
         padding-left: 10px;
     }
-    
+    .home-page .navbar {
+        padding-bottom: 5px;
+        padding-left: 10px;
+    }
+    .home-page .fixed .navbar {
+        margin-top: -5px;
+    }
     .container{
         width: 1260px;
     }
@@ -640,7 +657,6 @@ footer ul#footer-services li:first-child{
         position: absolute;
         width: 1260px;        
         bottom: 0;
-        padding-bottom: 9px;
         background: #ca0000 url(../img/index_header_bg.png) no-repeat bottom center;
     }   
     .home-page #header-right-bottom{
@@ -732,12 +748,14 @@ footer ul#footer-services li:first-child{
         color: #ffff00;
     }
     .contact-page #header-bottom {
-    padding-bottom: 14px;   
-    background: #ca0000 url("../img/contact-header-bg.png") no-repeat left bottom;
+        background: #ca0000 url("../img/contact-header-bg.png") no-repeat left bottom;
     }
     .contact {
         padding-left: 120px;
         padding-right: 120px;
+    }
+    .contact-page .navbar {
+        padding-bottom: 15px;
     }
 }
 #contact-header p{
@@ -750,6 +768,42 @@ footer ul#footer-services li:first-child{
     margin-bottom: 55px;
 }
     
+/*about page*/ 
+.about-us-page header {
+    background: #ca0000 url("../img/about-header-bg.png") no-repeat left bottom;
+}
+@media (min-width: 992px){
+    .about-us-page header {
+        height: 323px;
+    }
+    .about-us-page #header-bottom {
+        padding-bottom: 0;   
+        background: #ca0000 url("../img/about-header-bg.png") no-repeat left bottom;
+    }
+    .about-us-page #logo a {
+        display: block;
+        background-size: 149px 149px;
+        width: 170px;
+        height: 152px;
+    }
+    .about-us-page #about-category{
+        padding-top: 65px;
+    }
+    .image-container img{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    .image-container {
+        position: relative;
+        height: 224px;
+    }
+    .md-5th{
+        width: 20%;
+    }
+  
 /*project page*/ 
 .projects-page header {
     background: #ca0000 url("../img/project-header-bg.png") no-repeat left bottom;
@@ -759,7 +813,7 @@ footer ul#footer-services li:first-child{
         height: 326px;
     }
     .projects-page #header-bottom {
-        padding-bottom: 14px;   
+        padding-bottom: 4px;   
         background: #ca0000 url("../img/project-header-bg.png") no-repeat left bottom;
     }
     .projects-page #logo a {
@@ -782,7 +836,7 @@ footer ul#footer-services li:first-child{
     .md-5th{
         width: 20%;
     }
-  
+ 
     
 /*faq page*/ 
 .faqs-page header {
@@ -809,10 +863,42 @@ img#faqs-question{
         height: 326px;
     }
     .faqs-page #header-bottom {
-        padding-bottom: 14px;   
         background: #ca0000 url("../img/faq-header-bg.png") no-repeat left bottom;
     }
     .faqs-page #logo a {
+        display: block;
+        background-size: 149px 149px;
+        width: 170px;
+        height: 152px;
+    }
+    .image-container img{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    .image-container {
+        position: relative;
+        height: 224px;
+    }
+    .md-5th{
+        width: 20%;
+    }
+ 
+/*career page*/ 
+.careers-page header {
+    background: #ca0000 url("../img/career-header-bg.png") no-repeat left bottom;
+}
+@media (min-width: 992px){
+    .careers-page header {
+        height: 326px;
+    }
+    .careers-page #header-bottom {
+        padding-bottom: 2px;   
+        background: #ca0000 url("../img/career-header-bg.png") no-repeat left bottom;
+    }
+    .careers-page #logo a {
         display: block;
         background-size: 149px 149px;
         width: 170px;
@@ -846,7 +932,6 @@ img#faqs-question{
         height: 326px;
     }
     .services-page #header-bottom {
-        padding-bottom: 14px;   
         background: #ca0000 url("../img/service-header-bg.png") no-repeat left bottom;
     }
     .services-page #logo a {
@@ -876,7 +961,7 @@ img#faqs-question{
         position: absolute;
         bottom: -57px;
         z-index: 99999999;
-        left: 47%;
+        left: 42%;
         border: 8px solid transparent;
         border-top-color: #ca0000;
         content: ' ';
@@ -897,8 +982,7 @@ img#faqs-question{
     .news-page #header-bottom {
     position: absolute;
     width: 1260px;
-    bottom: 0px;
-    padding-bottom: 5px;   
+    bottom: 0px; 
     background: #ca0000 url("../img/news-header-bg.png") no-repeat center bottom;
     }
     .news-page #logo {
@@ -908,12 +992,11 @@ img#faqs-question{
     transition: 0.1s;
 }
 .news-page .navbar {
-    padding-bottom: 10px;
-    padding-left: 146px;
+    padding-top: 3px;
+    padding-bottom: 0px;
 }
 .news-page  #header-right-bottom {
     color: #eb2000;
-    margin-top: 36px;
 }
 .news-page #logo a {
     display: block;

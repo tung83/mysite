@@ -23,7 +23,7 @@ class AboutController extends FrontControllerBase
             , QtextRepository $qtextRepository
             , BasicConfigRepository $basicConfigRepository)
     {
-        parent::__construct("abouts", $menuRepository, $serviceCategoryRepository, $qtextRepository,$basicConfigRepository);        
+        parent::__construct("about-us", $menuRepository, $serviceCategoryRepository, $qtextRepository,$basicConfigRepository);        
         $this->aboutCategoryRepository = $aboutCategoryRepository;
         $this->aboutRepository = $aboutRepository;
     }
@@ -81,7 +81,8 @@ class AboutController extends FrontControllerBase
                 ,'qtextIntroduction' => $this->qtextIntroduction
                 ,'basicConfigs' => $this->basicConfigs
                 ,'aboutCategories' => $aboutCategories
-                ,'about' => $about] );
+                ,'about' => $about
+                ,'title'=>languageTransform($about, 'title')] );
     }
     
     

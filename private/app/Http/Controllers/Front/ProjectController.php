@@ -72,7 +72,6 @@ class ProjectController extends FrontControllerBase
         $itemId = $matches['digit'];    
         $projectCategories = $this->projectCategoryRepository->getActive(3);           
         $project = $this->projectRepository->getById($itemId);       
-	
         return view('front.project.itemIndex', ['currentMenu' => $this->currentMenu, 'serviceMenu' =>$this->serviceMenu
                 ,'menus' => $this->menus
                 ,'serviceCategories' => $this->serviceCategories 
@@ -81,7 +80,8 @@ class ProjectController extends FrontControllerBase
                 ,'qtextIntroduction' => $this->qtextIntroduction
                 ,'basicConfigs' => $this->basicConfigs
                 ,'projectCategories' => $projectCategories
-                ,'project' => $project] );
+                ,'project' => $project
+                ,'title'=>languageTransform($project, 'title')] );
     }
     
     

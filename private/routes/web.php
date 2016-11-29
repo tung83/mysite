@@ -84,6 +84,12 @@ Route::group(['namespace' => 'Front'], function() {
     Route::get('gioi-thieu/{aboutCategory}', 'AboutController@getCategory')->where('aboutCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
     Route::get('/ajax/abouts','AboutAjaxController@partialAboutData');
 
+    // Career
+    Route::get('careers', 'CareerController@index');
+    Route::get('tuyen-dung', 'CareerController@index');
+    Route::get('careers/{careerItem}', 'CareerController@getItem')->where('careerItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
+    Route::get('tuyen-dung/{careerItem}', 'CareerController@getItem')->where('careerItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
+
     //Contact
     Route::get('contact', 'ContactController@index');
     Route::get('lien-he', 'ContactController@index');

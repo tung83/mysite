@@ -83,7 +83,8 @@ class FaqController extends FrontControllerBase
                 ,'qtextIntroduction' => $this->qtextIntroduction
                 ,'basicConfigs' => $this->basicConfigs
                 ,'faqCategories' => $faqCategories
-                ,'faq' => $faq] );
+                ,'faq' => $faq
+                ,'title'=>languageTransform($faq, 'title')] );
     }
     
     

@@ -34,7 +34,7 @@ class AboutAjaxController extends Controller
         $this->aboutRepository = $aboutRepository;
         $this->aboutCategoryRepository = $aboutCategoryRepository;
         $this->middleware('ajax');
-        $this->menuEView = 'abouts';
+        $this->menuEView = 'about-us';
     }
     
     public function partialHomeData(Request $request)
@@ -48,7 +48,7 @@ class AboutAjaxController extends Controller
             return view('front.home.partials.about-category', ['aboutMenu' => $aboutMenu, 'abouts' => $abouts, 'aboutCategory' => $aboutCategory])->render();        
         }
         else {     
-               return view('front.home.partials.about-items', compact('aboutMenu','abouts'))->render();
+            return view('front.home.partials.about-items', compact('aboutMenu','abouts'))->render();
         }
     }
     

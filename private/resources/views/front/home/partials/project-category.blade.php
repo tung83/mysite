@@ -7,7 +7,7 @@
                     {{languageTransform($projectCategory, 'sum')}}  
                 </p>
             </figcaption>
-            {{ HTML::image('img/dyn-contens/'. $projectCategory->img, languageTransform($projectCategory, 'title'), array('class' => 'img-responsive center-block')) }}
+            {{ HTML::image('file/upload/'. $projectCategory->img, languageTransform($projectCategory, 'title'), array('class' => 'img-responsive center-block')) }}
             
         </figure>
         </a>

@@ -1,8 +1,5 @@
 <div class="about row">
     <div class="container">
-        <div id="about-list" class="row text-center">        
-            <h2 class="title">{{trans('front/site.abouts')}}</h2>
-        </div>
         <div id="about-category" class="row text-center ">
             <ul class="list-inline list-inline-sm">
                 @foreach($aboutCategories as $index => $aboutCategory) 

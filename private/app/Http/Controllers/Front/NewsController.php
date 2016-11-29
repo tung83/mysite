@@ -78,7 +78,8 @@ class NewsController extends FrontControllerBase
                 ,'qtextIntroduction' => $this->qtextIntroduction
                 ,'basicConfigs' => $this->basicConfigs
                 ,'newsCategories' => $newsCategories
-                ,'news' => $news] );
+                ,'news' => $news
+                ,'title'=>languageTransform($news, 'title')] );
     }
     
 }

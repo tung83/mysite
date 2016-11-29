@@ -1,4 +1,4 @@
-@extends('front.news.template', ['menus' => $menus, 'services' => $services
+@extends('front.news.template', ['title'=>$title, 'menus' => $menus, 'services' => $services
     ,'qtextFooterContact' => $qtextFooterContact, 'qtextIntroduction' => $qtextIntroduction
     , 'basicConfigs' => $basicConfigs])
 @section('main')

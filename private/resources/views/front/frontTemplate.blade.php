@@ -1,10 +1,33 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
+    <?php  
+        $current_page_view = 'home';
+        $keywords = trans('front/site.keywords');
+        $description = trans('front/site.description');
+        if(!empty($currentMenu)){
+            if(!isset($title)){
+                $title = languageTransform($currentMenu, 'title');
+            }
+            $keywords = languageTransform($currentMenu, 'meta_keyword');
+            $description = languageTransform($currentMenu, 'meta_description');
+            if($currentMenu->e_view == 'brand-name'){
+                $current_page_view = 'services';
+            }
+            else{
+                $current_page_view = $currentMenu->e_view;                
+            }
+        }
+        if(!isset($title)){
+            $title = trans('front/site.home_title');  
+        }
+        $title = '.:'.$title.' - '.trans('front/site.title').':.';
+    ?>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>{{ trans('front/site.title') }}</title>
-        <meta name="description" content="">    
+        <title>{{ $title }}</title>
+        <meta name="description" content="{{ $description }}">    
+        <meta name="keyword" content="{{ $keywords }}" />
         <meta name="format-detection" content="telephone=no">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="shortcut icon" type="image/x-icon" href="{!! asset('img/logo.png') !!}" />
@@ -16,9 +39,10 @@
 
         {!! HTML::style('css/front.css') !!}
         {!! HTML::style('css/front_style.css') !!}
+        {!! HTML::style('css/animate.css') !!}
     </head>
-  <body>
-    <div class="{{ !empty($currentMenu)?$currentMenu->e_view:'home'}}-page container">
+  <body>  
+    <div class="{{ $current_page_view}}-page container">
         <header class="row">
               
             <!--http://bootsnipp.com/snippets/featured/expanding-search-button-in-css-->
@@ -100,6 +124,7 @@
 
         {!! HTML::script('https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js') !!}
         {!! HTML::script('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js') !!}
+        {!! HTML::script('js/wow.min.js') !!}
     <script>
      $(function() {
          $.ajaxSetup({
@@ -107,7 +132,24 @@
                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
              }
          });
-     });
+        new WOW({
+            animateClass: 'animated'        
+        }).init();
+        $("body").append('<a href="#" class="scrollTo-top" ><i class="fa fa-angle-double-up"></i></a>');
+        var viewPortWidth = $(window).width();
+        $(window).scroll(function(event) {
+            event.preventDefault();
+            if ($(this).scrollTop() > 180) {
+                $('.scrollTo-top').fadeIn();
+            } else {
+                $('.scrollTo-top').fadeOut();
+            }
+        });    
+        $('.scrollTo-top').click(function(event) {
+            $('html, body').animate({scrollTop : 0 }, 600);
+            event.preventDefault();
+        }); 
+    });
     </script>
     @stack('scripts')    
     
