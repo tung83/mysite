@@ -1,7 +1,7 @@
 <div class="news row">
      <div class="container">
-        <div id="news-list" class="row text-center">        
-            <h2 class="title">{{trans('front/site.news-title')}}</h2>
+        <div id="news-list" class="row text-center">  
+            <h2 class="title">{{languageTransform($newsMenu, 'title')}}</h2>
         </div>
         <div id="news-category" class="row text-center ">
             <ul class="list-inline list-inline-sm">
