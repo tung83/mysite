@@ -46,22 +46,30 @@ abstract class BaseRepository
      */
     public function getByPid($pId)
     {
-        return $this->model->where('pId', $pId)->get();;
+        return $this->model->where([['active', '=', 1],['pId', '=', $pId]])
+                    ->orderBy('ind', 'asc')
+                    ->orderBy('id')->get();
     }
     
     public function paginateByPid($pId, $pageSize)
     {
-        return $this->model->where([['active', '=', 1],['pId', '=', $pId]])->paginate($pageSize);
+        return $this->model->where([['active', '=', 1],['pId', '=', $pId]])
+                    ->orderBy('ind', 'asc')
+                    ->orderBy('id')->paginate($pageSize);
     }
     
     public function paginateHomeByPid($pId, $pageSize)
     {
-        return $this->model->where([['active', '=', 1],['pId', '=', $pId], ['home', '=', 1]])->paginate($pageSize);
+        return $this->model->where([['active', '=', 1],['pId', '=', $pId], ['home', '=', 1]])
+                    ->orderBy('ind', 'asc')
+                    ->orderBy('id')->paginate($pageSize);
     }
     
     public function paginate($pageSize)
     {
-        return $this->model->paginate($pageSize);
+        return $this->model
+                    ->orderBy('ind', 'asc')
+                    ->orderBy('id')->paginate($pageSize);
     }
     
     public function getAll()

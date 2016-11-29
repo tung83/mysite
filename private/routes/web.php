@@ -101,6 +101,9 @@ Route::group(['namespace' => 'Front'], function() {
     Route::get('/ajax/homeServices','ServiceAjaxController@partialHomeData');
     Route::get('/ajax/homeNews','NewsAjaxController@partialHomeData');
     
+    
+    Route::get('search', 'SearchController@search')->name('search');;
+    
 
 });
 

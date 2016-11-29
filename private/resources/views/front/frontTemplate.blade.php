@@ -51,22 +51,23 @@
                 <div class="pull-right">
                     <ul>
                         <li>
-                             {!! (session('locale') == 'vi') ? link_to('/', 'VI', array('class' => 'active')) : link_to('language/vi', 'VI') !!}
+                             {!! (session('locale') == 'en') ? link_to('language/vi', 'VI') : link_to('/', 'VI', array('class' => 'active'))  !!}
                          </li>
                          <li>
                              <span>|</span>
                          </li>
                          <li>                  
-                             {!! (session('locale') == 'vi') ? link_to('language/en', 'ENG') : link_to('#', 'ENG', array('class' => 'active')) !!}
+                             {!! (session('locale') == 'en') ? link_to('#', 'ENG', array('class' => 'active')) :link_to('language/en', 'ENG')!!}
                          </li>
                     </ul>
                 </div>         
                 <div id="search-top">
-                    <form action="" class="search-form">
+                    <form method="GET" action="{{route('search')}}" class="search-form">
                         <div class="form-group has-feedback">
                                 <label for="search" class="sr-only">Search</label>
                                 <input type="text" class="form-control" name="search" id="search" placeholder="search">
-                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                <span class="search-span glyphicon glyphicon-search form-control-feedback"></span>
+
                         </div>
                     </form>
                 </div>       
@@ -149,6 +150,15 @@
             $('html, body').animate({scrollTop : 0 }, 600);
             event.preventDefault();
         }); 
+        $('#search').keypress(function (e) {
+            if (e.which == 13) {
+              $('form.search-form').submit();
+              return false;    //<---- Add this line
+            }
+          });
+        $('.search-span').on('click', function() {
+            $('form.search-form').submit();
+        });
     });
     </script>
     @stack('scripts')    

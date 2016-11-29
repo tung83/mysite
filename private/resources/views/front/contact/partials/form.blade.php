@@ -22,6 +22,11 @@ $(function() {
     $('form input,form textarea').keyup(function() {
         ToogleEnableSubmitButton();
     });
+    $(".submit-button").one("submit", submitFormFunction);
+    function submitFormFunction(event) {
+        event.preventDefault(); 
+        $(".submit-button").submit();
+    }
 });
 var recaptchaChecked = false;
 function recaptchaCallback() {
