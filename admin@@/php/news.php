@@ -169,6 +169,7 @@ function news_cate($db)
 }
 function news($db)
 {
+        var_dump(myPath);
 	$msg='';
     $act='news';
     $type='news';
@@ -242,6 +243,7 @@ function news($db)
             
             'home'=>$home,'most_viewed'=>$most_viewed,'active'=>$active,'ind'=>$ind,'pId'=>$pId
         );
+        var_dump(myPath);
         if(common::file_check($_FILES['file'])){
             WideImage::load('file')->resize(210,155, 'fill')->saveToFile(myPath.$file);
             $update = array_merge($update,array('img'=>$file));
