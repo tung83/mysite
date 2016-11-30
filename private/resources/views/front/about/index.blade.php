@@ -16,7 +16,7 @@
 
     function getAbouts(id, page){
         $.ajax({
-            url: '{{ url('/ajax/abouts') }}' + '?pId=' + id + '&page=' + page,
+            url: '{{ url('/ajax/about-us') }}' + '?pId=' + id + '&page=' + page,
             type: 'GET'
         }).done(function(data){
                 $('#about-category-content').html(data);
@@ -35,7 +35,7 @@
 
     function getAboutCategory(id){
         $.ajax({
-            url: '{{ url('/ajax/abouts') }}' + '?pId=' + id,
+            url: '{{ url('/ajax/about-us') }}' + '?pId=' + id,
             type: 'GET'
         }).done(function(data){
                 $('#about-category-content').html(data);
