@@ -96,7 +96,7 @@ function faq_cate($db)
         }
 	}
     $page_head= array(
-                    array('#','Danh mục tin tức')
+                    array('#','Danh mục tư vấn')
                 );
 	$str=$form->breadcumb($page_head);
 	$str.=$form->message($msg);
@@ -136,13 +136,9 @@ function faq_cate($db)
     		<div class="tab-content">
     			<div class="tab-pane bg-vi active" id="vietnamese">
                     '.$form->text('title',array('label'=>'Tiêu đề','required'=>true)).'
-                    '.$form->text('meta_keyword',array('label'=>'Keyword <code>SEO</code>')).'
-                    '.$form->textarea('meta_description',array('label'=>'Description <code>SEO</code>')).'
     			</div>
     			<div class="tab-pane bg-en" id="english">
                     '.$form->text('e_title',array('label'=>'Tiêu đề','required'=>true)).'
-                    '.$form->text('e_meta_keyword',array('label'=>'Keyword <code>SEO</code>')).'
-                    '.$form->textarea('e_meta_description',array('label'=>'Description <code>SEO</code>')).'
     			</div>
     		</div>
         </div>
@@ -212,12 +208,7 @@ function faq($db)
             'home'=>$home,'best'=>$best,'active'=>$active,'ind'=>$ind,'pId'=>$pId
         );
 		try{
-            $recent = $db->insert($table,$insert);
-            if(common::file_check($_FILES['file'])){
-                WideImage::load('file')->resize(217,162, 'fill')->saveToFile(myPath.$file);
-                $db->where('id',$recent);
-                $db->update($table,array('img'=>$file));
-            }
+            $recent = $db->insert($table,$insert);           
             header("location:".$_SERVER['REQUEST_URI'],true); 
         } catch(Exception $e) {
             $msg=$e->getMessage();
@@ -231,11 +222,6 @@ function faq($db)
             
             'home'=>$home,'best'=>$best,'active'=>$active,'ind'=>$ind,'pId'=>$pId
         );
-        if(common::file_check($_FILES['file'])){
-            WideImage::load('file')->resize(217,162, 'fill')->saveToFile(myPath.$file);
-            $update = array_merge($update,array('img'=>$file));
-            $form->img_remove($_POST['idLoad'],$db,$table);
-        }
         try{
             $db->where('id',$_POST['idLoad']);
             $db->update($table,$update);  
@@ -256,14 +242,14 @@ function faq($db)
 	}
     
     $page_head= array(
-                    array('#','Danh sách tin tức')
+                    array('#','Danh sách tư vấn')
                 );
 	$str=$form->breadcumb($page_head);
 	$str.=$form->message($msg);
     
     $str.=$form->search_area($db,$act,'faq_cate',$_GET['hint'],1);
     
-    $head_title=array('Tiêu đề<code>Vi/En</code>','Hình ảnh','Danh mục','Hiện/Ẩn','STT');
+    $head_title=array('Tiêu đề<code>Vi/En</code>','Danh mục','Hiện/Ẩn','STT');
 	$str.=$form->table_start($head_title);
 	
     $page=isset($_GET["page"])?intval($_GET["page"]):1;
@@ -281,7 +267,6 @@ function faq($db)
             $cate=$db->where('id',$item['pId'])->getOne('faq_cate','id,title');
             $item_content = array(
                 array($item['title'].'<br/><code>'.$item['e_title'].'</code>','text'),
-                array(myPath.$item['img'],'image'),
                 array(array($cate),'cate'),
                 array($item['active'],'bool'),
                 array($item['ind'],'text')
@@ -306,14 +291,12 @@ function faq($db)
     		<div class="tab-content">
     			<div class="tab-pane bg-vi active" id="vietnamese">
                     '.$form->text('title',array('label'=>'Tiêu đề','required'=>true)).'      
-                    '.$form->textarea('sum',array('label'=>'Trích Dẫn','required'=>true)).'      
                     '.$form->text('meta_keyword',array('label'=>'Keyword<code>SEO</code>','required'=>true)).'      
                     '.$form->textarea('meta_description',array('label'=>'Meta Description<code>SEO</code>','required'=>true)).'   
                     '.$form->ckeditor('content',array('label'=>'Nội dung','required'=>true)).'
     			</div>
     			<div class="tab-pane bg-en" id="english">
-                    '.$form->text('e_title',array('label'=>'Tiêu đề','required'=>true)).'      
-                    '.$form->textarea('e_sum',array('label'=>'Trích Dẫn','required'=>true)).'      
+                    '.$form->text('e_title',array('label'=>'Tiêu đề','required'=>true)).'         
                     '.$form->text('e_meta_keyword',array('label'=>'Keyword<code>SEO</code>','required'=>true)).'      
                     '.$form->textarea('e_meta_description',array('label'=>'Meta Description<code>SEO</code>','required'=>true)).'   
                     '.$form->ckeditor('e_content',array('label'=>'Nội dung','required'=>true)).'

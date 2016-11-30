@@ -27,11 +27,13 @@ function project_cate($db)
         $form = new form();
 	}
 	if(isset($_POST["addNew"])||isset($_POST["update"])) {
-        $title=htmlspecialchars($_POST['title']);	   
+        $title=htmlspecialchars($_POST['title']);	      
+        $sum=htmlspecialchars($_POST['sum']);
         $meta_kw=htmlspecialchars($_POST['meta_keyword']);
         $meta_desc=htmlspecialchars($_POST['meta_description']);
         
-        $e_title=htmlspecialchars($_POST['e_title']);	   
+        $e_title=htmlspecialchars($_POST['e_title']);	      
+        $e_sum=htmlspecialchars($_POST['e_sum']);
         $e_meta_kw=htmlspecialchars($_POST['e_meta_keyword']);
         $e_meta_desc=htmlspecialchars($_POST['e_meta_description']);
         
@@ -52,16 +54,21 @@ function project_cate($db)
     }
 	if(isset($_POST["addNew"])) {
         $insert = array(
-                    'title'=>$title,'meta_keyword'=>$meta_kw,
+                    'title'=>$title,'sum'=>$sum,'meta_keyword'=>$meta_kw,
                     'meta_description'=>$meta_desc,
                     
-                    'e_title'=>$e_title,'e_meta_keyword'=>$e_meta_kw,
+                    'e_title'=>$e_title,'e_sum'=>$e_sum,'e_meta_keyword'=>$e_meta_kw,
                     'e_meta_description'=>$e_meta_desc,
                     
                     'lev'=>$lev,'active'=>$active,'ind'=>$ind
                 );
 		try{
             $recent = $db->insert($table,$insert);
+            if(common::file_check($_FILES['file'])){
+                WideImage::load('file')->resize(520,330, 'fill')->saveToFile(myPath.$file);
+                $db->where('id',$recent);
+                $db->update($table,array('img'=>$file));
+            }
             header("location:".$_SERVER['REQUEST_URI'],true); 
         } catch(Exception $e) {
             $msg=$e->getMessage();
@@ -69,15 +76,20 @@ function project_cate($db)
 	}
 	if(isset($_POST["update"]))	{
 	   $update=array(
-                    'title'=>$title,'meta_keyword'=>$meta_kw,
+                    'title'=>$title,'sum'=>$sum,'meta_keyword'=>$meta_kw,
                     'meta_description'=>$meta_desc,
                     
-                    'e_title'=>$e_title,'e_meta_keyword'=>$e_meta_kw,
+                    'e_title'=>$e_title,'e_sum'=>$e_sum,'e_meta_keyword'=>$e_meta_kw,
                     'e_meta_description'=>$e_meta_desc,
                     
                     'lev'=>$lev,'active'=>$active,'ind'=>$ind
                 );
-        try{
+        try{            
+            if(common::file_check($_FILES['file'])){
+                WideImage::load('file')->resize(520,330, 'fill')->saveToFile(myPath.$file);
+                $update = array_merge($update,array('img'=>$file));
+                $form->img_remove($_POST['idLoad'],$db,$table);
+            }
             $db->where('id',$_POST['idLoad']);
             $db->update($table,$update);  
             header("location:".$_SERVER['REQUEST_URI'],true);   
@@ -103,7 +115,7 @@ function project_cate($db)
     
     $str.=$form->search_area($db,$act,'',$_GET['hint'],0);
     
-    $head_title=array('Tiêu đề<code>Vi/En</code>','Thứ tự','Hiển thị');
+    $head_title=array('Tiêu đề<code>Vi/En</code>','Hình ảnh','Thứ tự','Hiển thị');
 	$str.=$form->table_start($head_title);
 	
     $page=isset($_GET["page"])?intval($_GET["page"]):1;
@@ -116,6 +128,7 @@ function project_cate($db)
         foreach($list as $item){
             $item_content = array(
                 array($item['title'].'<br/><code>'.$item['e_title'].'</code>','text'),
+                array(myPath.$item['img'],'image'),
                 array($item['ind'],'text'),
                 array($item['active'],'bool')
             );
@@ -136,17 +149,16 @@ function project_cate($db)
     		<div class="tab-content">
     			<div class="tab-pane bg-vi active" id="vietnamese">
                     '.$form->text('title',array('label'=>'Tiêu đề','required'=>true)).'
-                    '.$form->text('meta_keyword',array('label'=>'Keyword <code>SEO</code>')).'
-                    '.$form->textarea('meta_description',array('label'=>'Description <code>SEO</code>')).'
+                    '.$form->textarea('sum',array('label'=>'Trích Dẫn','required'=>true)).'   
     			</div>
     			<div class="tab-pane bg-en" id="english">
                     '.$form->text('e_title',array('label'=>'Tiêu đề','required'=>true)).'
-                    '.$form->text('e_meta_keyword',array('label'=>'Keyword <code>SEO</code>')).'
-                    '.$form->textarea('e_meta_description',array('label'=>'Description <code>SEO</code>')).'
+                    '.$form->textarea('e_sum',array('label'=>'Trích Dẫn','required'=>true)).'   
     			</div>
     		</div>
         </div>
         <div class="col-lg-12">
+            '.$form->file('file',array('label'=>'Hình ảnh<code>520,330</code>')).'
             '.$form->number('ind',array('label'=>'Thứ tự','required'=>true)).'
             '.$form->checkbox('active',array('label'=>'Hiển Thị','checked'=>true)).'
         </div>
@@ -213,7 +225,7 @@ function project($db)
 		try{
             $recent = $db->insert($table,$insert);
             if(common::file_check($_FILES['file'])){
-                WideImage::load('file')->resize(217,162, 'fill')->saveToFile(myPath.$file);
+                WideImage::load('file')->resize(195,225, 'fill')->saveToFile(myPath.$file);
                 $db->where('id',$recent);
                 $db->update($table,array('img'=>$file));
             }
@@ -231,7 +243,7 @@ function project($db)
             'home'=>$home,'active'=>$active,'ind'=>$ind,'pId'=>$pId
         );
         if(common::file_check($_FILES['file'])){
-            WideImage::load('file')->resize(217,162, 'fill')->saveToFile(myPath.$file);
+            WideImage::load('file')->resize(195,225, 'fill')->saveToFile(myPath.$file);
             $update = array_merge($update,array('img'=>$file));
             $form->img_remove($_POST['idLoad'],$db,$table);
         }
@@ -306,21 +318,21 @@ function project($db)
     			<div class="tab-pane bg-vi active" id="vietnamese">
                     '.$form->text('title',array('label'=>'Tiêu đề','required'=>true)).'      
                     '.$form->textarea('sum',array('label'=>'Trích Dẫn','required'=>true)).'      
-                    '.$form->text('meta_keyword',array('label'=>'Keyword<code>SEO</code>','required'=>true)).'      
-                    '.$form->textarea('meta_description',array('label'=>'Meta Description<code>SEO</code>','required'=>true)).'   
+                    '.$form->text('meta_keyword',array('label'=>'Keyword<code>SEO</code>','required'=>false)).'      
+                    '.$form->textarea('meta_description',array('label'=>'Meta Description<code>SEO</code>','required'=>false)).'   
                     '.$form->ckeditor('content',array('label'=>'Nội dung','required'=>true)).'
     			</div>
     			<div class="tab-pane bg-en" id="english">
                     '.$form->text('e_title',array('label'=>'Tiêu đề','required'=>true)).'      
                     '.$form->textarea('e_sum',array('label'=>'Trích Dẫn','required'=>true)).'      
-                    '.$form->text('e_meta_keyword',array('label'=>'Keyword<code>SEO</code>','required'=>true)).'      
-                    '.$form->textarea('e_meta_description',array('label'=>'Meta Description<code>SEO</code>','required'=>true)).'   
+                    '.$form->text('e_meta_keyword',array('label'=>'Keyword<code>SEO</code>','required'=>false)).'      
+                    '.$form->textarea('e_meta_description',array('label'=>'Meta Description<code>SEO</code>','required'=>false)).'   
                     '.$form->ckeditor('e_content',array('label'=>'Nội dung','required'=>true)).'
     			</div>
     		</div>
         </div>
         <div class="col-lg-12">
-            '.$form->file('file',array('label'=>'Hình ảnh<code>217,162</code>')).'
+            '.$form->file('file',array('label'=>'Hình ảnh<code>195,225</code>')).'
             '.$form->number('ind',array('label'=>'Thứ tự')).'
             '.$form->checkbox('home',array('label'=>'Trang chủ','checked'=>true)).'
             '.$form->checkbox('active',array('label'=>'Hiển Thị','checked'=>true)).'

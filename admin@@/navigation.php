@@ -3,20 +3,20 @@
 function ad_menu()
 {
 	$topNav=array(
-                    array(1,"Slider","slider","table"),
+//                    array(1,"Slider","slider","film"),
                     /*array(10,'Banner quảng cáo','ads_banner','diamond'),*/	
-                    array(4,"Giới thiệu","about","fire"),
-                    array(5,'Tin tức - Sự Kiện','news','random'), 
-                    array(6,'Dự án','project','star'),   
-                    array(7,'Dịch vụ','service','usd'),          
-                    array(9,'Hỗ trợ','faq','usd'),                     
-                    array(8,'Tuyển dụng','career','bell-o'),
+                    array(4,"Giới thiệu","about","font"),
+                    array(5,'Tin tức','news','pencil-square-o'), 
+                    array(6,'Dự án','project','th-list'),   
+                    array(7,'Dịch vụ','service','gift'),          
+                    array(9,'Tư vấn','faq','comment'),                     
+                    array(8,'Tuyển dụng','career','user'),
                     //array(9,'Video','video','youtube'),
                     /*array(14,'Hỗ trợ trực tuyến','support_online','headphones'),*/
-                    array(14,'Đặt hàng','cart','shopping-cart'),
-                    array(7,'Liên hệ','contact','plus'),                    
-                    array(11,"Pages SEO","seo","fire"),
-                    array(12,"Quản lý text","qtext","music"),
+                    //array(14,'Đặt hàng','cart','shopping-cart'),
+                    array(10,'Liên hệ','contact','users'),                    
+                    array(11,"Pages SEO","seo","book"),
+                    array(12,"Quản lý text","qtext","folder-open"),
                     array(15,"Cấu hình cơ bản","basic_config","cog")
 					//array(13,"Quản lý người dùng","ad_user","user")
 				);
@@ -25,20 +25,22 @@ function ad_menu()
                     array(2,'Danh mục sản phẩm','type=product_cate'),
                     /*array(2,'Danh mục sản phẩm cấp 2','type=product_cate_2'), */
                     array(2,'Danh sách sản phẩm','type=product'), 
-                    array(3,'Loại phụ tùng','type=accessary_cate'),
-                    array(3,'Danh sách phụ tùng','type=accessary'),
+                    array(4,'Danh mục giới thiệu','type=about_cate'),
+                    array(4,'Danh sách giới thiệu','type=about'),  
+//                    array(3,'Loại phụ tùng','type=accessary_cate'),
+//                    array(3,'Danh sách phụ tùng','type=accessary'),
                     array(5,'Danh mục tin tức','type=news_cate'),
                     array(5,'Danh sách tin tức','type=news'),  
                     array(6,'Danh mục dự án','type=project_cate'),
                     array(6,'Danh sách dự án','type=project'),
+                    array(7,'Danh mục dịch vụ','type=service_cate'),
+                    array(7,'Danh sách dịch vụ','type=service'),
                     array(9,'Danh mục hỗ trợ','type=faq_cate'),
                     array(9,'Danh sách hỗ trợ','type=faq'),  
-//                    array(7,'Danh mục dịch vụ','type=service_cate'),
-//                    array(7,'Danh sách dịch vụ','type=service'),       
-                    array(12,"HotLine","id=2"),
-					array(12,"Liên hệ","id=3"),
-                   
-                    array(12,"Footer","id=4")               	
+                    array(12,"Liên hệ","id=1"),                   
+                    array(12,"Footer","id=2"),
+                    array(12,"Giới thiệu","id=3"),                  
+                    array(12,"Tuyển dụng","id=4")              	
 				);
 	$size=sizeof($topNav);
 	$act=$_GET["act"];

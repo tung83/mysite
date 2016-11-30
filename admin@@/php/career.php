@@ -58,7 +58,7 @@ function career($db)
 		try{
             $recent = $db->insert($table,$insert);
             if(common::file_check($_FILES['file'])){
-                WideImage::load('file')->resize(217,162, 'fill')->saveToFile(myPath.$file);
+                WideImage::load('file')->resize(460,345, 'fill')->saveToFile(myPath.$file);
                 $db->where('id',$recent);
                 $db->update($table,array('img'=>$file));
             }
@@ -76,7 +76,7 @@ function career($db)
             'active'=>$active
         );
         if(common::file_check($_FILES['file'])){
-            WideImage::load('file')->resize(217,162, 'fill')->saveToFile(myPath.$file);
+            WideImage::load('file')->resize(460,345, 'fill')->saveToFile(myPath.$file);
             $update = array_merge($update,array('img'=>$file));
             $form->img_remove($_POST['idLoad'],$db,$table);
         }
@@ -162,7 +162,7 @@ function career($db)
     		</div>
         </div>
         <div class="col-lg-12">
-            '.$form->file('file',array('label'=>'Hình ảnh<code>217,162</code>')).'
+            '.$form->file('file',array('label'=>'Hình ảnh<code>460,345</code>')).'
             '.$form->number('ind',array('label'=>'Thứ tự')).'
             '.$form->checkbox('active',array('label'=>'Hiển Thị','checked'=>true)).'
         </div>
