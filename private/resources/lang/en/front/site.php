@@ -2,7 +2,7 @@
 
 return [
     'title' => 'PS Media',    
-    'home_title' => 'Home page',
+    'home_title' => 'Home Page',
     'keywords' => 'ps media, quang cao, design',
     'despcription' => 'ps media, quang cao, design',
     'service' => 'services',

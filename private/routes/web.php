@@ -76,13 +76,13 @@ Route::group(['namespace' => 'Front'], function() {
     Route::get('/ajax/faqs','FaqAjaxController@partialFaqData');
 
     // About
-    Route::get('abouts', 'AboutController@index');
+    Route::get('about-us', 'AboutController@index');
     Route::get('gioi-thieu', 'AboutController@index');
-    Route::get('abouts/{aboutItem}', 'AboutController@getItem')->where('aboutItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
+    Route::get('about-us/{aboutItem}', 'AboutController@getItem')->where('aboutItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
     Route::get('gioi-thieu/{aboutItem}', 'AboutController@getItem')->where('aboutItem', '^([a-zA-Z0-9_-]+)-i([0-9]+)$');
-    Route::get('abouts/{aboutCategory}', 'AboutController@getCategory')->where('aboutCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
+    Route::get('about-us/{aboutCategory}', 'AboutController@getCategory')->where('aboutCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
     Route::get('gioi-thieu/{aboutCategory}', 'AboutController@getCategory')->where('aboutCategory', '^([a-zA-Z0-9_-]+)-p([0-9]+)$');
-    Route::get('/ajax/abouts','AboutAjaxController@partialAboutData');
+    Route::get('/ajax/about-us','AboutAjaxController@partialAboutData');
 
     // Career
     Route::get('careers', 'CareerController@index');
