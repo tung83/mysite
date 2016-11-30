@@ -20,7 +20,7 @@
         <div class='row faq-content'>
             <div class='col-md-8'>
                 <div class='pull-right'>
-                    <img id='faqs-question' alt="faqs_question" src="{{asset('img/faq_question.png')}}"/>    
+                    <img id='faqs-question' alt="faqs_question" src="{{asset('img/faq_question.png')}}" class="img-responsive center-block"/>    
                 </div>
                 <div id='faq-category-content'>
                     @include('front.faq.partials.faq-items',compact('currentMenu','faqs'))                  

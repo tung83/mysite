@@ -76,7 +76,7 @@
             <div id="flags" class="text-center"></div>
             <div id="header-bottom">
                 <div id="logo">
-                    <a href="{{ route('home') }}"/>
+                    <a href="{{ route('home') }}"></a>
                 </div>  
                 <div id="header-right-bottom" class="pull-right">
                     <span><i class="fa fa-phone"></i> 0123.456.789</span>
@@ -90,7 +90,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.html">{{ trans('front/site.title') }}</a>
+                        <a class="navbar-brand" href="{{ route('home') }}">{{ trans('front/site.title') }}</a>
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
@@ -159,6 +159,10 @@
         $('.search-span').on('click', function() {
             $('form.search-form').submit();
         });
+        
+        if($(window).width() < 992){
+            $("#logo").prependTo("header");            
+        }
     });
     </script>
     @stack('scripts')    

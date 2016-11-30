@@ -432,6 +432,9 @@ h2.title-main{
     height: 80px;    
     position: relative;
 }
+.career-home .career-item a{
+    color: #fff;
+}
 .career-home .career-item:before{
     position: absolute;
     top: 30px;
@@ -663,8 +666,7 @@ footer ul#footer-services li:first-child{
         margin-top: 15px;
         margin-right: 12px;
         color: #ffff00;
-    }
-    
+    }    
 }
 @media (min-width: 768px){
     .list-inline li a:before {
@@ -709,7 +711,6 @@ footer ul#footer-services li:first-child{
         margin-top: -2px;
         transition: .1s;
     }
-}
     
     .list-inline li a:before, .list-inline li a:after {
         content: '';
@@ -729,11 +730,10 @@ footer ul#footer-services li:first-child{
     .list-inline li a.active:before, .list-inline li a.active:after, .list-inline li a:hover:before, .list-inline li a:hover:after {
         opacity: 1;
     }
-    @media (min-width: 768px) {
-        .list-inline li a:after {
+    .list-inline li a:after {
             top: 100%;
         }
-    }
+}
  
 /*contact page*/ 
 .contact-page header {
@@ -786,23 +786,10 @@ footer ul#footer-services li:first-child{
         width: 170px;
         height: 152px;
     }
+}
     .about-us-page #about-category{
         padding-top: 65px;
         padding-bottom: 70px;
-    }
-    .image-container img{
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-    }
-    .image-container {
-        position: relative;
-        height: 224px;
-    }
-    .md-5th{
-        width: 20%;
     }
   
 /*project page*/ 
@@ -836,7 +823,8 @@ footer ul#footer-services li:first-child{
     }
     .md-5th{
         width: 20%;
-    }
+    }    
+}
  
     
 /*faq page*/ 
@@ -877,20 +865,7 @@ img#faqs-question{
         width: 170px;
         height: 152px;
     }
-    .image-container img{
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-    }
-    .image-container {
-        position: relative;
-        height: 224px;
-    }
-    .md-5th{
-        width: 20%;
-    }
+}
  
 /*career page*/ 
 .careers-page header {
@@ -910,20 +885,7 @@ img#faqs-question{
         width: 170px;
         height: 152px;
     }
-    .image-container img{
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-    }
-    .image-container {
-        position: relative;
-        height: 224px;
-    }
-    .md-5th{
-        width: 20%;
-    }
+}
     
 /*service page*/ 
 .services-page header {
@@ -946,20 +908,7 @@ img#faqs-question{
         width: 170px;
         height: 152px;
     }
-    .image-container img{
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-    }
-    .image-container {
-        position: relative;
-        height: 224px;
-    }
-    .md-5th{
-        width: 20%;
-    }
+}
     
     .services-page .slick-slider a.active:before {
         margin-bottom: -8px;
@@ -976,8 +925,8 @@ img#faqs-question{
         pointer-events: none;
     }
 
-
 /*news page*/ 
+@media (min-width: 992px){
 .news-page header {
     background: #ca0000 url("../img/news-header-bg.png") no-repeat center bottom;
 }
@@ -996,21 +945,21 @@ img#faqs-question{
     left: 5px;
     right:auto;
     transition: 0.1s;
-}
-.news-page .navbar {
-    padding-top: 3px;
-    padding-bottom: 0px;
-}
-.news-page  #header-right-bottom {
-    color: #eb2000;
-}
-.news-page #logo a {
-    display: block;
-    background-position: center bottom;
-    background-size: 149px 149px;
-    width: 150px;
-    height: 152px;
-}
+    }
+    .news-page .navbar {
+        padding-top: 3px;
+        padding-bottom: 0px;
+    }
+    .news-page  #header-right-bottom {
+        color: #eb2000;
+    }
+    .news-page #logo a {
+        display: block;
+        background-position: center bottom;
+        background-size: 149px 149px;
+        width: 150px;
+        height: 152px;
+    }
 }
 .news-page .news #news-list > h2{
     color: #000;
@@ -1021,4 +970,34 @@ img#faqs-question{
 
 #contact-google-map{
     height: 572px;
+}
+
+@media only screen and (max-width: 768px) {
+        
+    footer .footer-details{
+        padding: 10px 15px 10px 0px;
+    }
+    header{
+        background: url("../img/mobile-header-bg.png") !important;
+    }
+    #logo a {
+        display: block;
+        background: transparent url(../img/logo.png) no-repeat left bottom;
+        background-size: 60px 60px;
+        width: 60px;
+        height: 60px;
+    }
+    #logo {
+        position: absolute;
+        top: 40px;
+        z-index: 3000;
+        left: 50px;
+    }    
+}
+
+.home-page .project, .home-page .project a {
+    color: #000;
+}
+.customer a{
+    color: #fff; 
 }

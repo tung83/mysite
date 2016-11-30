@@ -3,7 +3,7 @@
     {!! HTML::style('css/slick.css') !!}
 @stop
 @section('main')
-    <div class="contact row">
+    <div class="contact">
     <div id="contact-header" class="row text-center">
         <h2 class="title">{{trans('front/contact.title')}}</h2>
         <p>{{ trans('front/contact.text') }}</p>
