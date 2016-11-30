@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* This class is added on scroll */
 .fixed{
-    height: 72px;
+    height: 78px;
     position: fixed !important; 
     top: 0; 
     z-index: 99999;
@@ -18,20 +18,14 @@
     background-color: #950303;
     border-color: #800202;
 }
+.contact-page .fixed {
+    height: 75px;
+}
+.news-page .fixed {
+    height: 87px;
+}
 .projects-page .fixed {
-    height: 78px;
-}
-.about-us-page .fixed {
-    height: 78px;
-}
-.careers-page .fixed {
-    height: 78px;
-}
-.faq-page .fixed {
-    height: 78px;
-}
-.services-page .fixed {
-    height: 78px;
+    height: 81px;
 }
 
 .home-page .fixed {
@@ -854,7 +848,7 @@ img#faqs-question{
 }
 @media (min-width: 992px){
     .faqs-page header {
-        height: 326px;
+        height: 323px;
     }
     .faqs-page #header-bottom {
         background: #ca0000 url("../img/faq-header-bg.png") no-repeat left bottom;
@@ -873,7 +867,7 @@ img#faqs-question{
 }
 @media (min-width: 992px){
     .careers-page header {
-        height: 326px;
+        height: 324px;
     }
     .careers-page #header-bottom {
         padding-bottom: 2px;   
@@ -897,7 +891,7 @@ img#faqs-question{
 }
 @media (min-width: 992px){
     .services-page header {
-        height: 326px;
+        height: 324px;
     }
     .services-page #header-bottom {
         background: #ca0000 url("../img/service-header-bg.png") no-repeat left bottom;
@@ -931,14 +925,15 @@ img#faqs-question{
     background: #ca0000 url("../img/news-header-bg.png") no-repeat center bottom;
 }
     .news-page header {
-        height: 316px;
+        height: 329px;
         position: relative;
     }
     .news-page #header-bottom {
-    position: absolute;
-    width: 1260px;
-    bottom: 0px; 
-    background: #ca0000 url("../img/news-header-bg.png") no-repeat center bottom;
+        position: absolute;
+        width: 1260px;
+        bottom: 0px; 
+        background: #ca0000 url("../img/news-header-bg.png") no-repeat center bottom;
+        padding-bottom: 13px;
     }
     .news-page #logo {
     bottom: -25px;
