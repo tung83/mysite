@@ -13,4 +13,6 @@ return [
     'readmore' => 'xem thêm...',
     'news-mostsaw' => 'Tin xem nhiều',
     'best-faqs' => 'Câu hỏi hay',
+    'mail_subject'=> 'Khách hàng liên hệ gửi từ website',
+    'mail_name'=>'Quản trị trang web'
 ];

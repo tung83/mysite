@@ -54,10 +54,50 @@ class ContactController extends FrontControllerBase
         'g-recaptcha-response' => 'required|recaptcha',
             'email' => 'bail|required|email'
         ]);
+        
+        $this->sendMail($request);
+
         $this->contactRepository->store($request->all());
 
         return redirect('/')->with('ok', trans('front/contact.ok'));
     }
     
+    private function sendMail($request){
+        $this->basicConfigs = $this->basicConfigRepository->getAll();  
+       
+        $subject =  trans('front/site.mail_subject'); 
+        $body = '
+        <html>
+        <head>
+        	<title>'.$subject.'</title>
+        </head>
+        <body>
+        	<p>'.trans('front/contact.fullName').': '.$request->input('fullName').'</p>
+        	<p>'.trans('front/contact.companyName').': '.$request->input('company').'</p>        	
+        	<p>'.trans('front/contact.address').': '.$request->input('address').'</p>
+        	<p>'.trans('front/contact.phone').': '.$request->input('phone').'</p>        
+        	<p>Fax: '.$request->input('fax').'</p>	
+        	<p>Email: '.$request->input('email').'</p>
+                <p>'.trans('front/contact.department').': '.$request->input('department').'</p>
+        	<p>'.trans('front/contact.content').': '.nl2br($request->input('content')).'</p>
+        </body>
+        </html>';
+//        Mail::send('emails.notificar', ['accion' => $accion], function ($m) use ($accion) {
+//            $m->from(env('MAIL_FROM'), env('MAIL_NAME'));
+//            $m->to("jtd@adagal.es", "Jtd")->subject('Nova acción formativa');
+//        });
+//        Mail::send('users.mails.welcome', array('firstname'=>Input::get('firstname')), function($message){
+//            $message->to($request->input('search'), Input::get('firstname').' '.Input::get('lastname'))->subject('Welcome to the Laravel 4 Auth App!');
+//        });
+        \Mail::send(['html' => 'front.contact.email'], array('body' => $body, 'title'=>$subject)
+                , function($message){
+                    $receiver = $this->basicConfigs->first(function ($value, $key) {
+                   return $value['key'] == 'smtp_receiver';
+                   });
+                   $message->from('quantrimang.psmedia@gmail.com', trans('front/site.mail_name'));
+
+                   $message->to('nguyenthanhtungdits@yahoo.com')->subject(trans('front/site.mail_subject'));
+        });
+    }
     
 }

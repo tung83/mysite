@@ -13,5 +13,6 @@ return [
     'readmore' => 'read more...',
     'news-mostsaw' => 'Most Viewed',
     'best-faqs' => 'Best Faqs',
-    
+    'mail_subject'=> 'Customer contacted from website',
+    'mail_name'=>'Website Administrator'
 ];
